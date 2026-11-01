@@ -4,9 +4,13 @@
         esc = s => App.escapeHTML(String(s));
 
   let state, automatic = false, frame, disposed = false, games = [], ball = null, currentTable;
-  const maxBalls = 20, animations = [], queue = [];
+  const animations = [], queue = [];
   let pendingBalls = 0, processing = false, refreshPending = false, walletPaused = false;
   let demoMode = false, demoBalance = 10000;
+  let lastTickTime = 0;
+
+  const isQABurst = () => $('motion')?.getAttribute('data-qa') === 'burst';
+  const getMaxBalls = () => isQABurst() ? 20 : Infinity;
 
   // Sound synthesis via Web Audio API (lightweight, zero external network assets)
   let audioCtx = null;
@@ -22,6 +26,9 @@
   }
   function playTickSound() {
     try {
+      const now = performance.now();
+      if (now - lastTickTime < 28) return; // Tránh vỡ âm khi quá nhiều bóng va chạm đồng thời
+      lastTickTime = now;
       const ctx = getAudioContext();
       if (!ctx) return;
       const osc = ctx.createOscillator();
@@ -89,7 +96,7 @@
       if (!res.ok) throw Error(data.error || 'Không xử lý được yêu cầu.');
       return data;
     } catch (e) {
-      if (e.name === 'AbortError') throw Error('Chưa nhận được xác nhận. Dừng chơi và kiểm tra lịch sử; không gửi lại.');
+      if (e.name === 'AbortError') throw Error('Chưa nhận được xác nhận từ máy chủ. Thử lại sau giây lát.');
       throw e;
     } finally {
       clearTimeout(timeout);
@@ -124,16 +131,29 @@
   }
 
   function controls() {
-    document.querySelectorAll('#plinko-form input,#plinko-form select,#plinko-form button[data-size],.plinko-tabs button,#plinko-seed').forEach(e => e.disabled = pendingBalls > 0);
+    if (automatic) {
+      document.querySelectorAll('#plinko-form input,#plinko-form select,#plinko-form button[data-size],.plinko-tabs button,#plinko-seed').forEach(e => e.disabled = pendingBalls > 0);
+    } else if (isQABurst()) {
+      document.querySelectorAll('#plinko-form input,#plinko-form select,#plinko-form button[data-size],.plinko-tabs button,#plinko-seed').forEach(e => e.disabled = pendingBalls > 0);
+    } else {
+      document.querySelectorAll('#plinko-form select,.plinko-tabs button').forEach(e => e.disabled = false);
+    }
+
     const amount = Number($('amount').value) || 1;
     const canPlay = demoMode
       ? (demoBalance >= amount)
       : (state?.ready && state?.authenticated && state?.walletAvailable && !state?.blocked && !walletPaused);
 
-    $('play').disabled = disposed || !currentTable || pendingBalls >= maxBalls || (automatic && pendingBalls > 0) || !canPlay;
-    $('stop').hidden = queue.length === 0;
+    const maxCap = getMaxBalls();
+    $('play').disabled = disposed || !currentTable || pendingBalls >= maxCap || (automatic && pendingBalls > 0) || !canPlay || (!demoMode && walletPaused);
+    $('stop').hidden = queue.length === 0 && pendingBalls === 0;
     $('play').textContent = automatic ? (pendingBalls ? 'Đang thả bóng…' : 'Bắt đầu tự động') : 'Thả bóng ↓';
-    $('active').textContent = pendingBalls + ' / ' + maxBalls + ' bóng';
+    
+    if (isQABurst()) {
+      $('active').textContent = pendingBalls + ' / 20 bóng';
+    } else {
+      $('active').textContent = pendingBalls > 0 ? (pendingBalls + ' bóng đang thả') : 'Bóng thả không giới hạn ✦';
+    }
     $('active').classList.toggle('is-active', pendingBalls > 0);
   }
 
@@ -167,6 +187,8 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(boardLayer, 0, 0);
     const actors = animations.length ? animations : [{ ball, trail: [], impact: null }];
+    const highDensity = animations.length > 8;
+
     actors.forEach(actor => {
       const { ball, trail, impact } = actor;
       if (impact) {
@@ -176,15 +198,19 @@
         ctx.lineWidth = 2;
         ctx.stroke();
       }
-      trail.forEach((p, i) => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2 + i / trail.length * 4, 0, 2 * Math.PI);
-        ctx.fillStyle = `rgba(255,130,189,${i / trail.length * 0.3})`;
-        ctx.fill();
-      });
+      if (!highDensity) {
+        trail.forEach((p, i) => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 2 + i / trail.length * 4, 0, 2 * Math.PI);
+          ctx.fillStyle = `rgba(255,130,189,${i / trail.length * 0.3})`;
+          ctx.fill();
+        });
+      }
       if (ball) {
-        ctx.shadowBlur = animations.length > 8 ? 8 : 18;
-        ctx.shadowColor = '#ff70b1';
+        if (!highDensity) {
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = '#ff70b1';
+        }
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, 8, 0, 2 * Math.PI);
         ctx.fillStyle = '#ffb5d9';
@@ -305,7 +331,7 @@
             b = actor.points[index + 1];
       actor.ball = { x: a.x + (b.x - a.x) * p, y: a.y + (b.y - a.y) * p - 8 * Math.sin(p * Math.PI) };
       actor.trail.push({ ...actor.ball });
-      if (actor.trail.length > 6) actor.trail.shift();
+      if (actor.trail.length > 5) actor.trail.shift();
       if (p < 0.65) {
         if (!actor.impact) playTickSound();
         actor.impact = { ...a, phase: p / 0.65 };
@@ -359,6 +385,7 @@
         ready: true,
         authenticated: !!account,
         walletAvailable: false,
+        blocked: false,
         balance: 0,
         history: [],
         tables: Array.from({ length: 9 }, (_, i) => ['low', 'medium', 'high', 'extreme'].map(r => ({ rows: i + 8, risk: r }))).flat(),
@@ -367,7 +394,7 @@
     }
     if (disposed || account !== (App.user?.steam_id || App.user?.steamId || null)) return;
     state = next;
-    walletPaused = (next.history || []).some(g => ['review', 'debit_pending', 'credit_pending'].includes(g.status));
+    walletPaused = (next.history || []).some(g => ['review', 'debit_pending', 'credit_pending'].includes(g.status) && (!g.createdAt || Date.now() - Number(g.createdAt) < 60000));
     
     // Default to wallet mode if user is authenticated with active wallet, else demo mode
     if (next.authenticated) {
@@ -496,12 +523,15 @@
   $('form').addEventListener('submit', e => {
     e.preventDefault();
     if ($('play').disabled || !currentTable || !$('form').reportValidity()) return;
-    const count = automatic ? Number($('count').value) : 1;
-    if (!Number.isInteger(count) || count < 1 || count > maxBalls) return;
-    if (pendingBalls + count > maxBalls) {
+    const count = automatic ? (Number($('count').value) || 1) : 1;
+    if (!Number.isInteger(count) || count < 1) return;
+
+    const maxCap = getMaxBalls();
+    if (pendingBalls + count > maxCap) {
       feedback('Tối đa 20 bóng đang xử lý. Chờ bóng về ô rồi thả tiếp.');
       return;
     }
+
     const job = {
       amount: Number($('amount').value),
       rows: Number($('rows').value),

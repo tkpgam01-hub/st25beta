@@ -48,13 +48,14 @@ module.exports = function(bank, store = defaultStore) {
     ]);
 
     const walletAvailable = !!sid && Number.isFinite(balance) && balance >= 0;
-    const blocked = history.some(game => ['review', 'debit_pending', 'credit_pending'].includes(game.status));
+    // Chỉ khóa tạm thời nếu có giao dịch đang chờ xử lý trong 30 giây gần nhất
+    const blocked = history.some(game => ['review', 'debit_pending', 'credit_pending'].includes(game.status) && (Date.now() - Number(game.createdAt) < 30000));
     const message = databaseFailed
       ? 'Không kết nối được kho giao dịch. Chơi bằng Lúa tạm dừng; vui lòng thử lại sau.'
       : !available
         ? 'Plinko đang tạm đóng. Vui lòng thử lại sau.'
         : blocked
-          ? 'Có lượt chơi cần đối soát. Kiểm tra lịch sử và liên hệ hỗ trợ; không gửi lại.'
+          ? 'Giao dịch đang xử lý. Vui lòng chờ vài giây rồi tiếp tục.'
           : sid && !walletAvailable
             ? 'Không đọc được ví Lúa máy chủ. Thử lại khi kết nối phục hồi.'
             : 'Lúa miễn phí trong game · Đặt trừ Lúa, nhận thưởng cộng vào ví máy chủ.';

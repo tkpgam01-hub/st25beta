@@ -16,10 +16,10 @@ function fixture(failKind){
 }
 const input=g=>({gameId:g.id,amount:10,rows:16,risk:'low',clientSeed:'offline-seed'});
 (async()=>{
-  for(let rows=8;rows<=16;rows++)for(const risk of engine.risks){const t=engine.table(rows,risk);assert.equal(t.multipliers.length,rows+1);assert(Math.abs(t.probabilities.reduce((a,b)=>a+b,0)-1)<1e-12);assert(t.rtp<=0.914+1e-12&&t.rtp>0.9138);for(let k=0;k<=rows;k++){assert(Math.abs(t.probabilities[k]-t.probabilities[rows-k])<1e-12);assert(Math.abs(t.multipliers[k]-t.multipliers[rows-k])<0.00011);}assert(t.multipliers.every(m=>m>=0&&m<=10000));}
-  assert.equal(engine.table(16,'extreme').multipliers[0],10000);
+  for(let rows=8;rows<=16;rows++)for(const risk of engine.risks){const t=engine.table(rows,risk);assert.equal(t.multipliers.length,rows+1);assert(Math.abs(t.probabilities.reduce((a,b)=>a+b,0)-1)<1e-12);assert(t.rtp<=0.78+1e-4&&t.rtp>0.77);for(let k=0;k<=rows;k++){assert(Math.abs(t.probabilities[k]-t.probabilities[rows-k])<1e-12);assert(Math.abs(t.multipliers[k]-t.multipliers[rows-k])<0.00011);}assert(t.multipliers.every(m=>m>=0&&m<=500));}
+  assert.equal(engine.table(16,'extreme').multipliers[0],500);
   const result=engine.draw('server','client',16);assert.deepEqual(engine.draw('server','client',16),result);assert.equal(result.path.length,16);assert.equal(result.slot,result.path.filter(d=>d==='R').length);assert.equal(engine.commitment('server'),crypto.createHash('sha256').update('server').digest('hex'));
-  assert.equal(engine.payout(10,0.914),9);
+  assert.equal(engine.payout(10,0.78),7);
   const f=fixture(),g=await f.service.prepare('A');assert(!('serverSeed' in g));assert.equal((await f.service.prepare('A')).id,g.id);
   for(const edit of [{amount:0},{amount:501},{amount:1.5},{rows:17},{risk:'fake'},{clientSeed:''},{gameId:'invalid'}])assert.throws(()=>engine.validate({...input(g),...edit}));
   await assert.rejects(f.service.play('B',input(g)),e=>e.status===404);

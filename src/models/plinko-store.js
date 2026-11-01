@@ -216,15 +216,18 @@ async function history(sid, limit = 30) {
 }
 
 async function unresolved(handle, sid) {
+  const cutoff = Date.now() - 30000; // Giao dịch quá 30 giây không tiếp tục khóa người chơi
   if (handle?.isMySQL) {
-    const [rows] = await handle.client.query("SELECT id FROM st25_plinko_games WHERE steam_id=? AND status IN ('debit_pending','credit_pending','review') LIMIT 1", [sid]);
+    const [rows] = await handle.client.query("SELECT id FROM st25_plinko_games WHERE steam_id=? AND status IN ('debit_pending','credit_pending','review') AND created_at > ? LIMIT 1", [sid, cutoff]);
     return rows.length > 0;
   }
   if (handle?.isPg) {
-    return (await handle.client.query("SELECT id FROM st25_plinko_games WHERE steam_id=$1 AND status IN ('debit_pending','credit_pending','review') LIMIT 1", [sid])).rows.length > 0;
+    return (await handle.client.query("SELECT id FROM st25_plinko_games WHERE steam_id=$1 AND status IN ('debit_pending','credit_pending','review') AND created_at > $2 LIMIT 1", [sid, cutoff])).rows.length > 0;
   }
   for (const v of memoryStore.values()) {
-    if (v.steam_id === sid && ['debit_pending', 'credit_pending', 'review'].includes(v.status)) return true;
+    if (v.steam_id === sid && ['debit_pending', 'credit_pending', 'review'].includes(v.status) && (Number(v.created_at) > cutoff)) {
+      return true;
+    }
   }
   return false;
 }
