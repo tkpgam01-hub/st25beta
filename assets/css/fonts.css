@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'ST25 Phudu';
+  src: url('../font/Phudu-Light.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ST25 Phudu';
+  src: url('../font/Phudu-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ST25 Phudu';
+  src: url('../font/Phudu-Medium.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ST25 Phudu';
+  src: url('../font/Phudu-SemiBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ST25 Phudu';
+  src: url('../font/Phudu-Bold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ST25 Phudu';
+  src: url('../font/Phudu-ExtraBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ST25 Phudu';
+  src: url('../font/Phudu-Black.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+:root {
+  --font-body: 'ST25 Phudu', Arial, sans-serif;
+  --font-heading: 'ST25 Phudu', Arial, sans-serif;
+}
+/* Include inline styles and dynamically rendered text; preserve icon glyph fonts. */
+:where(html, body, body *):not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad):not(.fa-solid):not(.fa-regular):not(.fa-brands):not([class*="material-icons"]):not([class*="material-symbols"]):not([class*="glyphicon"]):not([class*="fa-"]) {
+  font-family: var(--font-body) !important;
+}

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="vi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vòng Quay Roulette — ST25 VIETNAM</title>
+<meta name="description" content="Vòng quay Roulette phong cách CS2Skin ST25: Đặt cược T, CT hoặc Bạo Chúa Dragon, trừ và nhận Lúa trực tiếp từ ví máy chủ.">
+<link rel="icon" href="assets/imges/st25-favicon.png">
+<link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/redesign.css"><link rel="stylesheet" href="assets/css/portal-layout.css"><link rel="stylesheet" href="assets/css/fonts.css"><link rel="stylesheet" href="assets/css/roulette.css">
+<script src="assets/js/core.js"></script><script src="assets/js/api/endpoints.js"></script><script src="assets/js/ui.js" defer></script>
+</head><body class="st25-portal portal-roulette">
+<!-- include:header -->
+<main class="container roulette-page">
+  <!-- Top Banner: Title & Wallet Info -->
+  <div class="roulette-header">
+    <div class="roulette-title-group">
+      <span class="roulette-eyebrow"><i></i> ST25 ORIGINALS · CS2 ROULETTE THEME</span>
+      <h1>Vòng Quay Roulette <span>✦</span></h1>
+      <p>Dự đoán màu ô dừng lại · Trừ & nhận Lúa trực tiếp (Áp dụng 5% thuế bảo trì server khi thắng)</p>
+    </div>
+    <div class="roulette-wallet-box">
+      <div class="roulette-wallet-info">
+        <small id="roulette-mode-label">Chế độ chơi</small>
+        <strong id="roulette-balance">— Lúa</strong>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button type="button" id="roulette-mode-toggle" class="roulette-steam-btn" style="background:#0f766e;border-color:#14b8a6;color:#fff;cursor:pointer;">🎮 Chơi Thử: Bật</button>
+        <button type="button" id="roulette-dev-login" class="roulette-steam-btn" style="background:#0284c7;border-color:#38bdf8;color:#fff;cursor:pointer;">🔑 Đăng Nhập Test</button>
+        <a href="lien-ket-steam.html" id="roulette-login" class="roulette-steam-btn">Liên kết Steam ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <p id="roulette-notice" class="roulette-notice" role="status">Đang kết nối hệ thống Vòng quay ST25…</p>
+
+  <!-- Slider Arena (CS2Skin Horizontal Carousel) -->
+  <section class="roulette-arena" aria-label="Bàn quay Roulette CS2Skin">
+    <div class="roulette-timer-wrap">
+      <div class="roulette-timer-text" id="roulette-timer-text">
+        Sẵn sàng <span class="highlight">Đặt cược ván mới</span>
+      </div>
+      <div class="roulette-progress-bar">
+        <div class="roulette-progress-fill" id="roulette-progress-fill" style="width: 100%;"></div>
+      </div>
+    </div>
+
+    <!-- The Horizontal Roller Slider -->
+    <div class="roulette-carousel-container" id="roulette-carousel-container">
+      <div class="roulette-needle"></div>
+      <div class="roulette-strip" id="roulette-strip"></div>
+    </div>
+
+    <!-- History: Last 10 + Last 100 Stats -->
+    <div class="roulette-history-row">
+      <div class="roulette-history-group">
+        <span class="roulette-history-label">Lượt gần nhất:</span>
+        <div class="roulette-history-badges" id="roulette-history-badges"></div>
+      </div>
+      <div class="roulette-history-group">
+        <span class="roulette-history-label">Thống kê 100 lượt:</span>
+        <div class="roulette-stats100">
+          <span class="stat-t">T (x2): <b id="stat-t-count">0</b></span>
+          <span style="color: rgba(255,255,255,0.2);">|</span>
+          <span class="stat-dragon">DRAGON (x14): <b id="stat-dragon-count">0</b></span>
+          <span style="color: rgba(255,255,255,0.2);">|</span>
+          <span class="stat-ct">CT (x2): <b id="stat-ct-count">0</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Betting Controls: Input & Quick Buttons -->
+  <div class="roulette-bet-controls">
+    <div class="roulette-input-row">
+      <div class="roulette-input-wrap">
+        <input type="number" id="roulette-amount" min="1" max="1000" step="1" value="10" placeholder="Nhập số Lúa cược..." required>
+        <span class="lua-icon">🌾</span>
+      </div>
+      <div class="roulette-quick-buttons">
+        <button type="button" class="roulette-quick-btn" data-action="plus1">+1</button>
+        <button type="button" class="roulette-quick-btn" data-action="plus10">+10</button>
+        <button type="button" class="roulette-quick-btn" data-action="plus50">+50</button>
+        <button type="button" class="roulette-quick-btn" data-action="plus100">+100</button>
+        <button type="button" class="roulette-quick-btn" data-action="half">½</button>
+        <button type="button" class="roulette-quick-btn" data-action="double">2×</button>
+        <button type="button" class="roulette-quick-btn" data-action="max">MAX</button>
+        <button type="button" class="roulette-quick-btn" data-action="clear">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Cột Đặt Cược: T - Dragon - CT -->
+  <div class="roulette-bet-cards-grid">
+    <!-- Cột 1: CƯỢC T (ĂN THỊT) -->
+    <div class="roulette-bet-card card-t">
+      <div class="roulette-bet-card-header">
+        <div class="roulette-bet-card-title">
+          <span class="side-icon">🦖</span>
+          <span>ĂN THỊT (T)</span>
+        </div>
+        <span class="roulette-payout-tag">Ăn x1.95 (Thuế 5%)</span>
+      </div>
+      <div class="roulette-bet-card-body">
+        <button type="button" class="roulette-place-btn" id="btn-bet-t">
+          <span>Đặt Cược T</span> <i>↓</i>
+        </button>
+        <div class="roulette-column-stats">
+          <span>Tổng Lúa đặt:</span>
+          <strong id="total-bet-t">0 🌾</strong>
+        </div>
+        <div class="roulette-bets-list" id="bets-list-t">
+          <div class="roulette-empty-bets">Chưa có người cược</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cột 2: CƯỢC DRAGON (BẠO CHÚA) -->
+    <div class="roulette-bet-card card-dragon">
+      <div class="roulette-bet-card-header">
+        <div class="roulette-bet-card-title">
+          <span class="side-icon">👑</span>
+          <span>BẠO CHÚA (DRAGON)</span>
+        </div>
+        <span class="roulette-payout-tag">Ăn x13.50 (Thuế 5%)</span>
+      </div>
+      <div class="roulette-bet-card-body">
+        <button type="button" class="roulette-place-btn" id="btn-bet-dragon">
+          <span>Đặt Cược Dragon</span> <i>↓</i>
+        </button>
+        <div class="roulette-column-stats">
+          <span>Tổng Lúa đặt:</span>
+          <strong id="total-bet-dragon">0 🌾</strong>
+        </div>
+        <div class="roulette-bets-list" id="bets-list-dragon">
+          <div class="roulette-empty-bets">Chưa có người cược</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cột 3: CƯỢC CT (ĂN CỎ) -->
+    <div class="roulette-bet-card card-ct">
+      <div class="roulette-bet-card-header">
+        <div class="roulette-bet-card-title">
+          <span class="side-icon">🦕</span>
+          <span>ĂN CỎ (CT)</span>
+        </div>
+        <span class="roulette-payout-tag">Ăn x1.95 (Thuế 5%)</span>
+      </div>
+      <div class="roulette-bet-card-body">
+        <button type="button" class="roulette-place-btn" id="btn-bet-ct">
+          <span>Đặt Cược CT</span> <i>↓</i>
+        </button>
+        <div class="roulette-column-stats">
+          <span>Tổng Lúa đặt:</span>
+          <strong id="total-bet-ct">0 🌾</strong>
+        </div>
+        <div class="roulette-bets-list" id="bets-list-ct">
+          <div class="roulette-empty-bets">Chưa có người cược</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Provably Fair Verification Section -->
+  <details class="roulette-fair">
+    <summary>◇ Minh bạch & Xác minh công bằng (Provably Fair)</summary>
+    <div class="roulette-fair-content">
+      <p>Mỗi ván quay Roulette trên ST25 được đảm bảo tính ngẫu nhiên và minh bạch 100%. Server cam kết mã SHA-256 (Commitment) trước khi bạn cược, và kết quả được tính dựa trên thuật toán <code>HMAC-SHA256(serverSeed, clientSeed:roundId)</code>.</p>
+      <div style="margin: 12px 0;">
+        <label for="roulette-client-seed" style="display:block;margin-bottom:6px;font-weight:600;color:#fff;">Client Seed của bạn:</label>
+        <input type="text" id="roulette-client-seed" value="st25-vietnam-player" maxlength="128" style="background:#090d14;border:1px solid #202b3d;color:#fff;padding:8px 12px;border-radius:6px;width:100%;max-width:400px;font-family:monospace;">
+      </div>
+      <pre id="roulette-proof-output">Chưa có lượt quay nào để hiển thị dữ liệu mã hóa.</pre>
+    </div>
+  </details>
+</main>
+<!-- include:footer -->
+<script src="assets/js/app.js"></script><script src="assets/js/features/roulette.js"></script>
+</body></html>

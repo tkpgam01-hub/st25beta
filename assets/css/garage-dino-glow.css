@@ -1,0 +1,80 @@
+/* Backlight stays behind the dinosaur; its footprint never changes. */
+.garage-dino-visual {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  isolation: isolate;
+  overflow: visible;
+  vertical-align: middle;
+}
+.garage-dino-visual > img {
+  position: relative;
+  z-index: 1;
+  transform: scale(1);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1);
+}
+.garage-dino-visual--red::before,
+.garage-dino-visual--green::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: -20%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(ellipse, #ff453aaa 0%, #f4142466 30%, #bf051a33 50%, transparent 72%);
+  opacity: .6;
+  transform: scale(.95);
+  transition: opacity 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+}
+.garage-dino-visual--red > img {
+  filter: drop-shadow(0 0 2px #ff413d) drop-shadow(0 0 6px #f20c2870) !important;
+}
+.garage-dino-visual--green::before {
+  background: radial-gradient(ellipse, #a3ff38aa 0%, #5de41466 30%, #289c0533 50%, transparent 72%);
+}
+.garage-dino-visual--green > img {
+  filter: drop-shadow(0 0 2px #b0ff48) drop-shadow(0 0 6px #63ee2270) !important;
+}
+/* Separate red layer crossfades over green without animating a gradient. */
+.garage-dino-visual--green::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset: -20%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(ellipse, #ff453aaa 0%, #f4142466 30%, #bf051a33 50%, transparent 72%);
+  opacity: 0;
+  transform: scale(.95);
+  transition: opacity 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .garage-dino-visual--red:hover > img { transform: scale(1.12); }
+  .garage-dino-visual--red:hover::before { opacity: 1; transform: scale(1.15); }
+  .garage-dino-visual--green:hover > img { transform: scale(1.12); }
+  .garage-dino-visual--green:hover::before { opacity: 0; }
+  .garage-dino-visual--green:hover::after { opacity: 1; transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .garage-dino-visual > img, .garage-dino-visual::before, .garage-dino-visual::after { transition: none; }
+  .garage-dino-visual:hover > img, .garage-dino-visual:hover::before, .garage-dino-visual:hover::after { transform: none; }
+}
+
+/* Avoid blur and shadow repaint on every card during pointer movement. */
+body.st25-garage .slot-card {
+  transition: transform 180ms cubic-bezier(.2,.8,.2,1) !important;
+}
+body.st25-garage .slot-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,.5) !important;
+}
+@media (max-width: 768px) {
+  body.st25-garage .glass-panel { backdrop-filter: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.st25-garage .slot-card, body.st25-garage .slot-card:hover {
+    transition: none !important;
+    transform: none !important;
+  }
+}

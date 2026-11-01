@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nội Quy Server ST25 — The Isle: Evrima</title>
+  <meta name="description" content="13 Điều Nội Quy chính thức và Bảng Giới Hạn Đàn (Pack Limit) server ST25 The Isle: Evrima.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Header -->
+  <!-- include:header -->
+
+  <!-- Content -->
+  <main class="container" style="padding: 40px 20px;">
+    
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 35px;">
+      <span class="rule-badge badge-allow" style="font-size: 0.85rem; padding: 4px 12px;">Quy Định Chính Thức BQT ST25</span>
+      <h1 style="font-size: 2.3rem; font-weight: 800; color: #fff; margin: 12px 0;">13 ĐIỀU NỘI QUY SERVER ST25</h1>
+      <p style="color: var(--text-secondary); line-height: 1.7;">
+        Tất cả người chơi tham gia server ST25 bắt buộc tuân thủ đúng 13 Điều luật dưới đây. Mọi hành vi vi phạm sẽ được xử lý minh bạch dựa trên Video Record và Log Server.
+      </p>
+    </div>
+
+    <!-- Quick Navigation to Rules -->
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 35px;">
+      <a href="#dieu-1" class="btn btn-secondary btn-sm">Điều 1: Săn bắt</a>
+      <a href="#dieu-2" class="btn btn-secondary btn-sm">Điều 2: Pack Limit</a>
+      <a href="#dieu-3" class="btn btn-secondary btn-sm">Điều 3: Giao lưu</a>
+      <a href="#dieu-4" class="btn btn-secondary btn-sm">Điều 4: Report</a>
+      <a href="#dieu-5" class="btn btn-secondary btn-sm">Điều 5: Giao tiếp</a>
+      <a href="#dieu-6" class="btn btn-secondary btn-sm">Điều 6: Vùng Cam</a>
+      <a href="#dieu-7" class="btn btn-secondary btn-sm">Điều 7: Phục kích</a>
+      <a href="#dieu-8" class="btn btn-secondary btn-sm">Điều 8: Combat Log</a>
+      <a href="#dieu-9" class="btn btn-secondary btn-sm">Điều 9: Spam thú</a>
+      <a href="#dieu-10" class="btn btn-secondary btn-sm">Điều 10: Xử lý</a>
+      <a href="#dieu-11" class="btn btn-secondary btn-sm">Điều 11: Revenge Kill</a>
+      <a href="#dieu-12" class="btn btn-secondary btn-sm">Điều 12: Gara & 5 Phút</a>
+      <a href="#dieu-13" class="btn btn-secondary btn-sm">Điều 13: Third Party</a>
+    </div>
+
+    <!-- Rule 1 -->
+    <div id="dieu-1" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 1 — SĂN BẮT TỰ DO</span>
+        <span class="rule-badge badge-allow">ĐƯỢC PHÉP</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li><strong>Quy định:</strong> Người chơi được săn bắt tự do, miễn luôn tuân thủ đúng Pack Limit của loài mình.</li>
+          <li><strong>Tranh mồi tự nhiên:</strong> Các đàn hoặc khác loài có thể cùng xuất hiện trong một khu vực, tranh mồi, tranh xác hoặc tham gia giao tranh nếu tình huống xảy ra tự nhiên.</li>
+          <li><strong>Cấm Mixpack / liên minh khác loài:</strong> Không được phối hợp săn, bảo kê, hỗ trợ chiến đấu hoặc cố tình cùng nhau đánh một mục tiêu.</li>
+          <li><strong>Cấm tách nhóm:</strong> Các đàn cùng loài nhưng đã đủ Pack Limit cũng không được tách thành nhiều nhóm để phối hợp với nhau nhằm vượt giới hạn số lượng.</li>
+          <li><strong>Độc lập chiến đấu:</strong> Có thể tranh giành và đánh nhau tự do, nhưng mỗi đàn phải chiến đấu vì lợi ích của chính đàn mình. Không được bắt tay với đàn khác hoặc loài khác để tạo lợi thế số lượng.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 2 + PACK LIMIT TABLE -->
+    <div id="dieu-2" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 2 — ĐÀN & GIỚI HẠN NHÓM (PACK LIMIT)</span>
+        <span class="rule-badge badge-warn">QUY ĐỊNH SỐ LƯỢNG</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Một đàn chỉ được gồm các thành viên <strong>cùng loài</strong> và phải tuân thủ đúng Pack Limit của loài đó.</li>
+          <li><strong>Cấm Mixpack:</strong> Không được lập đàn, di chuyển, săn bắt hoặc hỗ trợ chiến đấu lâu dài với loài khác.</li>
+          <li>Không được chia thành nhiều nhóm nhỏ để lách Pack Limit nhưng vẫn đi chung, săn chung hoặc hỗ trợ nhau.</li>
+          <li>Người chơi được phép giao lưu với đàn khác, nhưng mức độ tương tác phải tuân thủ bảng Social Behavior của server.</li>
+          <li><em>Tóm tắt: Cùng loài thì được lập đàn đúng giới hạn; khác loài có thể gặp và giao lưu, nhưng không được biến thành một đàn chung.</em></li>
+        </ul>
+
+        <h3 style="color: #fff; margin: 24px 0 12px; font-size: 1.15rem;">Bảng Quy Định Số Lượng Thành Viên Mỗi Nhóm Theo Loài (Pack Limit)</h3>
+        
+        <div class="pack-table-wrap">
+          <table class="pack-table">
+            <thead>
+              <tr>
+                <th>Phân Loại</th>
+                <th>Tên Loài Khủng Long</th>
+                <th>Giới Hạn Tối Đa (Con / Đàn)</th>
+                <th>Ghi Chú Đặc Tính</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Carnivore -->
+              <tr><td rowspan="11" style="vertical-align: middle; font-weight: 700; color: #f43f5e; background: rgba(244, 63, 94, 0.05);">Carnivore<br>(Ăn thịt)</td><td>Tyrannosaurus (T-Rex)</td><td class="pack-limit-num">2</td><td>Siêu ăn thịt đỉnh chóp</td></tr>
+              <tr><td>Deinosuchus (Cá sấu khổng lồ)</td><td class="pack-limit-num">2</td><td>Chúa tể đầm lầy & sông ngòi</td></tr>
+              <tr><td>Allosaurus</td><td class="pack-limit-num">3</td><td>Thợ săn cơ động</td></tr>
+              <tr><td>Carnotaurus</td><td class="pack-limit-num">4</td><td>Tốc độ chạy cao</td></tr>
+              <tr><td>Dilophosaurus</td><td class="pack-limit-num">4</td><td>Sát thủ bóng đêm / ảo giác</td></tr>
+              <tr><td>Ceratosaurus</td><td class="pack-limit-num">5</td><td>Ăn xác & mùi hôi</td></tr>
+              <tr><td>Austroraptor</td><td class="pack-limit-num">6</td><td>Săn cá & ven nước</td></tr>
+              <tr><td>Omniraptor</td><td class="pack-limit-num">8</td><td>Săn mồi theo bầy / Pounce</td></tr>
+              <tr><td>Herrerasaurus</td><td class="pack-limit-num">8</td><td>Leo cây rình rập vồ mồi</td></tr>
+              <tr><td>Troodon</td><td class="pack-limit-num">10</td><td>Bầy độc đêm</td></tr>
+              <tr><td>Pteranodon</td><td class="pack-limit-num">10</td><td>Bay lượn trên không</td></tr>
+
+              <!-- Herbivore -->
+              <tr><td rowspan="9" style="vertical-align: middle; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.05);">Herbivore<br>(Ăn cỏ)</td><td>Triceratops (Tam giác long)</td><td class="pack-limit-num">3</td><td>Xe tăng hạng nặng</td></tr>
+              <tr><td>Stegosaurus (Kiếm long)</td><td class="pack-limit-num">3</td><td>Đòn gai đuôi cực mạnh</td></tr>
+              <tr><td>Tenontosaurus</td><td class="pack-limit-num">4</td><td>Phản công đuôi linh hoạt</td></tr>
+              <tr><td>Diabloceratops</td><td class="pack-limit-num">5</td><td>Sừng húc phòng thủ</td></tr>
+              <tr><td>Kentrosaurus</td><td class="pack-limit-num">5</td><td>Gai nhọn thân và đuôi</td></tr>
+              <tr><td>Maiasaura</td><td class="pack-limit-num">5</td><td>Chạy nhanh & đạp mạnh</td></tr>
+              <tr><td>Pachycephalosaurus</td><td class="pack-limit-num">6</td><td>Thiết đầu công húc gãy xương</td></tr>
+              <tr><td>Dryosaurus</td><td class="pack-limit-num">8</td><td>Đào hang & né đòn nhanh</td></tr>
+              <tr><td>Hypsilophodon</td><td class="pack-limit-num">10</td><td>Nhảy cao & nhổ mù mắt</td></tr>
+
+              <!-- Omnivore -->
+              <tr><td rowspan="2" style="vertical-align: middle; font-weight: 700; color: #f59e0b; background: rgba(245, 158, 11, 0.05);">Omnivore<br>(Ăn tạp)</td><td>Gallimimus</td><td class="pack-limit-num">10</td><td>Chạy việt dã nhanh nhất đảo</td></tr>
+              <tr><td>Beipiaosaurus</td><td class="pack-limit-num">10</td><td>Bơi lặn dưới nước & trên cạn</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rule 3 -->
+    <div id="dieu-3" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 3 — GIAO LƯU GIỮA CÁC ĐÀN</span>
+        <span class="rule-badge badge-warn">TỐI ĐA 5 PHÚT</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Các đàn hoặc người chơi khác loài được phép giao lưu ngắn, xin ăn, nói chuyện hoặc tương tác với nhau.</li>
+          <li><strong>Thời gian giao lưu tối đa 5 phút.</strong> Nếu nhiều đàn cùng gặp nhau tại một khu vực thì tính chung một mốc 5 phút, không tính riêng từng đàn.</li>
+          <li>Trong lúc giao lưu, các đàn nên giữ khoảng cách hợp lý, không nhập chung thành một nhóm.</li>
+          <li>Không được lợi dụng việc giao lưu để đi chung, săn chung, bảo kê hoặc phối hợp đánh người chơi khác.</li>
+          <li>Sau khi giao lưu, mỗi đàn phải tiếp tục hoạt động độc lập, tuân thủ đúng Pack Limit và Social Behavior của loài mình.</li>
+          <li><em>Việc nhiều đàn tình cờ ở cùng một khu vực không tự động bị tính là vi phạm. Chỉ vi phạm khi có hành vi rõ ràng cho thấy đang đi chung hoặc phối hợp với nhau.</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 4 -->
+    <div id="dieu-4" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 4 — BÁO CÁO VI PHẠM (REPORT & TICKET)</span>
+        <span class="rule-badge badge-allow">TIẾP NHẬN 24 GIỜ</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Mọi trường hợp báo cáo vi phạm phải được gửi trong vòng <strong>24 giờ</strong> kể từ khi sự việc xảy ra.</li>
+          <li>Báo cáo chỉ được tiếp nhận thông qua <strong>Ticket trên Discord</strong> của server ST25.</li>
+          <li>Khi mở Ticket, người báo cáo cần cung cấp đầy đủ:
+            <ul>
+              <li>• Tên / ID người bị báo cáo nếu xác định được.</li>
+              <li>• Thời gian xảy ra sự việc cụ thể: giờ, phút và ngày.</li>
+              <li>• Khu vực / địa điểm xảy ra sự việc nếu nhớ.</li>
+              <li>• <strong>File Record / Video gốc</strong> thể hiện rõ diễn biến trước, trong và sau tình huống vi phạm.</li>
+              <li>• Mô tả ngắn gọn điều luật mà bạn cho rằng người chơi đã vi phạm.</li>
+            </ul>
+          </li>
+          <li>Không xử lý report chỉ dựa trên lời kể, ảnh chụp hoặc video quá ngắn không đủ để xác định tình huống.</li>
+          <li>Report quá 24 giờ có thể bị từ chối xử lý. Thời gian càng chính xác + Record càng đầy đủ thì Mod càng dễ kiểm tra log và xử lý công bằng cho cả hai bên.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 5 -->
+    <div id="dieu-5" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 5 — GIAO TIẾP & TRANH CÃI</span>
+        <span class="rule-badge badge-warn">VĂN HOÁ ỨNG XỬ</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Người chơi được phép cà khịa, chửi nhau hoặc tranh cãi trong phạm vi vui chơi và cạnh tranh trong game.</li>
+          <li><strong>Nghiêm cấm các nội dung:</strong>
+            <ul>
+              <li>• Phân biệt vùng miền, dân tộc, quốc gia.</li>
+              <li>• Xúc phạm hoặc miệt thị giới tính.</li>
+              <li>• Đe dọa ngoài đời, xúc phạm gia đình hoặc công kích đời tư.</li>
+              <li>• Quấy rối một người chơi liên tục với mục đích gây khó chịu.</li>
+              <li>• Những lời nói quá mức, mất kiểm soát hoặc vượt khỏi phạm vi tranh cãi trong game.</li>
+            </ul>
+          </li>
+          <li>Có thể toxic trong game ở mức chấp nhận được, nhưng không được biến mâu thuẫn trong game thành công kích cá nhân ngoài đời.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 6: ORANGE ZONE -->
+    <div id="dieu-6" class="rule-card highlight">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 6 — VÙNG CAM (RỪNG DỪA)</span>
+        <span class="rule-badge badge-orange">QUY TẮC ĐẶC BIỆT</span>
+      </div>
+      <div class="rule-body">
+        <p style="margin-bottom: 12px; font-weight: 600; color: #fdba74;">
+          Vùng Cam là khu vực áp dụng luật săn bắt hạn chế nhằm tránh tình trạng CAMP và đồ sát người chơi mới/con non.
+        </p>
+        <ul>
+          <li>Người chơi vẫn được phép đi ngang, kiếm ăn, uống nước và sinh tồn bình thường trong khu vực.</li>
+          <li><strong>Cấm CAMP Vùng Cam</strong> để chờ và săn liên tục người chơi mới vào server, người vừa spawn hoặc con non.</li>
+          <li><strong>Các cá thể trên 50% Growth không được chủ động săn hoặc đồ sát con non trong Vùng Cam.</strong></li>
+          <li>Nếu bị người chơi khác chủ động tấn công, bạn vẫn được quyền đánh trả và tự vệ.</li>
+          <li>Người chơi đang bị săn từ bên ngoài không được cố tình chạy vào Vùng Cam để lợi dụng luật bảo vệ và né giao tranh.</li>
+          <li><strong>Vùng Cam KHÔNG PHẢI Safe Zone.</strong> Người chơi vẫn phải tự sinh tồn và chịu các rủi ro tự nhiên trong game. Pack Limit, Mixpack và các luật về đàn/giao tranh vẫn áp dụng bình thường.</li>
+        </ul>
+
+        <div style="margin-top: 18px; padding: 14px; background: rgba(0,0,0,0.3); border-radius: var(--radius-sm); border-left: 4px solid var(--accent-orange);">
+          <strong style="color: #fb923c;">DANH SÁCH VÙNG CAM HIỆN TẠI: Rừng Dừa</strong><br>
+          <span style="font-size: 0.9rem; color: #cbd5e1;">
+            Toàn bộ khu vực người chơi thường gọi là Rừng Dừa sẽ áp dụng luật Vùng Cam.<br>
+            • Con non được phép tấn công con non khác.<br>
+            • Con non tấn công con lớn trước ➔ Con lớn được tấn công lại.<br>
+            • Con lớn khi được hệ thống ghi nhận đạt 50% tấn công con non trước ➔ <strong>VI PHẠM</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rule 7 -->
+    <div id="dieu-7" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 7 — GIAO TRANH & PHỤC KÍCH</span>
+        <span class="rule-badge badge-allow">TỰ DO CHIẾN ĐẤU</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Người chơi được phép <strong>chủ động tấn công, phục kích và săn bất ngờ mà không cần 1-Call, 3-Call</strong> hay bất kỳ cảnh báo nào trước đó.</li>
+          <li>Việc đang nhìn nhau, đứng gần nhau hoặc từng giao lưu trước đó không đồng nghĩa với việc được bảo vệ khỏi bị săn.</li>
+          <li>Người chơi phải luôn tự cảnh giác và chịu trách nhiệm với việc sinh tồn của mình — đúng với tính chất hoang dã của server.</li>
+          <li>Tuy nhiên, mọi cuộc săn và giao tranh vẫn phải tuân thủ các luật khác như Pack Limit, Mixpack, Vùng Cam, CAMP và các quy định về đàn. Thấy cơ hội săn — bạn có quyền săn.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 8 -->
+    <div id="dieu-8" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 8 — COMBAT LOG & WEB GARAGE</span>
+        <span class="rule-badge badge-prohibit">NGHIÊM CẤM NÉ GIAO TRANH</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li><strong>Cấm thoát game, Alt + F4, ngắt kết nối hoặc đưa nhân vật vào Web Garage</strong> để né giao tranh / né bị săn / giữ mạng.</li>
+          <li>Khi đang giao tranh, bị truy đuổi hoặc vừa thoát khỏi một cuộc săn, không được sử dụng Web Garage để cất nhân vật nhằm tránh đối thủ.</li>
+          <li>Chỉ được sử dụng Web Garage khi nhân vật đã thoát khỏi tình huống nguy hiểm và không còn liên quan đến giao tranh đang diễn ra.</li>
+          <li>Trường hợp mất mạng, crash game hoặc lỗi kỹ thuật ngoài ý muốn sẽ được BQT xem xét dựa trên Record và log server nếu có.</li>
+          <li><strong>Đã bước vào một cuộc săn hoặc giao tranh thì phải giải quyết tình huống trong game, không được dùng hệ thống ngoài game để né chết.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 9 -->
+    <div id="dieu-9" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 9 — CẤM SPAM THÚ / NUÔI ĐÀN</span>
+        <span class="rule-badge badge-prohibit">CẤM FARM THỨC ĂN</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Cấm tổ chức nhiều người hoặc nhiều tài khoản liên tục tạo thú mới rồi đem tới cho một đàn giết để lấy thức ăn, tăng trưởng hoặc duy trì đàn.</li>
+          <li>Không được cố tình spawn thú ➔ chạy tới một vị trí ➔ cho giết ➔ tiếp tục spawn lại nhằm tạo nguồn thức ăn nhân tạo.</li>
+          <li>Cấm sử dụng bạn bè, acc phụ hoặc một nhóm đông người để hy sinh nhân vật có chủ đích cho một đàn khác ăn.</li>
+          <li>Cấm lợi dụng cơ chế trùng sinh để farm thức ăn (từ loài này sang loài khác để biến nhân vật cũ thành thức ăn).</li>
+          <li>Việc săn và ăn người chơi gặp tự nhiên trong quá trình sinh tồn vẫn hoàn toàn được phép. Chết tự nhiên trong combat và xác bị ăn không vi phạm.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 10: VIOLATIONS & PENALTIES -->
+    <div id="dieu-10" class="rule-card warning-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 10 — HỆ THỐNG CẢNH BÁO & XỬ LÝ VI PHẠM</span>
+        <span class="rule-badge badge-warn">MỨC PHẠT CHÍNH THỨC</span>
+      </div>
+      <div class="rule-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 20px;">
+          <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.08);">
+            <h4 style="color: #38bdf8; margin-bottom: 8px;">KHOẢN 1 — CẢNH CÁO LẦN 1</h4>
+            <p style="font-size: 0.9rem;"><strong>1.1 — Vi phạm 01 lỗi:</strong> Ghi nhận Cảnh cáo lần 1. Người chơi tiếp tục tham gia Server.</p>
+            <p style="font-size: 0.9rem; margin-top: 6px;"><strong>1.2 — Vi phạm từ 02 lỗi:</strong> Ghi nhận Cảnh cáo lần 2 (áp dụng Khoản 2.1).</p>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(245, 158, 11, 0.3);">
+            <h4 style="color: #f59e0b; margin-bottom: 8px;">KHOẢN 2 — CẢNH CÁO LẦN 2</h4>
+            <p style="font-size: 0.9rem;"><strong>2.1 — Vi phạm 01 lỗi:</strong><br>• Tất cả Role VIP: Tước toàn bộ quyền lợi VIP trong <strong>03 ngày</strong>.<br>• Long Dân: <strong>Ban 01 ngày</strong>.</p>
+            <p style="font-size: 0.9rem; margin-top: 6px;"><strong>2.2 — Vi phạm từ 02 lỗi:</strong> <strong>Ban 03 ngày</strong>, không phân biệt Role/VIP.</p>
+          </div>
+
+          <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(244, 63, 94, 0.3);">
+            <h4 style="color: #f43f5e; margin-bottom: 8px;">KHOẢN 3 — CẢNH CÁO LẦN 3</h4>
+            <p style="font-size: 0.9rem;"><strong>3.1 — Tái phạm:</strong> <strong>Ban vĩnh viễn</strong>.</p>
+            <p style="font-size: 0.9rem; margin-top: 6px;"><strong>Trường hợp SSVIP - SSSVIP:</strong><br>• Ban 15 ngày.<br>• Tước Role SSVIP - SSSVIP vĩnh viễn.<br>• Không hoàn lại quyền lợi/giá trị Role đã mua.</p>
+          </div>
+        </div>
+
+        <div style="padding: 12px; background: rgba(244, 63, 94, 0.1); border-radius: var(--radius-sm); border-left: 4px solid #f43f5e;">
+          <strong style="color: #f43f5e;">VI PHẠM NGHIÊM TRỌNG — XỬ LÝ TRỰC TIẾP:</strong><br>
+          <span style="font-size: 0.875rem; color: #fecdd3;">
+            • Cố tình vi phạm nhiều lần cùng một lỗi ➔ <strong>Ban 03 ngày</strong>.<br>
+            • Lợi dụng Bug/Exploit để trục lợi, gian lận hoặc tạo lợi thế không công bằng ➔ <strong>Ban vĩnh viễn</strong>.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rule 11 -->
+    <div id="dieu-11" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 11 — SAU KHI CHẾT / REVENGE KILL</span>
+        <span class="rule-badge badge-prohibit">CẤM TRẢ THÙ NGAY</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Sau khi chết, không được quay lại khu vực vừa chết để trả thù, tiếp tục trận đánh hoặc hỗ trợ đàn cũ.</li>
+          <li>Không được mở Web Garage lấy một con khác rồi quay lại khu vực vừa chết để săn, đánh hoặc hỗ trợ đánh người/đàn đã giết mình.</li>
+          <li>Không được Respawn con mới rồi chạy thẳng về vị trí vừa chết với mục đích Revenge Kill.</li>
+          <li>Sau khi chết, người chơi được phép lấy con khác trong Garage hoặc chơi con mới để tiếp tục sinh tồn bình thường, miễn không quay lại can thiệp vào tình huống vừa xảy ra.</li>
+          <li><strong>Cá thể chết = tình huống của cá thể đó kết thúc. Không được dùng con khác trong Garage trong thời gian 15 PHÚT hoặc một mạng mới để quay lại tiếp tục trận cũ.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 12: GARAGE 5 MINS -->
+    <div id="dieu-12" class="rule-card highlight">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 12 — GARAGE / RESTORE & THỜI GIAN CHỜ GIAO TRANH (5 PHÚT)</span>
+        <span class="rule-badge badge-warn">QUY ĐỊNH 5 PHÚT</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li>Cấm lợi dụng Garage để di chuyển Dino lớn tới một khu vực khác rồi Restore lên nhằm tham gia giao tranh ngay lập tức.</li>
+          <li><strong>Sau khi Retrieve / Restore / Swap Dino, người chơi phải chờ tối thiểu 5 PHÚT trước khi được:</strong>
+            <ul>
+              <li>• Chủ động săn hoặc tấn công người chơi khác.</li>
+              <li>• Tham gia hỗ trợ giao tranh cho đàn.</li>
+              <li>• Bảo kê thành viên đang chiến đấu.</li>
+              <li>• Tranh xác bằng vũ lực.</li>
+              <li>• Chủ động tham gia một cuộc giao tranh gần khu vực vừa Restore.</li>
+            </ul>
+          </li>
+          <li><strong>Nếu một cuộc giao tranh đã bắt đầu trước thời điểm bạn Restore Dino, bạn KHÔNG ĐƯỢC THAM GIA cuộc giao tranh đó, kể cả sau khi đã chờ đủ 5 phút.</strong></li>
+          <li>Trong thời gian 5 phút, nếu bị người chơi khác chủ động tấn công trước, bạn được phép đánh trả để tự vệ và bảo toàn mạng sống (nhưng không được lợi dụng để truy đuổi săn ngược).</li>
+          <li>Cấm các thành viên trong team lần lượt Restore Dino lớn để tiếp viện, thay người hoặc bổ sung quân số cho một trận chiến đang diễn ra.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Rule 13: THIRD PARTY -->
+    <div id="dieu-13" class="rule-card">
+      <div class="rule-header">
+        <span class="rule-title">ĐIỀU 13 — THIRD PARTY TẤN CÔNG (LUẬT TEAM THỨ 3)</span>
+        <span class="rule-badge badge-prohibit">QUY TẮC COMBAT</span>
+      </div>
+      <div class="rule-body">
+        <ul>
+          <li><strong>1. Người ngoài tự ý vào TEAM UP:</strong> Người chơi không thuộc team ban đầu nhưng cố tình nhập team/đi chung team để tham gia giao tranh ➔ tính là TEAM UP. Mặc định: WARN 1 lần, tái phạm xử lý theo quy định.</li>
+          <li><strong>2. Team thứ 3 cố tình phá giao tranh:</strong> Team 3 không được phép cố tình xen vào khi 2 team đang giao tranh. Nếu Team 3 cố tình lao vào đánh ➔ tính là phá giao tranh, không được hoàn trả Dino nếu chết. 2 Team ban đầu sẽ được hỗ trợ RF có điều kiện là Tái giao tranh.</li>
+          <li><strong>2.1 Cấm lợi dụng Team 3 để né giao tranh:</strong> Cấm hành vi đang bị truy đuổi cố tình cắn Team 3 hoặc cắn con non (<= 40% growth) để lôi kéo bên thứ 3 vào giải vây.</li>
+          <li><strong>3. Team 3 đã có mặt từ trước:</strong> Phải chờ 2 team đánh xong và hồi phục. Chỉ được đánh khi <strong>CẢ HAI BÊN ĐỒNG Ý</strong> (xác nhận bằng Phím 1, Voice hoặc Chat).</li>
+          <li><strong>4. Team 3 từ xa đến khi combat đang diễn ra:</strong> Thấy giao tranh đang diễn ra thì tuyệt đối KHÔNG ĐƯỢC XEN VÀO.</li>
+          <li><strong>5. Trường hợp ngẫu nhiên sau giao tranh:</strong> Team vừa giao tranh phải có F2 chứng minh. Nếu xác bị xóa, tính <strong>5 phút rời khu vực để hồi máu</strong>. Người vừa xong chủ động đánh trước nếu chết KHÔNG được hoàn Dino.</li>
+          <li><strong>QUY TẮC F2:</strong> <strong>Không có F2 ➔ Không hỗ trợ hoàn trả (RF) Dino.</strong> F2 là căn cứ duy nhất để Admin xác định trạng thái thực tế.</li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+</body>
+</html>

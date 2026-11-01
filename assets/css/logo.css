@@ -1,0 +1,13 @@
+/* Keep the supplied logo intact and reserve its space before the PNG loads. */
+.brand .st25-site-logo, .brand-logo .st25-site-logo {
+  display: block;
+  width: 84px;
+  height: 56px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+body.st25-portal .site-header .nav-wrap { padding-block: 6px; }
+.site-footer .brand .st25-site-logo { width: 132px; height: 88px; }
+@media (max-width: 600px) {
+  .brand .st25-site-logo, .brand-logo .st25-site-logo { width: 72px; height: 48px; }
+}

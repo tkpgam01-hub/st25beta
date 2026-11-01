@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Đồ Thành Viên Gateway — ST25 VIETNAM</title>
+  <meta name="description" content="Bản đồ định vị cá nhân thành viên server ST25: Hiển thị duy nhất vị trí của bạn, các vùng màu tròn (Bãi thả AI, Sanctuaries, Vùng Cam Rừng Dừa, Điểm nóng đỏ) theo https://st25.islepilot.eu/map.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    .stat-mini-bar {
+      height: 5px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 3px;
+    }
+    .stat-mini-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+    .zone-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.825rem;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: background 0.15s ease;
+    }
+    .zone-legend-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .color-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal st25-map" style="overflow: hidden;">
+
+  <!-- Header -->
+  <!-- include:header -->
+
+  <!-- Map Layout -->
+  <div class="map-page-wrap">
+    <!-- Map Viewport -->
+    <div id="map-viewport"></div>
+
+    <!-- Map Sidebar -->
+    <aside class="map-sidebar">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="color: #fff; font-size: 1.15rem; margin-bottom: 2px;">🌾 Bản Đồ Sinh Tồn ST25 🦖</h3>
+          <span class="rule-badge badge-allow" id="member-privacy-badge">Bảo Mật Cá Nhân</span>
+        </div>
+        <p style="font-size: 0.775rem; color: var(--text-muted); line-height: 1.4;">
+          Chỉ hiển thị vị trí của bạn (ẩn toàn bộ người chơi khác). Đồng bộ các vùng màu theo <strong style="color: #fbbf24;">st25.islepilot.eu/map</strong>.
+        </p>
+      </div>
+
+      <!-- Active Member Status Box -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+          <div>
+            <strong id="active-player-name" style="color: #fff; font-size: 0.95rem; display: block;">Đang quét tài khoản...</strong>
+            <span id="active-player-steamid" style="font-size: 0.75rem; color: var(--text-muted); font-family: monospace;">SteamID: ---</span>
+          </div>
+          <span class="rule-badge badge-allow" id="player-live-badge">Đang quét</span>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.25); border-radius: 4px; padding: 10px; margin-bottom: 10px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px;">
+            <span style="color: var(--text-muted);">Khủng long:</span>
+            <strong id="active-dino-species" style="color: #38bdf8;">---</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+            <span style="color: var(--text-muted);">Tăng trưởng (Growth):</span>
+            <strong id="active-dino-growth" style="color: var(--accent-emerald-light);">---</strong>
+          </div>
+
+          <!-- Health Mini Bar -->
+          <div style="margin-top: 6px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
+              <span>Máu (Health)</span>
+              <span id="active-dino-health-txt">100%</span>
+            </div>
+            <div class="stat-mini-bar">
+              <div id="active-dino-health-bar" class="stat-mini-fill" style="width: 100%; background: #ef4444;"></div>
+            </div>
+          </div>
+
+          <!-- Position Coordinates & Grid -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.8rem;">
+            <div>
+              <span style="color: var(--text-muted); display: block; font-size: 0.725rem;">Toạ độ Unreal:</span>
+              <span id="active-dino-coords" style="font-family: monospace; color: #fff; font-weight: 600;">X: --- | Y: ---</span>
+            </div>
+            <div style="text-align: right;">
+              <span style="color: var(--text-muted); display: block; font-size: 0.725rem;">Ô Lưới:</span>
+              <strong id="active-dino-grid" style="color: var(--accent-amber); font-size: 1rem; font-family: monospace;">---</strong>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <button id="btn-focus-player" class="btn btn-primary btn-sm" style="flex: 1;">
+            Về Vị Trí Của Tôi
+          </button>
+          <a href="lien-ket-steam.html" class="btn btn-secondary btn-sm" title="Đổi tài khoản Steam">
+            Đổi Steam
+          </a>
+        </div>
+      </div>
+
+      <!-- Colored Zones Legend & Layer Toggles (st25.islepilot.eu/map) -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px;">
+        <h4 style="color: #fff; font-size: 0.825rem; font-weight: 700; margin-bottom: 8px;">
+          Các Vùng Màu (IslePilot Map):
+        </h4>
+
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <!-- 1. Bãi thả AI -->
+          <label class="zone-legend-item">
+            <input type="checkbox" id="chk-zone-ai" checked>
+            <span class="color-dot" style="background: #38bdf8; box-shadow: 0 0 6px #38bdf8;"></span>
+            <span style="color: #38bdf8; font-weight: 600;">Bãi Thả AI Trung Tâm</span>
+          </label>
+
+          <!-- 2. Sanctuaries -->
+          <label class="zone-legend-item">
+            <input type="checkbox" id="chk-zone-sanctuary" checked>
+            <span class="color-dot" style="background: #34d399; box-shadow: 0 0 6px #34d399;"></span>
+            <span style="color: #34d399; font-weight: 600;">Sanctuaries (6 Thánh địa con non)</span>
+          </label>
+
+          <!-- 3. Vùng Cam Rừng Dừa -->
+          <label class="zone-legend-item">
+            <input type="checkbox" id="chk-zone-orange" checked>
+            <span class="color-dot" style="background: #f97316; box-shadow: 0 0 6px #f97316;"></span>
+            <span style="color: #fb923c; font-weight: 600;">Vùng Cam — Rừng Dừa (Điều 6)</span>
+          </label>
+
+          <!-- 4. Điểm Nóng Đỏ -->
+          <label class="zone-legend-item">
+            <input type="checkbox" id="chk-zone-hotspot" checked>
+            <span class="color-dot" style="background: #ef4444; box-shadow: 0 0 6px #ef4444;"></span>
+            <span style="color: #f87171;">Điểm Nóng Giao Tranh Đỏ (20 Vùng)</span>
+          </label>
+
+          <!-- 5. Patrol Zones Tím -->
+          <label class="zone-legend-item">
+            <input type="checkbox" id="chk-zone-patrol" checked>
+            <span class="color-dot" style="background: #a78bfa;"></span>
+            <span style="color: #c4b5fd;">Patrol Zones (Vùng tuần tra tím)</span>
+          </label>
+
+          <!-- 6. Vùng Đại Di Cư MMZ -->
+          <label class="zone-legend-item">
+            <input type="checkbox" id="chk-zone-migration" checked>
+            <span class="color-dot" style="background: #4dff00;"></span>
+            <span style="color: #86efac;">Vùng Đại Di Cư (MMZ & Tuyến đường)</span>
+          </label>
+
+          <!-- 7. Địa danh -->
+          <label class="zone-legend-item">
+            <input type="checkbox" id="chk-zone-locations" checked>
+            <span class="color-dot" style="background: #e2e8f0;"></span>
+            <span style="color: var(--text-secondary);">24 Địa danh trên đảo (Locations)</span>
+          </label>
+
+          <!-- 8. Lưới A1 - L12 -->
+          <label class="zone-legend-item" style="border-top: 1px solid rgba(255,255,255,0.06); margin-top: 4px; padding-top: 6px;">
+            <input type="checkbox" id="chk-grid" checked>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">Lưới toạ độ A1 – L12</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Realtime Mouse Coordinates Readout -->
+      <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-sm); padding: 12px;">
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px;">Toạ độ con trỏ chuột:</div>
+        <div id="map-mouse-coords" style="font-family: monospace; font-size: 0.9rem; color: var(--accent-emerald-light); font-weight: 700;">
+          X: 0 | Y: 0
+        </div>
+        <div id="map-mouse-grid" style="font-family: monospace; font-size: 0.8rem; color: var(--accent-amber); margin-top: 2px;">
+          Ô: F6
+        </div>
+      </div>
+
+      <!-- Search Landmarks -->
+      <div>
+        <label class="form-label" for="input-search-landmark" style="font-size: 0.8rem;">Tìm Địa Danh Trên Đảo:</label>
+        <input type="text" id="input-search-landmark" class="form-input" style="font-size: 0.825rem; padding: 8px 10px;" placeholder="Delta, Swamp, The Pit, Bãi thả AI...">
+      </div>
+
+      <!-- Quick Funny Landmark Selector -->
+      <div>
+        <label class="form-label" for="select-funny-landmark" style="font-size: 0.8rem; color: #38bdf8; font-weight: 700;">
+          😂 Chọn Nhanh Địa Danh Hài Hước:
+        </label>
+        <select id="select-funny-landmark" class="form-input" style="font-size: 0.825rem; padding: 8px 10px; background: #0f172a; color: #fff; border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer; width: 100%;">
+          <option value="">-- Chọn xem 24 địa danh hài hước --</option>
+        </select>
+      </div>
+
+      <!-- Notice Box -->
+      <div style="margin-top: auto; padding: 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: var(--radius-sm); font-size: 0.775rem; color: #bae6fd;">
+        <strong>Bảo mật:</strong> Bản đồ chỉ hiển thị vị trí của chính bạn nhằm đảm bảo tính công bằng sinh tồn trong server ST25.
+      </div>
+    </aside>
+  </div>
+
+  <script src="assets/vendor/leaflet/leaflet.js"></script>
+  <script src="assets/js/zones-data.js"></script>
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/map.js?v=20261009-stable1"></script>
+</body>
+</html>

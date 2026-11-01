@@ -1,0 +1,21 @@
+<!-- Transcribed HTML panel; mjchal, https://codepen.io/mjchal/pen/vYpaxOK. MIT. -->
+<!-- Panel archive only: no external dependencies have been downloaded. -->
+<div class="container text-white mx-auto w-full max-w-xl mt-10 p-4 rounded-2xl">
+  <h1 class="text-2xl text-center font-bold mb-6">Clash Plinko Verifier</h1>
+  <label for="serverHash">Server Hash</label>
+  <input id="serverHash" type="text" class="w-full py-2 px-3 rounded-xl mt-1 mb-2" />
+  <label for="serverSeed">Server Seed</label>
+  <input id="serverSeed" type="text" class="w-full py-2 px-3 rounded-xl mt-1 mb-2" />
+  <label for="clientSeed">Client Seed</label>
+  <input id="clientSeed" type="text" class="w-full py-2 px-3 rounded-xl mt-1 mb-2" />
+  <label for="rows">Rows</label>
+  <select id="rows" class="w-full py-2 px-3 rounded-xl mt-1 mb-2">
+    <option value="8">8</option><option value="9">9</option>
+    <option value="10">10</option><option value="11">11</option>
+    <option value="12">12</option><option value="13">13</option>
+    <option value="14">14</option><option value="15">15</option>
+    <option value="16">16</option>
+  </select>
+  <div id="verify" class="bg-pink-600 hover:bg-pink-500 cursor-pointer text-center p-3 rounded-xl mt-3">Verify Game</div>
+  <div id="result" class="my-6"></div>
+</div>

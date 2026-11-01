@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Giao Dịch P2P (Trade ST25) — ST25 VIETNAM</title>
+  <meta name="description" content="Hệ thống giao dịch trao đổi Khủng Long và Lúa P2P chính thức máy chủ ST25 The Isle: Evrima, đồng bộ chuẩn IslePilot EU.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    .trade-banner {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+    .balance-huge {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #fbbf24;
+      text-shadow: 0 0 18px rgba(245, 158, 11, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quick-switch-bar {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+    .trade-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    .offer-box {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+      transition: all 0.2s ease;
+    }
+    .offer-box:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(30, 41, 59, 0.95);
+    }
+    .offer-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-pending { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-accepted { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-declined { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .badge-cancelled { background: rgba(100, 116, 139, 0.2); color: #cbd5e1; border: 1px solid rgba(100, 116, 139, 0.4); }
+    .btn-action-accept {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #fff;
+      border: none;
+      font-weight: 800;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-action-accept:hover { transform: scale(1.03); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
+    .btn-action-decline {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-action-decline:hover { background: rgba(239, 68, 68, 0.3); color: #fff; }
+    .btn-action-cancel {
+      background: rgba(148, 163, 184, 0.15);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      transition: all 0.2s;
+    }
+    .btn-action-cancel:hover { background: rgba(239, 68, 68, 0.2); color: #f87171; border-color: #ef4444; }
+    .dino-preview-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 8px;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Site Header -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 25px; padding-bottom: 60px;">
+
+    <!-- Trade Banner -->
+    <div class="trade-banner">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span class="rule-badge badge-allow">🤝 Hệ Thống Trade P2P Chuẩn IslePilot</span>
+          <span style="color: #cbd5e1; font-size: 0.85rem;" id="trade-user-tag">Đang đồng bộ...</span>
+        </div>
+        <h1 style="color: #fff; font-size: 1.8rem; margin: 4px 0;">HỆ THỐNG GIAO DỊCH TRAO ĐỔI (TRADE ST25)</h1>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">
+          Giao dịch trực tiếp P2P giữa hai người chơi: Chuyển Khủng Long & Lúa 🌾 an toàn, đối phương chấp nhận là vào thẳng Gara!
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 24px; align-items: center;">
+        <div style="text-align: right;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Sức Chứa Gara</div>
+          <div style="color: #38bdf8; font-weight: 800; font-size: 1.25rem;" id="trade-garage-capacity">---</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Số dư Lúa của bạn</div>
+          <div class="balance-huge">
+            <span id="trade-balance-val">---</span>
+            <span style="font-size: 1.3rem;">🌾</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cảnh báo chống treo thú ảo / lạm dụng Gara -->
+    <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 12px 18px; margin-bottom: 25px; display: flex; align-items: center; gap: 14px;">
+      <span style="font-size: 1.6rem;">⏱️</span>
+      <div style="font-size: 0.88rem; color: #fca5a5; line-height: 1.5;">
+        <strong style="color: #f87171;">Quy định chống treo thú ảo:</strong> Mỗi lời mời giao dịch chỉ có hiệu lực trong vòng <strong style="color: #fff; text-decoration: underline;">30 giây</strong>. Nếu sau 30 giây người nhận chưa chấp nhận, hệ thống sẽ tự động hủy giao dịch và <strong style="color: #fff;">hoàn trả Khủng Long về lại Gara của bạn ngay lập tức</strong>.
+      </div>
+    </div>
+
+    <!-- Main Grid: Create Trade (Left) | Incoming & Outgoing Offers (Right) -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 25px; margin-bottom: 35px;">
+
+      <!-- SECTION 1: TẠO LỜI MỜI GIAO DỊCH (SEND TRADE OFFER) -->
+      <div class="trade-card">
+        <h3 style="color: #fff; font-size: 1.25rem; margin-top: 0; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+          <span>📤 Tạo Lời Mời Giao Dịch Mới</span>
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 18px;">
+          Nhập Steam ID người bạn muốn giao dịch, chọn Khủng Long trong Gara và đặt số Lúa thỏa thuận.
+        </p>
+
+        <form id="create-trade-form" onsubmit="TradeApp.submitCreateTrade(event)">
+          <!-- Select Online Receiver or Type Steam ID -->
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="trade-recent-players">Chọn nhanh người chơi online:</label>
+            <select id="trade-recent-players" class="form-input" onchange="TradeApp.onSelectRecentPlayer(this.value)">
+              <option value="">-- Đang nạp danh sách người chơi online --</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label" for="trade-receiver-steamid">Steam ID 64 người nhận giao dịch (*):</label>
+            <input type="text" id="trade-receiver-steamid" class="form-input" placeholder="Nhập 17 chữ số Steam ID..." required maxlength="17">
+          </div>
+
+          <!-- Section: Sender Offers -->
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <div style="font-size: 0.88rem; font-weight: 700; color: #fbbf24; margin-bottom: 10px; display: flex; justify-content: space-between;">
+              <span>🎁 Vật Phẩm & Lúa Bạn Đưa Ra:</span>
+              <span id="trade-dino-count-badge" style="color: #94a3b8; font-size: 0.78rem;">0 Dino trong Gara</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label class="form-label" for="trade-select-dino">Chọn Khủng Long từ Gara của bạn:</label>
+              <select id="trade-select-dino" class="form-input" onchange="TradeApp.onSelectDinoChange()">
+                <option value="">-- Không gửi Dino (Chỉ chuyển Lúa) --</option>
+              </select>
+              <div id="trade-selected-dino-preview" style="display: none;" class="dino-preview-card"></div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="trade-sender-lua">Số Lúa bạn tặng/gửi kèm (🌾):</label>
+              <input type="number" id="trade-sender-lua" class="form-input" min="0" value="0" placeholder="0 nếu không tặng Lúa">
+            </div>
+          </div>
+
+          <!-- Section: Sender Requests -->
+          <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <div style="font-size: 0.88rem; font-weight: 700; color: #34d399; margin-bottom: 10px;">
+              <span>💰 Yêu Cầu Đối Phương Trả Lại:</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label" for="trade-requested-lua">Số Lúa yêu cầu đối phương trả (🌾 Giá bán):</label>
+              <input type="number" id="trade-requested-lua" class="form-input" min="0" value="0" placeholder="Nhập số Lúa muốn nhận (VD: 50)...">
+              <small style="color: #94a3b8; font-size: 0.75rem; display: block; margin-top: 4px;">
+                💡 Nếu đặt 50 Lúa, khi đối phương bấm "Chấp Nhận", họ sẽ bị trừ 50 Lúa và bạn nhận được 50 Lúa ngay!
+              </small>
+            </div>
+          </div>
+
+          <!-- Note -->
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label class="form-label" for="trade-note">Lời nhắn thỏa thuận (Tùy chọn):</label>
+            <input type="text" id="trade-note" class="form-input" placeholder="VD: Đổi T-Rex lấy 50 Lúa nhé bạn...">
+          </div>
+
+          <button type="submit" id="btn-submit-trade" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 1rem; padding: 14px;">
+            🤝 Gửi Lời Mời Giao Dịch Ngay 🚀
+          </button>
+        </form>
+      </div>
+
+      <!-- SECTION 2: LỜI MỜI NHẬN ĐƯỢC (INCOMING) & ĐÃ GỬI (OUTGOING) -->
+      <div>
+        
+        <!-- INCOMING OFFERS -->
+        <div class="trade-card" style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="color: #fff; font-size: 1.25rem; margin: 0; display: flex; align-items: center; gap: 8px;">
+              <span>📥 Lời Mời Chờ Bạn Xử Lý</span>
+            </h3>
+            <span class="offer-badge badge-pending" id="incoming-badge">0 lời mời</span>
+          </div>
+
+          <div id="incoming-trades-list">
+            <div style="text-align: center; padding: 30px; color: #64748b;">
+              Đang tải danh sách lời mời...
+            </div>
+          </div>
+        </div>
+
+        <!-- OUTGOING OFFERS -->
+        <div class="trade-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="color: #fff; font-size: 1.15rem; margin: 0; display: flex; align-items: center; gap: 8px;">
+              <span>⏳ Lời Mời Bạn Đã Gửi (Đang Chờ Phản Hồi)</span>
+            </h3>
+            <span class="offer-badge badge-pending" id="outgoing-badge">0 lời mời</span>
+          </div>
+
+          <div id="outgoing-trades-list">
+            <div style="text-align: center; padding: 25px; color: #64748b;">
+              Chưa có lời mời gửi đi nào đang chờ.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SECTION 3: LỊCH SỬ GIAO DỊCH (TRADE HISTORY) -->
+    <div class="trade-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h2 style="color: #fff; font-size: 1.3rem; margin: 0 0 4px;">📜 Lịch Sử Giao Dịch Gần Đây</h2>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 0.85rem;">
+            Theo dõi tất cả giao dịch đã hoàn tất, bị từ chối hoặc đã hủy giữa các thành viên ST25.
+          </p>
+        </div>
+        <button onclick="TradeApp.loadData()" class="btn-preset" style="padding: 6px 14px;">🔄 Làm Mới</button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Thời Gian</th>
+              <th>Người Gửi (Sender)</th>
+              <th>Người Nhận (Receiver)</th>
+              <th>Vật Phẩm Trao Đổi</th>
+              <th>Lúa 🌾</th>
+              <th>Trạng Thái</th>
+            </tr>
+          </thead>
+          <tbody id="trade-history-tbody">
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 25px; color: #64748b;">
+                Đang tải lịch sử giao dịch...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/giao-dich.js"></script>
+</body>
+</html>

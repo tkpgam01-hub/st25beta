@@ -1,0 +1,46 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="../assets/css/style.css"><link rel="stylesheet" href="../assets/css/fonts.css"><link rel="stylesheet" href="../assets/css/portal-layout.css"><link rel="stylesheet" href="../assets/css/quests.css"></head><body class="st25-portal quests-page"><main class="container quest-page">
+    
+    <!-- Page Title -->
+    <div class="quest-page-heading"><div><h1>NHIỆM VỤ & THÀNH TỰU</h1><p>Hoàn thành thử thách sinh tồn để nhận phần thưởng.</p></div><span class="quest-page-label">ST25 · THE ISLE EVRIMA</span></div>
+    <div id="quest-tabs" class="quest-tabs" role="tablist" aria-label="Loại nhiệm vụ">
+      <button type="button" role="tab" id="quest-tab-daily" aria-controls="quest-board-panel" data-quest-tab="daily" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>Hằng ngày <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-weekly" aria-controls="quest-board-panel" data-quest-tab="weekly" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-11 3v5m3-5v5m3-5v5"/></svg>Hằng tuần <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-monthly" aria-controls="quest-board-panel" data-quest-tab="monthly" aria-selected="false" tabindex="-1" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>Hằng tháng <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-achievements" aria-controls="prime-section" data-quest-tab="achievements" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v7a4 4 0 0 1-8 0V3Zm0 2H4v3a4 4 0 0 0 4 4m8-7h4v3a4 4 0 0 1-4 4m-4 2v5m-4 2h8m-6-2h4"/></svg>Thành tựu <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-events" aria-controls="quest-board-panel" data-quest-tab="events" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.5"/><path d="M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14"/></svg>Sự kiện <span>0</span></button>
+    </div>
+    <section id="quest-board-panel" role="tabpanel" aria-labelledby="quest-tab-daily">
+      <div class="quest-section-heading"><div class="quest-section-plaque"><div><h2 id="quest-section-title">NHIỆM VỤ ĐANG HOẠT ĐỘNG</h2><p id="quest-section-description">Hoàn thành mục tiêu để nhận thưởng vào ví</p></div><span id="server-quest-count">0</span></div></div>
+      <div class="quest-board-actions"><button type="button" id="quest-claim-all" class="quest-claim is-ready" onclick="claimAllQuests()" hidden>Nhận tất cả</button></div>
+      <div id="server-quests-grid" class="quest-grid"><div class="quest-empty">Đang đồng bộ nhiệm vụ từ máy chủ ST25…</div></div>
+      <p class="quest-footnote">Tiến độ dựa trên hoạt động trong game. Phần thưởng và điều kiện do máy chủ cung cấp.</p>
+    </section>
+    <!-- Section 2: Prime Elder Evolution Quests -->
+    <section id="prime-section" role="tabpanel" aria-labelledby="quest-tab-achievements" hidden>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h2 style="color: #fff; font-size: 1.35rem; margin-bottom: 4px;">10 Thử Thách Tiến Hóa Prime Elder</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            Tiến hóa thành Prime Elder để nhận kích thước khổng lồ và sức mạnh tối thượng trong The Isle: Evrima.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Điều kiện đạt được:</span>
+          <span class="rule-badge badge-allow" id="prime-quest-status" style="font-size: 0.85rem; padding: 4px 10px;">0 / 10 Đã Đạt</span>
+        </div>
+      </div>
+
+      <!-- Prime Elder Status Banner -->
+      <div id="prime-summary-banner" style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--accent-emerald); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 20px; font-size: 0.875rem; color: #cbd5e1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <strong style="color: #fff;">Quy chuẩn Evrima:</strong> Bạn cần hoàn thành tối thiểu <strong>5 / 10</strong> điều kiện để có cơ hội trở thành Prime Elder khi đạt 100% Growth.
+        </div>
+        <div id="prime-eligibility-badge" class="rule-badge badge-warn">Chưa đủ điều kiện</div>
+      </div>
+
+      <div id="prime-quests-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px;">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+  </main><script>const App={escapeHTML:v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))};function claimSingleQuest(){}function claimAllQuests(){}</script><script src="../assets/js/quests.js"></script><script>document.addEventListener('DOMContentLoaded',()=>QuestBoard.render({"serverQuests":[{"id":"1","name":"Người săn mồi mới","description":"Hạ 3 khủng long.","period":"daily","config":{"count":3},"progress":0,"rewardAmount":15000},{"id":"2","name":"Sinh tồn 30 phút","description":"Chơi trong 30 phút.","period":"daily","config":{"minutes":30},"progress":10,"rewardAmount":50000},{"id":"3","name":"Thợ săn","description":"Hạ 6 khủng long.","period":"daily","rarity":"uncommon","config":{"count":6},"progress":0,"rewardAmount":32500},{"id":"4","name":"Sinh tồn 1 giờ","description":"Chơi trong 60 phút.","period":"daily","rarity":"uncommon","config":{"minutes":60},"progress":60,"rewardAmount":85000,"completed":true,"canClaim":true},{"id":"5","name":"Sinh tồn 6 giờ","description":"Hoàn thành Sinh tồn 1 giờ trước.","period":"daily","rarity":"rare","config":{"minutes":360},"progress":0,"rewardAmount":250000,"locked":true}],"primeQuests":[],"events":[]}));</script></body></html>

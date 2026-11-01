@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dịch Vụ Thả Xác Cứu Đói — ST25 VIETNAM</title>
+  <meta name="description" content="Gọi thả xác AI & Carcass khẩn cấp bằng Lúa 🌾 cứu đói cho khủng long ăn thịt trên máy chủ ST25 The Isle: Evrima.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    .carcass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+    .carcass-card:hover {
+      border-color: #fbbf24;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.15);
+    }
+    .nutrient-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 4px;
+      color: #fbbf24;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Site Header -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 30px; padding-bottom: 60px;">
+    
+    <!-- Title & Balance Banner -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px;">
+      <div>
+        <span class="rule-badge badge-allow">🥩 Tiếp Tế Khẩn Cấp ST25</span>
+        <h1 style="color: #fff; font-size: 2rem; margin: 8px 0 4px;">DỊCH VỤ THẢ XÁC CỨU ĐÓI (CARCASS) 🌾</h1>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">
+          Đổi Lúa 🌾 lấy nguồn thức ăn tươi ngon thả ngay toạ độ của bạn khi cơn đói cồn cào đe dọa mạng sống!
+        </p>
+      </div>
+
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35); padding: 12px 20px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 1.8rem;">🌾</span>
+        <div>
+          <small style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Số Lúa hiện có</small>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #fbbf24;" id="carcass-lua-val">--- Lúa</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert Note -->
+    <div style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 25px; font-size: 0.88rem; color: #cbd5e1;">
+      📍 <strong>Đồng bộ toạ độ GPS:</strong> Khi bạn bấm đặt hàng, máy chủ sẽ định vị toạ độ GPS của khủng long bạn đang điều khiển và thả xác xuống trong bán kính 10 mét. Hãy đảm bảo an toàn xung quanh trước khi ăn!
+    </div>
+
+    <!-- Carcass Types Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 35px;" id="carcass-grid">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Order History Section -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+      <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 14px;">📜 Đơn Hàng Thả Xác Tiếp Tế Gần Nhất</h3>
+      <div id="carcass-history-list" style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="color: var(--text-muted); text-align: center; padding: 25px;">Chưa có đơn thả xác nào gần đây.</div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/tha-xac.js"></script>
+</body>
+</html>

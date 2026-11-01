@@ -1,0 +1,20 @@
+node_modules/
+.build-cache/
+reference/
+.env
+.env.*
+!.env.example
+tests/*.log
+tests/*-process.txt
+tests/.redesign-browser-*/
+tests/.quests-browser-*/
+
+/public/
+
+# Local merge recovery backup
+.merge-backup/
+aaa-local-before-merge-fix.zip
+/debug.log
+.vercel
+.env*
+!.env.example

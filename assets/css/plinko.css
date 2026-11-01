@@ -1,0 +1,72 @@
+.plinko-page{max-width:1240px;padding-top:30px;padding-bottom:60px}.plinko-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:22px}.plinko-eyebrow{font-size:10px;color:#b6a0c5;letter-spacing:2px}.plinko-heading h1{font-size:38px!important;margin:4px 0;color:#faf7ff}.plinko-heading h1 span{color:#ee65aa;padding-left:12px}.plinko-heading p{color:#9c97ae;font-size:13px}.plinko-wallet{text-align:right;background:#191621;border:1px solid #302b3c;padding:14px 20px;border-radius:14px}.plinko-wallet small{display:block;color:#a19aad;font-size:10px;letter-spacing:1px}.plinko-wallet strong{display:block;font-size:23px;color:#eac68b}.plinko-wallet a{font-size:12px;color:#eac68b}.plinko-notice{color:#b4aebd;font-size:12px;min-height:18px;margin:12px 0}.plinko-shell{display:grid;grid-template-columns:280px minmax(0,1fr);background:#15131d;border:1px solid #302939;border-radius:18px;overflow:hidden}.plinko-controls{padding:22px;background:#211c2b;border-right:1px solid #342b40}.plinko-tabs{display:flex;gap:5px;background:#17131e;border-radius:10px;padding:5px;margin-bottom:23px}.plinko-tabs button{flex:1;border:0;background:transparent;color:#a8a0b9;padding:10px 0;border-radius:7px;font-size:12px;cursor:pointer}.plinko-tabs button.selected{background:#46334d;color:#fff}.plinko-controls label,.plinko-fair label{display:block;color:#c7bcd3;font-size:12px;margin:18px 0 8px}.plinko-controls label small{float:right;color:#968b9f}.plinko-controls input,.plinko-controls select,.plinko-fair input{width:100%;background:#16121f;border:1px solid #40334d;border-radius:9px;color:#f4eaf9;padding:12px;font-size:14px;min-width:0}.plinko-input{position:relative}.plinko-input input{padding-right:42px}.plinko-input span{position:absolute;right:12px;top:11px}.plinko-shortcuts{display:flex;gap:7px;margin-top:7px}.plinko-shortcuts button{flex:1;background:#312839;color:#c7bdd1;border:1px solid #40344d;border-radius:7px;padding:7px;cursor:pointer}.plinko-play{width:100%;margin-top:24px;border:0;background:linear-gradient(110deg,#cf4f8e,#ed78aa);color:#fff;padding:15px;border-radius:9px;font-weight:800;cursor:pointer;box-shadow:0 6px 28px #dc58952a}.plinko-play span{float:right}.plinko-controls button:disabled{opacity:.45;cursor:default}.plinko-controls #plinko-stop{width:100%;margin-top:8px;padding:10px;border:1px solid #cf4f8e;background:transparent;color:#f6a2ca;border-radius:9px}.plinko-feedback{font-size:11px;color:#b2a5bd;line-height:1.7;margin:14px 0;min-height:38px}.plinko-stats{border-top:1px solid #3d3047;padding-top:12px}.plinko-stats div{display:flex;justify-content:space-between;font-size:11px;color:#a89cb3;margin:10px 0;gap:8px}.plinko-stats strong{color:#ddd1e5}.plinko-arena{padding:20px 25px 14px;position:relative;min-width:0;background:radial-gradient(ellipse at 50% 25%,#34203770,transparent 68%),#15131d}.plinko-arena-top{display:flex;justify-content:space-between;color:#9d87a8;font-size:10px;letter-spacing:2px}.plinko-arena-top small{color:#d4a0ba;font-size:9px;letter-spacing:1px}#plinko-board{display:block;width:100%;height:auto;aspect-ratio:1000/740}.plinko-slots{display:grid;gap:3px;position:relative;margin:0 8%;grid-template-columns:repeat(var(--slots,17),minmax(0,1fr))}.plinko-slots button{padding:12px 0;font-size:9px;border:0;border-radius:4px;color:#241826;background:hsl(var(--hue),78%,65%);font-weight:800;cursor:help;min-width:0}.plinko-slots button.winner{outline:2px solid #fff;transform:translateY(-5px);box-shadow:0 0 20px #ef84b7}.plinko-result{text-align:center;color:#efd6e9;font-weight:700;min-height:30px;margin:24px 0 8px}.plinko-board-note{font-size:10px;color:#8b8097;text-align:center}.plinko-history,.plinko-fair{margin-top:22px;padding:22px;background:#191520;border:1px solid #342b3e;border-radius:14px}.plinko-history>div:first-child{display:flex;justify-content:space-between;gap:12px;align-items:center}.plinko-history h2{font-size:16px!important;color:#e9e2ee}.plinko-history span{font-size:11px;color:#91869d}.plinko-table-scroll{overflow:auto}.plinko-page table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap;margin-top:16px}.plinko-page th{text-align:left;color:#91849d;font-weight:500;font-size:10px;padding:12px}.plinko-page td{padding:13px 12px;border-top:1px solid #2f2639;color:#c5b9d0}.plinko-page td button{border:1px solid #53415e;background:#2b2034;color:#d7c4e3;padding:5px 9px;border-radius:6px;cursor:pointer}.plinko-fair{font-size:12px;color:#aa9bb6;line-height:1.8}.plinko-fair summary{cursor:pointer;color:#dcc8e8}.plinko-fair pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#110e18;padding:14px;border-radius:8px;font-size:11px}.plinko-page button:focus-visible,.plinko-page input:focus-visible,.plinko-page select:focus-visible{outline:2px solid #f9add2;outline-offset:3px}.plinko-page [hidden]{display:none!important}@media(max-width:900px){.plinko-shell{grid-template-columns:235px minmax(0,1fr)}.plinko-controls{padding:15px}.plinko-arena{padding:18px 10px}.plinko-slots{gap:2px;margin:0 3%}.plinko-slots button{font-size:8px;padding:10px 0}}@media(max-width:650px){.plinko-page{padding:20px 12px}.plinko-heading{gap:8px}.plinko-heading h1{font-size:30px!important}.plinko-eyebrow{font-size:8px;letter-spacing:1px}.plinko-heading p{font-size:11px}.plinko-wallet{padding:10px}.plinko-wallet strong{font-size:18px}.plinko-shell{display:flex;flex-direction:column}.plinko-arena{order:-1;padding-top:16px}.plinko-controls{border-right:0;border-top:1px solid #342b40}.plinko-controls form{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.plinko-controls form>label:first-child,.plinko-controls #plinko-mode,.plinko-controls .plinko-play,.plinko-controls .plinko-feedback,.plinko-controls #plinko-stop,.plinko-controls #plinko-auto-options{grid-column:1/-1}.plinko-controls form>label{grid-column:1/-1}.plinko-controls .plinko-input{grid-column:1}.plinko-controls .plinko-shortcuts{grid-column:2;margin-top:0;align-items:stretch}.plinko-controls select{grid-column:1/-1}.plinko-tabs{margin-bottom:10px}.plinko-history,.plinko-fair{padding:15px}.plinko-history>div:first-child{display:block}.plinko-result{font-size:13px;margin-top:16px}.plinko-slots button{font-size:7px}.plinko-board-note{font-size:9px}}@media(prefers-reduced-motion:reduce){.plinko-slots button.winner{transform:none}}
+
+@layer st25-redesign {
+.portal-plinko .plinko-page{max-width:1240px!important;margin-inline:auto}.portal-plinko .plinko-tabs button.selected{background:#46334d!important;color:#fff!important}.portal-plinko .plinko-play{background:linear-gradient(110deg,#cf4f8e,#ed78aa)!important;color:#fff!important}.portal-plinko .plinko-slots button{background:hsl(var(--hue),78%,65%)!important;color:#241826!important;border:0!important;border-radius:4px!important;padding:12px 0!important}.portal-plinko .plinko-slots button:after{content:"?";font-size:7px}@media(max-width:650px){.portal-plinko .plinko-slots button{font-size:6px!important;padding:10px 0!important}.portal-plinko .plinko-slots button:after{display:none}}
+
+}
+
+/* Plinko visual refresh is scoped to this page. */
+.plinko-active{grid-column:1/-1;text-align:center;margin:10px 0 0;font-size:11px;font-variant-numeric:tabular-nums;color:#9a87a7}.plinko-active.is-active{color:#f6b1d1}
+@layer st25-redesign {
+  body.portal-plinko #plinko-play{background:linear-gradient(110deg,#ce4788,#ef83b3)!important;color:#fff!important;border:0!important;border-radius:10px!important;box-shadow:0 6px 24px #d653932b!important}
+  body.portal-plinko #plinko-play:hover:not(:disabled){background:linear-gradient(110deg,#db5195,#f493bd)!important;color:#fff!important;transform:translateY(-1px)!important}
+  body.portal-plinko .plinko-tabs button.selected{background:#50364f!important;border-color:#71526f!important;color:#fff!important}
+}
+.portal-plinko .plinko-page{padding-top:38px}
+.plinko-heading{margin-bottom:26px}
+.plinko-eyebrow{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:1.7px}
+.plinko-eyebrow i{width:6px;height:6px;background:#f080ba;border-radius:50%;box-shadow:0 0 12px #f080ba80}
+.portal-plinko .plinko-heading h1{font-size:48px!important;font-weight:850;letter-spacing:-2px;margin:8px 0}
+.plinko-heading h1 span{display:inline-block;font-size:32px;vertical-align:middle}
+.plinko-heading p{margin:0;line-height:1.6}
+.plinko-wallet{min-width:166px;border-color:#51405a;background:linear-gradient(140deg,#2d2335,#191621);box-shadow:inset 0 1px #ffffff08}
+.plinko-wallet strong{font-variant-numeric:tabular-nums;margin-block:5px}
+.plinko-notice{border-left:2px solid #ad5f96;padding:7px 12px;line-height:1.7;margin-bottom:20px;background:#241a2c55;border-radius:0 6px 6px 0}
+.plinko-shell{border-color:#49324f;border-radius:22px;box-shadow:0 20px 70px #09060f55,inset 0 1px #ffffff08}
+.plinko-controls{padding:24px;background:linear-gradient(165deg,#261e31,#1c1726);border-color:#3e2e48}
+.plinko-tabs{margin-bottom:20px;border:1px solid #ffffff08}
+.plinko-tabs button,.plinko-shortcuts button,.plinko-play{transition:background .15s,box-shadow .15s,transform .15s}
+.plinko-shortcuts button:hover{background:#48334f}
+.plinko-play:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 30px #eb67a34d}
+.plinko-play:active:not(:disabled){transform:translateY(1px)}
+.plinko-controls input,.plinko-controls select{box-shadow:inset 0 2px 6px #0000001a}
+.plinko-arena{padding:22px 26px 18px;background:radial-gradient(ellipse at 50% 35%,#57233e50,transparent 64%),linear-gradient(160deg,#1d1727,#120f1b)}
+.plinko-arena-top{align-items:center;gap:10px;letter-spacing:1px}
+.plinko-arena-top small{background:#50314670;border:1px solid #80526a65;border-radius:6px;padding:7px 9px;line-height:1.2;color:#f6bad7}
+#plinko-motion{border:1px solid #51405d;background:#251c30;color:#cbb6d7;padding:7px 10px;border-radius:7px;font-size:10px;white-space:nowrap;cursor:pointer;min-height:32px}
+#plinko-motion:hover{background:#35223f}
+.plinko-recent{display:flex;align-items:center;justify-content:flex-end;gap:5px;min-height:32px;margin-top:12px;overflow:hidden;font-size:10px;color:#897890}
+.plinko-recent-chip{flex:none;font-variant-numeric:tabular-nums;background:#30243a;border:1px solid #ffffff0a;color:#c9b4d1;padding:4px 8px;border-radius:5px}
+.plinko-recent-chip.positive{color:#fbc0dc;background:#72344d55;border-color:#ac547740}
+#plinko-board{contain:layout paint}
+.portal-plinko .plinko-slots button{border-radius:5px!important;box-shadow:inset 0 -3px #00000020;transition:transform .15s,box-shadow .15s}
+.portal-plinko .plinko-slots button:after{content:none!important}
+.plinko-slots button:hover{transform:translateY(-3px)}
+.plinko-slots button.winner{box-shadow:0 0 20px #ef84b766;animation:plinko-land .35s ease-out}
+.plinko-result{background:#261b32;border:1px solid #54334f66;border-radius:10px;padding:12px 14px;margin:20px auto 10px;width:fit-content;min-width:210px;font-size:14px;font-variant-numeric:tabular-nums}
+.plinko-result.positive{color:#ffd0e5;border-color:#cf5b8e80;background:#4f233755}
+.plinko-board-note{line-height:1.6;margin:0}
+.plinko-history,.plinko-fair{background:linear-gradient(145deg,#211a2b,#18131f);border-color:#44314f}
+.plinko-page tbody tr:hover{background:#ffffff03}
+@keyframes plinko-land{0%{transform:translateY(0)}45%{transform:translateY(-9px)}100%{transform:translateY(-5px)}}
+@media(max-width:900px){.plinko-controls{padding:18px}.plinko-arena{padding:20px 14px}}
+@media(max-width:650px){
+  .portal-plinko .plinko-page{padding:22px 12px 40px}
+  .portal-plinko .plinko-heading h1{font-size:36px!important;letter-spacing:-1px}
+  .plinko-heading h1 span{font-size:25px}.plinko-heading{margin-bottom:18px}
+  .plinko-heading p{max-width:185px}.plinko-eyebrow{font-size:8px;letter-spacing:.4px;gap:5px}
+  .plinko-wallet{min-width:110px;padding:12px 10px;border-radius:11px}.plinko-wallet small{font-size:8px;letter-spacing:.4px}
+  .plinko-shell{border-radius:16px}.plinko-arena{padding:16px 10px}
+  .plinko-controls{padding:18px;border-color:#44314f}.plinko-recent{min-height:27px;margin-top:8px;gap:4px}
+  .plinko-recent-chip{font-size:9px;padding:3px 6px}.plinko-arena-top small{font-size:8px}
+  .plinko-result{font-size:12px;min-width:180px;margin-top:16px;padding:10px}
+  .plinko-controls input,.plinko-controls select,.plinko-shortcuts button{min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){.plinko-page *{animation:none!important;transition:none!important}.plinko-slots button:hover{transform:none}}
+
+/* Keep the primary action above the board on narrow screens. */
+@media(max-width:650px){
+  .portal-plinko .plinko-arena{order:0;border-top:1px solid #44314f}
+  .portal-plinko .plinko-controls{border-top:0}
+  .portal-plinko #plinko-play{grid-row:1;grid-column:1/-1;margin-top:0;min-height:48px}
+}

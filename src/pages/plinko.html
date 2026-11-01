@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="vi"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plinko — ST25 VIETNAM</title><meta name="description" content="Plinko ST25: thả bóng, xem xác suất và chơi bằng điểm Lúa miễn phí.">
+<link rel="icon" href="assets/imges/st25-favicon.png">
+<link rel="stylesheet" href="assets/css/style.css"><link rel="stylesheet" href="assets/css/redesign.css"><link rel="stylesheet" href="assets/css/portal-layout.css"><link rel="stylesheet" href="assets/css/fonts.css"><link rel="stylesheet" href="assets/css/plinko.css?v=20261014-visible-play">
+<script src="assets/js/core.js"></script><script src="assets/js/api/endpoints.js"></script><script src="assets/js/ui.js" defer></script>
+</head><body class="st25-portal portal-plinko">
+<!-- include:header -->
+<main class="container plinko-page">
+<div class="plinko-heading"><div><span class="plinko-eyebrow"><i></i> ST25 ORIGINALS · ĐIỂM LÚA MIỄN PHÍ</span><h1>Plinko<span>✦</span></h1><p>Một quả bóng. Hàng ngàn khả năng.</p></div><div class="plinko-wallet"><small>VÍ LÚA TRONG GAME</small><strong id="plinko-balance">—</strong><a href="lien-ket-steam.html" id="plinko-login">Liên kết Steam ↗</a></div></div>
+<p id="plinko-notice" class="plinko-notice" role="status">Đang kết nối Plinko…</p>
+<div class="plinko-shell">
+<aside class="plinko-controls">
+<div class="plinko-tabs" role="group" aria-label="Cách chơi"><button type="button" id="plinko-manual" class="selected" aria-pressed="true">Thủ công</button><button type="button" id="plinko-auto" aria-pressed="false">Tự động</button></div>
+<form id="plinko-form">
+<label for="plinko-mode">Ví sử dụng</label><select id="plinko-mode" aria-label="Ví Lúa máy chủ"><option value="wallet">Lúa trong game</option></select>
+<label for="plinko-amount">Số Lúa mỗi bóng <small>1–500</small></label><div class="plinko-input"><input id="plinko-amount" type="number" min="1" max="500" step="1" value="10" required><span>🌾</span></div>
+<div class="plinko-shortcuts"><button type="button" data-size="half">½</button><button type="button" data-size="double">2×</button><button type="button" data-size="max">MAX</button></div>
+<label for="plinko-risk">Mức rủi ro</label><select id="plinko-risk"><option value="low">Thấp</option><option value="medium">Trung bình</option><option value="high">Cao</option><option value="extreme">Cực cao</option></select>
+<label for="plinko-rows">Số hàng</label><select id="plinko-rows"><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option selected>16</option></select>
+<div id="plinko-auto-options" hidden><label for="plinko-count">Số bóng tự động</label><input id="plinko-count" type="number" min="1" max="20" value="5"><small>Tối đa 20 bóng · dừng khi có lỗi</small></div>
+<button class="plinko-play" id="plinko-play" type="submit" disabled>Thả bóng <span>↓</span></button><p class="plinko-active" id="plinko-active" role="status">0 / 20 bóng</p><button id="plinko-stop" type="button" hidden>Dừng bóng chờ</button>
+<p class="plinko-feedback" id="plinko-feedback" role="status" aria-live="polite">Mỗi bóng trừ Lúa trong game; thưởng cộng vào ví máy chủ.</p>
+</form><div class="plinko-stats"><div><span>RTP lý thuyết</span><strong id="plinko-rtp">—</strong></div><div><span>Thưởng tối đa / bóng</span><strong id="plinko-max">—</strong></div></div>
+</aside>
+<section class="plinko-arena" aria-label="Bảng Plinko"><div class="plinko-arena-top"><small id="plinko-mode-label">VÍ LÚA TRONG GAME</small><button type="button" id="plinko-motion" aria-pressed="true" title="Bật hoặc tắt hiệu ứng thả bóng">Hiệu ứng: Bật</button></div><div class="plinko-recent" id="plinko-recent" aria-label="Hệ số các lượt vừa chơi"><span>Lượt vừa chơi xuất hiện ở đây</span></div><canvas id="plinko-board" width="1000" height="740" aria-label="Bóng đi qua các hàng chốt đến ô thưởng"></canvas><div id="plinko-slots" class="plinko-slots" aria-label="Hệ số và xác suất mỗi ô"></div><div class="plinko-result" id="plinko-result" aria-live="polite">Sẵn sàng thả bóng</div><p class="plinko-board-note">Mỗi nhánh trái / phải: 50% · Chạm ô để xem xác suất</p></section>
+</div>
+<section class="plinko-history"><div><h2>Lịch sử của bạn</h2><span>Chỉ hiển thị lượt chơi của bạn</span></div><div class="plinko-table-scroll"><table><thead><tr><th>Chế độ</th><th>Mức gửi</th><th>Hệ số</th><th>Nhận lại</th><th>Trạng thái</th><th>Xác minh</th></tr></thead><tbody id="plinko-history"><tr><td colspan="6">Chưa có lượt chơi. Thả bóng để bắt đầu.</td></tr></tbody></table></div></section>
+<details class="plinko-fair"><summary>◇ Xác suất & xác minh kết quả</summary><p>Bảng thưởng ST25 được tính riêng, không phải bảng thưởng Clash.gg. RTP xấp xỉ 91,4% trước khi làm tròn Lúa; phần thưởng lấy số nguyên xuống nên RTP thực tế tùy mức gửi. Hệ số bao gồm vốn. Lúa chỉ là điểm miễn phí, không mua bán hoặc quy đổi tiền.</p><label for="plinko-seed">Client seed</label><input id="plinko-seed" maxlength="128" autocomplete="off"><p>Server công bố SHA-256 của seed trước khi gửi Lúa. Kết quả dùng HMAC-SHA256(serverSeed, clientSeed:hàng), 32 bit đầu dưới 2³¹ đi trái, còn lại đi phải. Seed được tiết lộ khi giao dịch kết thúc.</p><pre id="plinko-proof">Chưa có lượt xác minh.</pre><div class="plinko-table-scroll"><table><thead><tr><th>Ô</th><th>Xác suất</th><th>Hệ số</th><th>Nhận với mức gửi hiện tại</th></tr></thead><tbody id="plinko-odds"></tbody></table></div></details>
+</main>
+<!-- include:footer -->
+<script src="assets/js/app.js?v=20261012-plinko1"></script><script src="assets/js/features/plinko.js?v=20261013-live20"></script>
+</body></html>

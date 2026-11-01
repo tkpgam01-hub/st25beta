@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhiệm Vụ Cá Nhân — ST25 VIETNAM</title>
+  <meta name="description" content="Danh sách nhiệm vụ cá nhân, tiến độ Prime Elder và số dư Lúa của riêng bạn trên server ST25 The Isle Evrima. Đồng bộ tự động theo thời gian thực.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    .personal-profile-banner {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .profile-avatar-wrap {
+      position: relative;
+    }
+    .profile-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 3px solid var(--accent-emerald);
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
+    }
+    .profile-info h2 {
+      margin: 0 0 4px;
+      font-size: 1.35rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile-steam-id {
+      font-family: monospace;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
+    .profile-dino-badges {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .wallet-box {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius-sm);
+      padding: 16px 24px;
+      text-align: right;
+      min-width: 200px;
+    }
+    .wallet-title {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .wallet-amount {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent-amber);
+      display: block;
+      margin-top: 2px;
+      text-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+    }
+    .unlinked-alert {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .prime-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+    .prime-card.completed {
+      border-color: rgba(52, 211, 153, 0.35);
+      background: rgba(16, 185, 129, 0.06);
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/quests.css?v=20261009-brighter1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal quests-page">
+
+  <!-- Header -->
+  <!-- include:header -->
+
+  <!-- Content -->
+  <main class="container quest-page">
+    
+    <!-- Page Title -->
+    <div class="quest-page-heading"><div><h1>NHIỆM VỤ & THÀNH TỰU</h1><p>Hoàn thành thử thách sinh tồn để nhận phần thưởng.</p></div><span class="quest-page-label">ST25 · THE ISLE EVRIMA</span></div>
+    <!-- Personal Profile Dashboard Banner -->
+    <div id="personal-profile-banner" class="personal-profile-banner" style="border-color: rgba(245, 158, 11, 0.35); background: linear-gradient(135deg, rgba(20, 26, 21, 0.95), rgba(35, 42, 30, 0.9));">
+      <div class="profile-left">
+        <div class="profile-avatar-wrap">
+          <img id="player-avatar" src="https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" alt="Avatar" class="profile-avatar" style="border-color: #fbbf24; box-shadow: 0 0 15px rgba(245, 158, 11, 0.45);">
+        </div>
+        <div class="profile-info">
+          <h2>
+            <span id="player-name">Đang tải tài khoản...</span>
+            <span class="rule-badge badge-allow" id="badge-account-status">Đã Kết Nối</span>
+          </h2>
+          <div class="profile-steam-id">
+            SteamID64: <span id="player-steam-id" style="color: #cbd5e1;">---</span>
+          </div>
+          <div class="profile-dino-badges">
+            <span class="rule-badge badge-blue" id="player-dino-species">Khủng long: Đang tải...</span>
+            <span class="rule-badge badge-warn" id="player-dino-growth">Độ lớn: ---%</span>
+            <span class="rule-badge badge-allow" id="player-dino-online">Trực tuyến</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+        <!-- Wallet Balance (Lúa ST25) -->
+        <div class="wallet-box" style="background: rgba(245, 158, 11, 0.14); border: 1.5px solid rgba(251, 191, 36, 0.45); box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);">
+          <span class="wallet-title" style="color: #fef08a; font-weight: 700;">🌾 SỐ DƯ LÚA TRONG VÍ</span>
+          <span class="wallet-amount" id="player-coins-amount" style="color: #fbbf24; text-shadow: 0 0 14px rgba(245, 158, 11, 0.5);">🌾 0 Lúa</span>
+        </div>
+
+        <!-- Action Links -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <a id="btn-view-on-map" href="bando.html" class="btn btn-primary btn-sm" style="text-align: center;">
+            📍 Xem Vị Trí Trên Map
+          </a>
+          <a href="gara.html" class="btn btn-secondary btn-sm" style="text-align: center;">
+            🦖 Vào Gara Cá Nhân
+          </a>
+          <a href="lien-ket-steam.html" class="btn btn-secondary btn-sm" style="text-align: center; font-size: 0.75rem; padding: 4px 8px;">
+            Đổi Tài Khoản Steam
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlinked Steam Warning (Hidden by default, shown if not logged in) -->
+    <div id="unlinked-alert" class="unlinked-alert" style="display: none; border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.08);">
+      <h3 style="color: #fbbf24; font-size: 1.25rem; margin-bottom: 8px;">🌾 Bạn chưa liên kết tài khoản Steam!</h3>
+      <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 18px; line-height: 1.5;">
+        Server ST25 bảo mật dữ liệu sinh tồn tuyệt đối cho từng thành viên. Vui lòng liên kết tài khoản Steam của bạn để kiểm tra nhiệm vụ, nhận thưởng <strong>Lúa 🌾</strong> và theo dõi tiến độ Prime Elder.
+      </p>
+      <a href="lien-ket-steam.html" class="btn btn-primary">Liên Kết Tài Khoản Steam Ngay</a>
+    </div>
+
+    
+    <div id="quest-tabs" class="quest-tabs" role="tablist" aria-label="Loại nhiệm vụ">
+      <button type="button" role="tab" id="quest-tab-daily" aria-controls="quest-board-panel" data-quest-tab="daily" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>Hằng ngày <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-weekly" aria-controls="quest-board-panel" data-quest-tab="weekly" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-11 3v5m3-5v5m3-5v5"/></svg>Hằng tuần <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-monthly" aria-controls="quest-board-panel" data-quest-tab="monthly" aria-selected="false" tabindex="-1" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>Hằng tháng <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-achievements" aria-controls="prime-section" data-quest-tab="achievements" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v7a4 4 0 0 1-8 0V3Zm0 2H4v3a4 4 0 0 0 4 4m8-7h4v3a4 4 0 0 1-4 4m-4 2v5m-4 2h8m-6-2h4"/></svg>Thành tựu <span>0</span></button>
+      <button type="button" role="tab" id="quest-tab-events" aria-controls="quest-board-panel" data-quest-tab="events" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1.5"/><path d="M8 8a6 6 0 0 0 0 8m8-8a6 6 0 0 1 0 8M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14"/></svg>Sự kiện <span>0</span></button>
+    </div>
+    <section id="quest-board-panel" role="tabpanel" aria-labelledby="quest-tab-daily">
+      <div class="quest-section-heading"><div class="quest-section-plaque"><div><h2 id="quest-section-title">NHIỆM VỤ ĐANG HOẠT ĐỘNG</h2><p id="quest-section-description">Hoàn thành mục tiêu để nhận thưởng vào ví</p></div><span id="server-quest-count">0</span></div></div>
+      <div class="quest-board-actions"><button type="button" id="quest-claim-all" class="quest-claim is-ready" onclick="claimAllQuests()" hidden>Nhận tất cả</button></div>
+      <div id="server-quests-grid" class="quest-grid"><div class="quest-empty">Đang đồng bộ nhiệm vụ từ máy chủ ST25…</div></div>
+      <p class="quest-footnote">Tiến độ dựa trên hoạt động trong game. Phần thưởng và điều kiện do máy chủ cung cấp.</p>
+    </section>
+    <!-- Section 2: Prime Elder Evolution Quests -->
+    <section id="prime-section" role="tabpanel" aria-labelledby="quest-tab-achievements" hidden>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h2 style="color: #fff; font-size: 1.35rem; margin-bottom: 4px;">10 Thử Thách Tiến Hóa Prime Elder</h2>
+          <p style="font-size: 0.85rem; color: var(--text-secondary);">
+            Tiến hóa thành Prime Elder để nhận kích thước khổng lồ và sức mạnh tối thượng trong The Isle: Evrima.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Điều kiện đạt được:</span>
+          <span class="rule-badge badge-allow" id="prime-quest-status" style="font-size: 0.85rem; padding: 4px 10px;">0 / 10 Đã Đạt</span>
+        </div>
+      </div>
+
+      <!-- Prime Elder Status Banner -->
+      <div id="prime-summary-banner" style="background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--accent-emerald); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 20px; font-size: 0.875rem; color: #cbd5e1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <strong style="color: #fff;">Quy chuẩn Evrima:</strong> Bạn cần hoàn thành tối thiểu <strong>5 / 10</strong> điều kiện để có cơ hội trở thành Prime Elder khi đạt 100% Growth.
+        </div>
+        <div id="prime-eligibility-badge" class="rule-badge badge-warn">Chưa đủ điều kiện</div>
+      </div>
+
+      <div id="prime-quests-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px;">
+        <!-- Injected by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/quests.js?v=20261009-orange-tabs1"></script>
+  <script src="assets/js/features/nhiem-vu.js"></script>
+</body>
+</html>

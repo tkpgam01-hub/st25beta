@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gara Khủng Long — Máy Chủ ST25 VIETNAM (IslePilot Cloud)</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <style>
+    .garage-header-box {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .active-dino-panel {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(15, 23, 42, 0.8));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+    @media (max-width: 768px) {
+      .active-dino-panel { grid-template-columns: 1fr; }
+    }
+    .stat-bars { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .stat-item { background: rgba(0,0,0,0.25); border-radius: 6px; padding: 6px 10px; }
+    .stat-label-wrap { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px; color: #cbd5e1; }
+    .stat-bar-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+    .stat-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s ease; }
+    .fill-health { background: #10b981; }
+    .fill-hunger { background: #f59e0b; }
+    .fill-thirst { background: #06b6d4; }
+    .fill-stamina { background: #3b82f6; }
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .slot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .slot-card:hover {
+      transform: translateY(-3px);
+      border-color: #38bdf8;
+    }
+    .slot-card.empty-slot {
+      border: 2px dashed rgba(255,255,255,0.1);
+      background: rgba(15, 23, 42, 0.4);
+      align-items: center;
+      justify-content: center;
+      min-height: 220px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .slot-badge-num {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255,255,255,0.08);
+      color: #94a3b8;
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+    .mutation-tag {
+      display: inline-block;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin: 2px;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/garage-dino-glow.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/garage-storage.css?v=20261009-compact-active1">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-garage st25-portal">
+
+  <!-- Navigation Bar -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 35px; padding-bottom: 60px;">
+
+    <!-- Page Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 6px;">
+          GARA KHỦNG LONG ST25
+        </h1>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">
+          Đồng bộ Cloud 100% với nhà phát hành IslePilot (<a href="https://st25.islepilot.eu/garage" target="_blank" style="color: #38bdf8;">st25.islepilot.eu/garage</a>). Quản lý thú nuôi riêng tư theo tài khoản Steam!
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <!-- Nút Admin chỉ hiển thị khi tài khoản đăng nhập là Admin -->
+        <a href="cai-dat.html" class="btn btn-sm" style="display: none; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-weight: 800; border: none; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);" id="btn-admin-panel-link">
+          👑 Quản Trị Cấp Role & Slot
+        </a>
+        <button onclick="Garage.refresh()" class="btn btn-secondary btn-sm" id="btn-refresh-garage">
+          🔄 Đồng bộ dữ liệu
+        </button>
+        <a href="giao-dich.html" class="btn btn-primary btn-sm" style="font-weight: 700;">
+          ⚖️ Chợ Mua Bán Dino
+        </a>
+      </div>
+    </div>
+
+    <!-- Admin Quick Switcher Bar (CHỈ ADMIN MỚI THẤY) -->
+    <div id="admin-quick-bar" style="display: none; background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(234, 179, 8, 0.4); border-radius: var(--radius-md); padding: 12px 18px; margin-bottom: 20px; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.2rem;">🔍</span>
+        <span style="color: #facc15; font-weight: 700; font-size: 0.9rem;">Admin Soi Gara Người Chơi:</span>
+        <input type="text" id="admin-quick-steamid" placeholder="Nhập Steam ID người chơi..." style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 6px 12px; color: #fff; font-size: 0.85rem; width: 220px;" onkeydown="if(event.key==='Enter') Garage.switchPlayer(this.value)">
+        <button onclick="Garage.switchPlayer(document.getElementById('admin-quick-steamid').value)" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 5px 10px;">
+          Xem Gara
+        </button>
+        <button onclick="Garage.resetToAdminSelf()" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 5px 10px; color: #38bdf8; border-color: #38bdf8;">
+          👤 Về Tài Khoản Tôi
+        </button>
+      </div>
+
+      <div>
+        <a href="javascript:void(0)" onclick="Garage.openAssignForCurrent()" class="btn btn-sm" style="background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; font-size: 0.82rem; font-weight: 700;">
+          ⚡ Cấp Thêm Slot Cho ID Này
+        </a>
+      </div>
+    </div>
+
+    <!-- Màn hình yêu cầu Đăng Nhập Steam khi chưa login -->
+    <div id="login-required-panel" style="display: none; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: var(--radius-lg); padding: 50px 30px; text-align: center; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+      <span style="font-size: 3.5rem; display: block; margin-bottom: 14px;">🔒</span>
+      <h2 style="color: #fff; font-size: 1.8rem; font-weight: 800; margin-bottom: 10px;">Vui Lòng Đăng Nhập Tài Khoản Steam</h2>
+      <p style="color: #94a3b8; max-width: 600px; margin: 0 auto 24px; line-height: 1.6; font-size: 0.95rem;">
+        Hệ thống Gara ST25 quản lý khủng long riêng biệt theo từng tài khoản. Hãy đăng nhập tài khoản Steam của bạn để xem và bảo quản khủng long an toàn, không bị nhầm lẫn dữ liệu với thành viên khác!
+      </p>
+      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px;">
+        <a href="{{api:playerSteamLogin}}?redirect=/gara.html" class="btn btn-primary" style="font-weight: 800; padding: 14px 28px; font-size: 1.05rem; background: linear-gradient(135deg, #10b981, #059669); border: none;">
+          🎮 Đăng Nhập Bằng Steam Chính Chủ
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Khung Nội Dung Gara Cá Nhân -->
+    <div id="garage-authenticated-content">
+
+    <!-- Live Account Bar -->
+    <div class="garage-header-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span class="garage-dino-visual garage-dino-visual--red" style="width:56px;height:56px;"><img src="assets/imges/thumbs/Tyrannosaurus.png" decoding="async" onerror="this.onerror=null;this.src='assets/imges/Tyrannosaurus.png';" alt="Khủng long ST25" style="width:100%;height:100%;object-fit:contain;"></span>
+          <div>
+            <span style="color: #fff; font-weight: 800; font-size: 1.15rem;" id="garage-player-name">Đang tải tài khoản...</span>
+            <small style="color: var(--text-muted); display: block;" id="garage-player-steamid">SteamID: ---</small>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <span class="rule-badge badge-allow" style="background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; color: #38bdf8; font-size: 0.85rem;" id="garage-role-badge">
+            👑 Đang tải vai trò...
+          </span>
+          <span class="rule-badge badge-allow" style="background: rgba(16, 185, 129, 0.15); border-color: #10b981; color: #6ee7b7; font-size: 0.85rem;">
+            ☁️ ISLEPILOT CLOUD SYNC
+          </span>
+          <span style="color: #fbbf24; font-weight: 800; font-size: 1rem;" id="garage-count-badge">
+            Đang lưu: 0 / 3 Khủng Long
+          </span>
+        </div>
+      </div>
+
+      <!-- Capacity Notice -->
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.85rem; color: #94a3b8;" id="garage-capacity-notice">
+        Sức chứa Gara được hệ thống tự động đồng bộ theo vai trò của bạn trên server ST25.
+      </div>
+    </div>
+
+    <!-- Quy Định An Toàn Cất & Lấy Gara (100m Khoảng Cách & 30s Không Sát Thương) -->
+    <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+      <span style="font-size: 1.8rem; line-height: 1;">🛡️</span>
+      <div style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; flex: 1;">
+        <strong style="color: #38bdf8; font-size: 0.98rem; display: block; margin-bottom: 4px;">
+          Quy Định An Toàn Khi Cất & Lấy Khủng Long Gara ST25:
+        </strong>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: 6px;">
+          <div style="background: rgba(0, 0, 0, 0.3); padding: 10px 14px; border-radius: 8px; border-left: 3px solid #10b981;">
+            <strong style="color: #6ee7b7;">🦖 Lấy Ra Đảo (Restore):</strong>
+            <div style="color: #94a3b8; font-size: 0.82rem; margin-top: 2px;">
+              Bắt buộc nhân vật phải cách xa người chơi khác <strong>tối thiểu 100 mét</strong> (khu vực vắng người). Nếu có người xung quanh trong 100m, server sẽ từ chối để chống gian lận spawn thú.
+            </div>
+          </div>
+          <div style="background: rgba(0, 0, 0, 0.3); padding: 10px 14px; border-radius: 8px; border-left: 3px solid #f59e0b;">
+            <strong style="color: #fcd34d;">📦 Cất Vào Gara (Park):</strong>
+            <div style="color: #94a3b8; font-size: 0.82rem; margin-top: 2px;">
+              Bắt buộc <strong>không bị nhận sát thương trong 30 giây</strong> và thời gian chờ giãn cách (cooldown) giữa 2 lần cất/lấy là <strong>30 giây</strong>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Action Error Alert Banner (Hiển thị nổi bật khi gặp lỗi 100m hoặc Combat) -->
+    <div id="garage-action-alert" style="display: none; background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 22px; box-shadow: 0 8px 30px rgba(239, 68, 68, 0.25);">
+      <div style="display: flex; gap: 14px; align-items: flex-start;">
+        <span style="font-size: 2rem; line-height: 1;" id="garage-action-alert-icon">⚠️</span>
+        <div style="flex: 1;">
+          <h4 style="color: #f87171; margin: 0 0 6px; font-size: 1.1rem; font-weight: 800;" id="garage-action-alert-title">
+            Thông Báo Từ Máy Chủ Game
+          </h4>
+          <div style="color: #fca5a5; font-size: 0.92rem; line-height: 1.6;" id="garage-action-alert-msg">
+            Nội dung thông báo
+          </div>
+        </div>
+        <button type="button" onclick="document.getElementById('garage-action-alert').style.display='none'" style="background: rgba(255,255,255,0.1); border: none; color: #cbd5e1; width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">&times;</button>
+      </div>
+    </div>
+
+    <!-- Cooldown Alert (if any) -->
+    <div id="cooldown-alert" style="display: none; background: rgba(234, 88, 12, 0.15); border: 1px solid #f97316; border-radius: var(--radius-md); padding: 14px 20px; margin-bottom: 24px; align-items: center; justify-content: space-between;">
+      <span style="color: #fdba74; font-weight: 600;">
+        ⏳ Thời gian chờ đồng bộ game server: <strong id="cooldown-timer-text" style="color: #fff; font-size: 1.1rem;">00:30</strong>
+      </span>
+      <span style="color: #94a3b8; font-size: 0.85rem;">Vui lòng chờ hết thời gian để đảm bảo dữ liệu nhân vật an toàn.</span>
+    </div>
+
+    <!-- Active Dinosaur Panel -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="color: #fff; font-size: 1.2rem; margin: 0; display: flex; align-items: center; gap: 8px;">
+          <span>🎮 Khủng Long Đang Trong Game (Active Dino)</span>
+        </h3>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Trạng thái nhân vật hiện tại trên bản đồ</span>
+      </div>
+
+      <div id="active-dino-content" class="active-dino-panel">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: var(--text-muted);">
+          Đang nạp dữ liệu từ máy chủ ST25...
+        </div>
+      </div>
+    </section>
+
+    <!-- Garage Slots Grid -->
+    <section style="margin-top: 35px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h3 style="color: #fff; font-size: 1.25rem; margin: 0 0 4px;">
+            📦 Kho Lưu Trữ Gara (Cloud IslePilot)
+          </h3>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 0.85rem;">
+            Danh sách khủng long đã cất an toàn. Bấm <strong>"Đưa Ra Đảo (Restore)"</strong> để thế chỗ nhân vật trong game (cần 30 giây thời gian chờ và phát cảnh báo phạm vi 500m).
+          </p>
+        </div>
+        <span class="rule-badge badge-warn" id="slots-capacity-summary">Đang nạp slots...</span>
+      </div>
+
+      <div id="garage-slots-grid" class="slots-grid">
+        <!-- Rendered by gara.js -->
+      </div>
+    </section>
+
+    </div> <!-- End of #garage-authenticated-content -->
+
+    <!-- MODAL ĐẾM NGƯỢC 30S CẤT VÀO GARA (PARK CHANNELING & BẮT BUỘC ĐỨNG YÊN) -->
+    <div id="park-channeling-modal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #10b981; border-radius: 20px; max-width: 520px; width: 100%; padding: 32px; box-shadow: 0 20px 60px rgba(16, 185, 129, 0.35); text-align: center; position: relative;">
+        
+        <!-- Animated Pulse Icon -->
+        <div style="position: relative; width: 84px; height: 84px; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; background: rgba(16, 185, 129, 0.15); border: 2px dashed #10b981; border-radius: 50%;">
+          <span class="garage-dino-visual garage-dino-visual--red" style="width:60px;height:60px;"><img id="park-modal-dino-icon" src="assets/imges/thumbs/Tyrannosaurus.png" decoding="async" onerror="this.onerror=null;this.src='assets/imges/Tyrannosaurus.png';" alt="Dino"
+            style="width:60px;height:60px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(16,185,129,0.5));"></span>
+        </div>
+
+        <h3 style="color: #fff; font-size: 1.45rem; font-weight: 800; margin: 0 0 6px;">
+          ⏳ ĐANG NIÊM PHONG CẤT VÀO GARA
+        </h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px;">
+          Đang niêm phong khủng long <strong style="color: #34d399;" id="park-modal-dino-name">Tyrannosaurus (100%)</strong> vào Gara Cloud...
+        </p>
+
+        <!-- Big 30-Second Countdown Clock -->
+        <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+          <div style="font-size: 0.8rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; margin-bottom: 4px;">Thời Gian Chờ Cất Vào Gara</div>
+          <div id="park-countdown-big" style="font-size: 3.5rem; font-weight: 900; color: #34d399; font-family: monospace; line-height: 1; text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);">
+            30s
+          </div>
+          
+          <!-- Progress Bar Track -->
+          <div style="background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; margin-top: 14px; overflow: hidden;">
+            <div id="park-countdown-progress" style="width: 100%; height: 100%; background: linear-gradient(90deg, #34d399, #10b981); transition: width 1s linear;"></div>
+          </div>
+        </div>
+
+        <!-- Stand Still Warning Banner -->
+        <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 10px; padding: 12px 16px; margin-bottom: 24px; text-align: left; display: flex; gap: 12px; align-items: center;">
+          <span style="font-size: 1.8rem; line-height: 1;">🧍</span>
+          <div style="font-size: 0.86rem; color: #fef08a; line-height: 1.5;">
+            <strong style="color: #fbbf24; display: block;">⚠️ BẮT BUỘC ĐỨNG YÊN HOÀN TOÀN IN-GAME:</strong>
+            Bạn PHẢI đứng yên trong suốt 30 giây này, không di chuyển, không tấn công và không nhận sát thương! Sau 30 giây hệ thống sẽ tự động gửi lệnh cất an toàn.
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button type="button" onclick="Garage.cancelParkChanneling()" class="btn btn-secondary" style="width: 100%; padding: 12px; font-weight: 700; border-color: #64748b; color: #cbd5e1;">
+            ❌ Hủy Bỏ Lệnh Cất
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MODAL ĐẾM NGƯỢC 30S ĐƯA RA ĐẢO (RESTORE CHANNELING & CẢNH BÁO 500M) -->
+    <div id="restore-channeling-modal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(10px); z-index: 99999; align-items: center; justify-content: center; padding: 20px;">
+      <div style="background: linear-gradient(145deg, #1e293b, #0f172a); border: 2px solid #f59e0b; border-radius: 20px; max-width: 520px; width: 100%; padding: 32px; box-shadow: 0 20px 60px rgba(245, 158, 11, 0.35); text-align: center; position: relative;">
+        
+        <!-- Animated Pulse Icon -->
+        <div style="position: relative; width: 84px; height: 84px; margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; background: rgba(245, 158, 11, 0.15); border: 2px dashed #f59e0b; border-radius: 50%;">
+          <span class="garage-dino-visual garage-dino-visual--red" style="width:60px;height:60px;"><img id="restore-modal-dino-icon" src="assets/imges/thumbs/Tyrannosaurus.png" decoding="async" onerror="this.onerror=null;this.src='assets/imges/Tyrannosaurus.png';" alt="Dino"
+            style="width:60px;height:60px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(245,158,11,0.5));"></span>
+        </div>
+
+        <h3 style="color: #fff; font-size: 1.45rem; font-weight: 800; margin: 0 0 6px;">
+          ⏳ ĐANG CHUẨN BỊ ĐƯA RA ĐẢO
+        </h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px;">
+          Đang chuẩn bị hồi sinh khủng long <strong style="color: #fbbf24;" id="restore-modal-dino-name">Tyrannosaurus (100%)</strong> vào game server...
+        </p>
+
+        <!-- Big 30-Second Countdown Clock -->
+        <div style="background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+          <div style="font-size: 0.8rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px; margin-bottom: 4px;">Thời Gian Chờ Xuất Hiện In-Game</div>
+          <div id="restore-countdown-big" style="font-size: 3.5rem; font-weight: 900; color: #fbbf24; font-family: monospace; line-height: 1; text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);">
+            30s
+          </div>
+          
+          <!-- Progress Bar Track -->
+          <div style="background: rgba(255, 255, 255, 0.08); height: 10px; border-radius: 5px; margin-top: 14px; overflow: hidden;">
+            <div id="restore-countdown-progress" style="width: 100%; height: 100%; background: linear-gradient(90deg, #f59e0b, #ef4444); transition: width 1s linear;"></div>
+          </div>
+        </div>
+
+        <!-- 500m Warning Radar Alert Banner -->
+        <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; border-radius: 10px; padding: 12px 16px; margin-bottom: 24px; text-align: left; display: flex; gap: 12px; align-items: center;">
+          <span style="font-size: 1.8rem; line-height: 1;">📡</span>
+          <div style="font-size: 0.86rem; color: #fca5a5; line-height: 1.5;">
+            <strong style="color: #f87171; display: block;">📢 CẢNH BÁO BÁN KÍNH 500 MÉT:</strong>
+            Đã phát tín hiệu toàn khu vực! Người chơi xung quanh 500m sẽ thấy thông báo loài và % chuẩn bị xuất hiện. Bạn phải giữ an toàn trong suốt 30 giây!
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button type="button" onclick="Garage.cancelRestoreChanneling()" class="btn btn-secondary" style="width: 100%; padding: 12px; font-weight: 700; border-color: #64748b; color: #cbd5e1;">
+            ❌ Hủy Bỏ Lệnh Triệu Hồi
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/gara.js?v=20261009-compact-active1"></script>
+</body>
+</html>

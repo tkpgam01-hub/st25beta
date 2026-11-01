@@ -1,0 +1,768 @@
+/* ==========================================================================
+   ST25 VIETNAM - ROULETTE (CS2SKIN STYLE)
+   Dark cyberpunk aesthetics with neon glows, smooth carousel slider, and real-time wallet HUD
+   ========================================================================== */
+
+:root {
+  --rl-bg-dark: #080b11;
+  --rl-bg-panel: #0e131d;
+  --rl-bg-card: #141b27;
+  --rl-bg-hover: #1c2536;
+  --rl-border: #202b3d;
+  --rl-border-light: rgba(255, 255, 255, 0.08);
+
+  --rl-t-red: #ea3943;
+  --rl-t-red-glow: rgba(234, 57, 67, 0.35);
+  --rl-t-red-bg: rgba(234, 57, 67, 0.12);
+
+  --rl-ct-blue: #3273ec;
+  --rl-ct-blue-glow: rgba(50, 115, 236, 0.35);
+  --rl-ct-blue-bg: rgba(50, 115, 236, 0.12);
+
+  --rl-dragon-gold: #f59e0b;
+  --rl-dragon-green: #10b981;
+  --rl-dragon-glow: rgba(245, 158, 11, 0.45);
+  --rl-dragon-bg: rgba(245, 158, 11, 0.12);
+
+  --rl-gold-text: #fbbf24;
+  --rl-text-main: #f1f5f9;
+  --rl-text-muted: #8e9db4;
+  --rl-font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+}
+
+.portal-roulette {
+  background-color: var(--rl-bg-dark);
+  color: var(--rl-text-main);
+  min-height: 100vh;
+}
+
+.roulette-page {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* Header & Wallet Banner */
+.roulette-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.roulette-title-group h1 {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 4px;
+}
+
+.roulette-title-group h1 span {
+  color: var(--rl-dragon-gold);
+  font-size: 24px;
+}
+
+.roulette-title-group p {
+  color: var(--rl-text-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.roulette-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #38bdf8;
+  margin-bottom: 4px;
+}
+
+.roulette-eyebrow i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.roulette-wallet-box {
+  background: linear-gradient(135deg, rgba(20, 27, 39, 0.95), rgba(14, 19, 29, 0.95));
+  border: 1px solid var(--rl-border);
+  border-radius: 14px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.roulette-wallet-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.roulette-wallet-info small {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--rl-text-muted);
+  font-weight: 600;
+}
+
+.roulette-wallet-info strong {
+  font-size: 20px;
+  font-weight: 800;
+  color: #facc15;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--rl-font-mono);
+}
+
+.roulette-steam-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.roulette-steam-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+/* Notice Bar */
+.roulette-notice {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--rl-border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.roulette-notice.alert {
+  border-color: #ef4444;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Slider Arena (CS2Skin Style Carousel) */
+.roulette-arena {
+  background: radial-gradient(circle at 50% 20%, #151d2c 0%, #0c111a 100%);
+  border: 1px solid var(--rl-border);
+  border-radius: 20px;
+  padding: 24px 20px 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  margin-bottom: 24px;
+}
+
+.roulette-arena::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+}
+
+/* Countdown bar */
+.roulette-timer-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.roulette-timer-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roulette-timer-text span.highlight {
+  color: #38bdf8;
+  font-family: var(--rl-font-mono);
+  font-size: 17px;
+}
+
+.roulette-progress-bar {
+  width: 260px;
+  max-width: 90%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.roulette-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  border-radius: 999px;
+  transform-origin: left center;
+  transition: width 0.1s linear;
+}
+
+/* The Carousel Track */
+.roulette-carousel-container {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #080c14;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.8);
+}
+
+/* Vignette shadow gradient on left & right edges */
+.roulette-carousel-container::before,
+.roulette-carousel-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.roulette-carousel-container::before {
+  left: 0;
+  background: linear-gradient(to right, #080c14 15%, transparent 100%);
+}
+
+.roulette-carousel-container::after {
+  right: 0;
+  background: linear-gradient(to left, #080c14 15%, transparent 100%);
+}
+
+/* Center Selector Needle */
+.roulette-needle {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #f59e0b, #fbbf24, #f59e0b);
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.9), 0 0 24px rgba(245, 158, 11, 0.5);
+}
+
+.roulette-needle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 14px solid #fbbf24;
+  filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.9));
+}
+
+.roulette-needle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 14px solid #fbbf24;
+  filter: drop-shadow(0 -2px 6px rgba(245, 158, 11, 0.9));
+}
+
+/* Carousel Strip (sliding horizontally) */
+.roulette-strip {
+  display: flex;
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  left: 0;
+  will-change: transform;
+  user-select: none;
+}
+
+/* Carousel Card Tiles */
+.roulette-tile {
+  width: 90px;
+  height: 110px;
+  margin: 0 4px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.roulette-tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.roulette-tile-icon {
+  font-size: 26px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.roulette-tile-num {
+  font-family: var(--rl-font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+/* Tile color variants */
+.roulette-tile.tile-t {
+  background: linear-gradient(145deg, #c52932, #8b1820);
+  border: 1px solid rgba(234, 57, 67, 0.5);
+}
+
+.roulette-tile.tile-ct {
+  background: linear-gradient(145deg, #265dc5, #173d88);
+  border: 1px solid rgba(50, 115, 236, 0.5);
+}
+
+.roulette-tile.tile-dragon {
+  background: linear-gradient(145deg, #d97706, #059669);
+  border: 1px solid rgba(245, 158, 11, 0.8);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);
+}
+
+.roulette-tile.winner-highlight {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.5);
+  z-index: 2;
+}
+
+/* History Bar */
+.roulette-history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.roulette-history-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.roulette-history-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--rl-text-muted);
+  letter-spacing: 0.8px;
+}
+
+.roulette-history-badges {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.roulette-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  font-family: var(--rl-font-mono);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.roulette-badge.badge-t {
+  background: var(--rl-t-red);
+}
+
+.roulette-badge.badge-ct {
+  background: var(--rl-ct-blue);
+}
+
+.roulette-badge.badge-dragon {
+  background: var(--rl-dragon-gold);
+  color: #000;
+}
+
+.roulette-stats100 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--rl-font-mono);
+}
+
+.stat-t { color: #f87171; }
+.stat-dragon { color: #fbbf24; }
+.stat-ct { color: #60a5fa; }
+
+/* Betting Control Center */
+.roulette-bet-controls {
+  background: var(--rl-bg-panel);
+  border: 1px solid var(--rl-border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.roulette-input-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.roulette-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.roulette-input-wrap input {
+  width: 100%;
+  height: 48px;
+  background: #090d14;
+  border: 1px solid var(--rl-border);
+  border-radius: 10px;
+  padding: 0 44px 0 16px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--rl-font-mono);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.roulette-input-wrap input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+.roulette-input-wrap .lua-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+.roulette-quick-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.roulette-quick-btn {
+  background: #141b27;
+  border: 1px solid var(--rl-border);
+  color: #cbd5e1;
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 48px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.roulette-quick-btn:hover {
+  background: #1e293b;
+  color: #fff;
+  border-color: #475569;
+}
+
+.roulette-quick-btn.active {
+  background: #38bdf8;
+  color: #0f172a;
+  border-color: #38bdf8;
+}
+
+/* 3 Cửa Cược: T - Dragon - CT */
+.roulette-bet-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.roulette-bet-card {
+  background: var(--rl-bg-panel);
+  border: 1px solid var(--rl-border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.roulette-bet-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.roulette-bet-card-header {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.roulette-bet-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.roulette-bet-card-title span.side-icon {
+  font-size: 20px;
+}
+
+.roulette-payout-tag {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: var(--rl-font-mono);
+}
+
+/* Header colors */
+.card-t .roulette-bet-card-title { color: #f87171; }
+.card-t .roulette-payout-tag { background: var(--rl-t-red-bg); color: #f87171; border: 1px solid var(--rl-t-red); }
+
+.card-dragon .roulette-bet-card-title { color: #fbbf24; }
+.card-dragon .roulette-payout-tag { background: var(--rl-dragon-bg); color: #fbbf24; border: 1px solid var(--rl-dragon-gold); }
+
+.card-ct .roulette-bet-card-title { color: #60a5fa; }
+.card-ct .roulette-payout-tag { background: var(--rl-ct-blue-bg); color: #60a5fa; border: 1px solid var(--rl-ct-blue); }
+
+/* Bet Button */
+.roulette-bet-card-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.roulette-place-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.roulette-place-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.card-t .roulette-place-btn {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4);
+}
+.card-t .roulette-place-btn:not(:disabled):hover {
+  background: linear-gradient(135deg, #f87171, #dc2626);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.6);
+}
+
+.card-dragon .roulette-place-btn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #000;
+  font-weight: 900;
+  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.4);
+}
+.card-dragon .roulette-place-btn:not(:disabled):hover {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.6);
+}
+
+.card-ct .roulette-place-btn {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.4);
+}
+.card-ct .roulette-place-btn:not(:disabled):hover {
+  background: linear-gradient(135deg, #60a5fa, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.6);
+}
+
+/* Bets List under each column */
+.roulette-column-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--rl-text-muted);
+  font-weight: 600;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.roulette-column-stats strong {
+  color: #fff;
+  font-family: var(--rl-font-mono);
+}
+
+.roulette-bets-list {
+  min-height: 120px;
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.roulette-bet-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.roulette-bet-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.roulette-bet-amount {
+  font-family: var(--rl-font-mono);
+  font-weight: 700;
+  color: #facc15;
+}
+
+.roulette-empty-bets {
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  padding: 30px 0;
+}
+
+/* Provably Fair Details */
+.roulette-fair {
+  background: var(--rl-bg-panel);
+  border: 1px solid var(--rl-border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 24px;
+}
+
+.roulette-fair summary {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  color: #38bdf8;
+  outline: none;
+  user-select: none;
+}
+
+.roulette-fair-content {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.roulette-fair-content pre {
+  background: #090d14;
+  border: 1px solid var(--rl-border);
+  padding: 12px;
+  border-radius: 8px;
+  color: #a5f3fc;
+  font-size: 12px;
+  overflow-x: auto;
+  font-family: var(--rl-font-mono);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .roulette-bet-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

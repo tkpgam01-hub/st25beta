@@ -1,0 +1,215 @@
+{
+  "scope": "Offline mocks; transactions blocked; not a live API test",
+  "results": [
+    {
+      "page": "index.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "bando.html",
+      "width": 1440,
+      "scroll": 1440,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "gara.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "nhiem-vu.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "giao-dich.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "hom-qua.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "bxh.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "ho-tro.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "noi-quy.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "tai-hud.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "moi-ban.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "tha-xac.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "lien-ket-steam.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "cai-dat.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "song-bac.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "index.html",
+      "width": 390,
+      "scroll": 390,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "bando.html",
+      "width": 390,
+      "scroll": 390,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "gara.html",
+      "width": 390,
+      "scroll": 390,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "nhiem-vu.html",
+      "width": 390,
+      "scroll": 390,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    },
+    {
+      "page": "giao-dich.html",
+      "width": 390,
+      "scroll": 390,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "errors": []
+    }
+  ]
+}

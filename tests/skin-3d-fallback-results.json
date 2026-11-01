@@ -1,0 +1,80 @@
+{
+  "scope": "Offline mocks; transactions blocked; not a live API test",
+  "results": [
+    {
+      "page": "skin.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 17,
+      "dock": true,
+      "hud": false,
+      "brokenImages": [],
+      "threeD": {
+        "fallback": true,
+        "colors": true,
+        "retry": true
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 1024,
+      "scroll": 1009,
+      "icons": 17,
+      "dock": true,
+      "hud": false,
+      "brokenImages": [],
+      "threeD": {
+        "fallback": true,
+        "colors": true,
+        "retry": true
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 768,
+      "scroll": 753,
+      "icons": 17,
+      "dock": true,
+      "hud": false,
+      "brokenImages": [],
+      "threeD": {
+        "fallback": true,
+        "colors": true,
+        "retry": true
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 390,
+      "scroll": 390,
+      "icons": 17,
+      "dock": true,
+      "hud": false,
+      "brokenImages": [],
+      "threeD": {
+        "fallback": true,
+        "colors": true,
+        "retry": true
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 320,
+      "scroll": 320,
+      "icons": 17,
+      "dock": true,
+      "hud": false,
+      "brokenImages": [],
+      "threeD": {
+        "fallback": true,
+        "colors": true,
+        "retry": true
+      },
+      "errors": []
+    }
+  ]
+}

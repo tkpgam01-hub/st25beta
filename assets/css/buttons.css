@@ -1,0 +1,99 @@
+:where(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):where(:not(.leaflet-container *)) { position: relative; }
+/* Shared ST25 warm glass buttons. Motion uses transform and opacity only. */
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *) {
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(255, 177, 111, .6) !important;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #33261f 0%, #201c1a 55%, #63331d 100%) !important;
+  color: #fff2dc !important;
+  box-shadow: inset 0 -2px 5px #ffab5855, 0 2px 6px #0004 !important;
+  text-shadow: 0 1px 3px #0008;
+  transition: transform 160ms cubic-bezier(.2,.8,.2,1);
+}
+
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *)::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 120%, #fff3bc 0%, #ffb458 22%,
+    #ff742d88 42%, transparent 72%);
+  opacity: .45;
+  transition: opacity 180ms ease;
+}
+
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *)::after {
+  content: '';
+  position: absolute;
+  inset: -60% -35%;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 40%, #fff3df26 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+}
+
+@media (hover: hover) {
+  body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):not(:disabled):not([aria-disabled="true"]):hover {
+    transform: none;
+    border-color: #ffdc9d !important;
+
+  }
+  body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):not(:disabled):not([aria-disabled="true"]):hover::before { opacity: .8; }
+  body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):not(:disabled):not([aria-disabled="true"]):hover::after { transform: translateX(100%); }
+}
+
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):focus-visible {
+  outline: 2px solid #ffe6b3;
+  outline-offset: 4px;
+}
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):not(:disabled):not([aria-disabled="true"]):active {
+  transform: translateY(1px) scale(.98);
+  box-shadow: inset 0 2px 8px #0008, inset 0 -2px 8px #ffa65088,
+    0 0 8px #ff792d44 !important;
+}
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):disabled, body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *)[aria-disabled="true"] {
+  opacity: .45;
+  cursor: not-allowed;
+}
+/* Preserve the warning meaning of destructive actions. */
+body :is(.btn-danger, .tab-danger):not(.leaflet-container *) {
+  color: #ffd5cf !important;
+  border-color: #f8717180 !important;
+  background: linear-gradient(180deg, #452321, #271a1a 60%, #692d25) !important;
+}
+/* Fast press response, with no perpetual animation or pointer listeners. */
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *) {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):not(:disabled):not([aria-disabled="true"]):active {
+  transition-duration: 80ms;
+}
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):is(:disabled, [aria-disabled="true"]) {
+  transform: none !important;
+}
+body :is(button, .btn):not(.leaflet-container *):is(.active, [aria-pressed="true"], [aria-selected="true"]) {
+  border-color: #ffe4ad !important;
+  box-shadow: inset 0 -3px 10px #ffb45899, 0 0 0 1px #ffc37888 !important;
+}
+body :is(button, .btn):not(.leaflet-container *)[aria-busy="true"] {
+  cursor: progress;
+}
+
+/* Touch screens do not need a moving shine layer. */
+@media (hover: none), (pointer: coarse) {
+  body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *)::after { display: none; }
+}
+body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):is(:disabled, [aria-disabled="true"])::after { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *), body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *):active,
+  body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *)::before, body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *)::after {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  body :is(button, .btn, .btn-steam-big, input[type="submit"], input[type="button"]):not(.leaflet-container *)::after { display: none; }
+}

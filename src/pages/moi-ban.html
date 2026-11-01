@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mời Bạn Bè Nhận Lúa — ST25 VIETNAM</title>
+  <meta name="description" content="Chương trình giới thiệu bạn bè tham gia server ST25 The Isle: Evrima. Nhận ngay 50 Lúa 🌾 cho cả bạn và đồng đội!">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    .referral-banner {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .code-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px dashed #fbbf24;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      margin: 15px 0;
+    }
+    .code-text {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #fbbf24;
+      font-family: monospace;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Site Header -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 30px; padding-bottom: 60px;">
+    
+    <!-- Hero Referral Banner -->
+    <div class="referral-banner">
+      <span class="rule-badge badge-allow" style="font-size: 0.85rem;">🌾 CHƯƠNG TRÌNH ĐỒNG ĐỘI ST25 🦖</span>
+      <h1 style="color: #fff; font-size: 2.2rem; margin: 12px 0 6px;">MỜI BẠN CÙNG CHƠI — NHẬN NGAY +50 LÚA 🌾</h1>
+      <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto 15px; font-size: 0.95rem;">
+        Chia sẻ mã giới thiệu cho bạn bè. Khi bạn bè liên kết tài khoản Steam và nhập mã, cả <strong>Bạn</strong> và <strong>Bạn Bè</strong> đều nhận ngay <strong>50 Lúa 🌾</strong> vào ví sinh tồn!<br>
+        <span style="color: #fbbf24; font-size: 0.85rem; font-weight: 600;">🔒 Lưu ý: Mỗi mã mời chỉ dùng được đúng 1 lần duy nhất, sau 1 lần sẽ bị khóa vĩnh viễn toàn server.</span>
+      </p>
+
+      <div class="code-box" id="code-box-container">
+        <span class="code-text" id="my-ref-code">ST25-XXXXX</span>
+        <button onclick="copyRefCode()" class="btn btn-primary btn-sm" id="btn-copy-code">
+          📋 Sao Chép Mã
+        </button>
+      </div>
+
+      <div id="code-locked-notice" style="display: none; margin-top: 12px;">
+        <span class="rule-badge badge-deny" style="font-size: 0.85rem; padding: 5px 12px;">🔒 Mã mời này đã có bạn bè sử dụng và đã bị khóa vĩnh viễn (1 lần duy nhất)</span>
+        <div style="margin-top: 10px;">
+          <button onclick="generateNewInviteCode()" class="btn btn-primary btn-sm" id="btn-gen-code" style="background: linear-gradient(135deg, #10b981, #059669); border: none;">
+            🔄 Tạo Mã Mới Cho Bạn Bè Khác
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top: 12px;">
+        <button onclick="copyShareLink()" class="btn btn-secondary btn-sm" id="btn-copy-link">
+          🔗 Sao Chép Link Giới Thiệu Nhanh
+        </button>
+      </div>
+    </div>
+
+    <!-- Referral Stats Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 35px;">
+      <div class="stat-card">
+        <span style="font-size: 2rem;">👥</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #fff; margin: 4px 0;" id="stat-count">0</div>
+        <small style="color: var(--text-muted); text-transform: uppercase;">Bạn bè đã mời</small>
+      </div>
+
+      <div class="stat-card">
+        <span style="font-size: 2rem;">🌾</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin: 4px 0;" id="stat-earned">0 Lúa</div>
+        <small style="color: var(--text-muted); text-transform: uppercase;">Lúa nhận từ mời bạn</small>
+      </div>
+
+      <div class="stat-card" style="border-color: rgba(251, 191, 36, 0.4); background: rgba(245, 158, 11, 0.08);">
+        <span style="font-size: 2rem;">💰</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #fbbf24; margin: 4px 0;" id="stat-balance">0 Lúa</div>
+        <small style="color: #fef08a; text-transform: uppercase; font-weight: 600;">Số dư Lúa hiện có</small>
+      </div>
+
+      <div class="stat-card">
+        <span style="font-size: 2rem;">🎁</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #10b981; margin: 4px 0;">+50 Lúa</div>
+        <small style="color: var(--text-muted); text-transform: uppercase;">Thưởng mỗi lượt mời</small>
+      </div>
+
+      <div class="stat-card">
+        <span style="font-size: 2rem;">🏆</span>
+        <div style="font-size: 1.8rem; font-weight: 800; color: #38bdf8; margin: 4px 0;">Không Giới Hạn</div>
+        <small style="color: var(--text-muted); text-transform: uppercase;">Số lượng bạn bè</small>
+      </div>
+    </div>
+
+    <!-- 2 Column: Claim Code & Leaderboard -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;">
+      
+      <!-- Input Friend Code -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+        <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>🤝 Bạn Được Bạn Bè Giới Thiệu? Nhập Mã Nhận Lúa</span>
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
+          Nhập mã mời từ người bạn đã giới thiệu bạn vào ST25 để nhận ngay <strong>+20 Lúa 🌾</strong> vào ví sinh tồn! <em>(Lưu ý: Mỗi mã mời chỉ có hiệu lực đúng 1 lần duy nhất trên toàn máy chủ, và mỗi tài khoản chỉ được nhập mã mời 1 lần duy nhất trong đời).</em>
+        </p>
+
+        <form id="claim-code-form" onsubmit="handleClaimCode(event)">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label class="form-label" for="friend-code">Mã Giới Thiệu Bạn Bè (ST25-XXXXX):</label>
+            <input type="text" id="friend-code" class="form-input" placeholder="Ví dụ: ST25-88278" required style="text-transform: uppercase; font-weight: 700;">
+            <small style="color: #94a3b8; font-size: 0.8rem; display: block; margin-top: 6px;">
+              💡 Hỗ trợ: Mã giới thiệu cá nhân do bạn bè cung cấp (định dạng <code>ST25-XXXXX</code>). Mã chỉ sử dụng được 1 lần duy nhất.
+            </small>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btn-submit-claim" style="width: 100%;">
+            🌾 Kích Hoạt Mã Mời (+20 Lúa) 🚀
+          </button>
+        </form>
+      </div>
+
+      <!-- Top Referrers -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+        <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>👑 Bảng Vinh Danh Đại Sứ Làng ST25</span>
+        </h3>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">
+          Những nông dân chăm chỉ xây dựng cộng đồng vững mạnh nhất.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; font-size: 0.88rem;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.2rem;">🥇</span>
+              <strong style="color: #fff;">Chủ Trại Gà ST25</strong>
+            </div>
+            <span style="color: #fbbf24; font-weight: 700;">28 bạn (+1,400 Lúa 🌾)</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; font-size: 0.88rem;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.2rem;">🥈</span>
+              <strong style="color: #fff;">Trùm Rừng Dừa</strong>
+            </div>
+            <span style="color: #fbbf24; font-weight: 700;">19 bạn (+950 Lúa 🌾)</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(15, 23, 42, 0.6); border-radius: 6px; font-size: 0.88rem;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.2rem;">🥉</span>
+              <strong style="color: #fff;">Thích Thì Var</strong>
+            </div>
+            <span style="color: #fbbf24; font-weight: 700;">14 bạn (+700 Lúa 🌾)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/moi-ban.js"></script>
+</body>
+</html>

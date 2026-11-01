@@ -1,0 +1,219 @@
+{
+  "scope": "Offline mocks; transactions blocked; not a live API test",
+  "results": [
+    {
+      "page": "skin.html",
+      "width": 1440,
+      "scroll": 1425,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "threeD": {
+        "ready": true,
+        "colors": true,
+        "growth": true,
+        "pattern": true,
+        "keyboard": true,
+        "png": true,
+        "contextLost": true,
+        "contextRecovered": true,
+        "idle": true,
+        "spinning": true,
+        "hidden": true,
+        "resumed": true,
+        "low": true,
+        "maxGeometries": 78,
+        "species": [
+          {
+            "name": "Tyrannosaurus",
+            "triangles": 32810
+          },
+          {
+            "name": "Carnotaurus",
+            "triangles": 33290
+          },
+          {
+            "name": "Ceratosaurus",
+            "triangles": 48282
+          },
+          {
+            "name": "Deinosuchus",
+            "triangles": 49394
+          },
+          {
+            "name": "Omniraptor",
+            "triangles": 33290
+          },
+          {
+            "name": "Dilophosaurus",
+            "triangles": 34714
+          },
+          {
+            "name": "Triceratops",
+            "triangles": 35074
+          },
+          {
+            "name": "Stegosaurus",
+            "triangles": 32042
+          },
+          {
+            "name": "Gallimimus",
+            "triangles": 29162
+          },
+          {
+            "name": "Pteranodon",
+            "triangles": 28352
+          },
+          {
+            "name": "Herrerasaurus",
+            "triangles": 32810
+          },
+          {
+            "name": "Diabloceratops",
+            "triangles": 34834
+          },
+          {
+            "name": "Tenontosaurus",
+            "triangles": 32810
+          },
+          {
+            "name": "Pachycephalosaurus",
+            "triangles": 33762
+          },
+          {
+            "name": "Hypsilophodon",
+            "triangles": 29162
+          },
+          {
+            "name": "Troodon",
+            "triangles": 50426
+          },
+          {
+            "name": "Beipiaosaurus",
+            "triangles": 49946
+          }
+        ],
+        "drawCalls": 58,
+        "triangles": 32810
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 1024,
+      "scroll": 1009,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "threeD": {
+        "ready": true,
+        "colors": true,
+        "growth": true,
+        "pattern": true,
+        "keyboard": true,
+        "png": true,
+        "contextLost": true,
+        "contextRecovered": true,
+        "idle": true,
+        "spinning": true,
+        "hidden": true,
+        "resumed": true,
+        "low": true,
+        "maxGeometries": 0,
+        "species": [],
+        "drawCalls": 58,
+        "triangles": 32810
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 768,
+      "scroll": 753,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "threeD": {
+        "ready": true,
+        "colors": true,
+        "growth": true,
+        "pattern": true,
+        "keyboard": true,
+        "png": true,
+        "contextLost": true,
+        "contextRecovered": true,
+        "idle": true,
+        "spinning": true,
+        "hidden": true,
+        "resumed": true,
+        "low": true,
+        "maxGeometries": 0,
+        "species": [],
+        "drawCalls": 58,
+        "triangles": 32810
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 390,
+      "scroll": 390,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "threeD": {
+        "ready": true,
+        "colors": true,
+        "growth": true,
+        "pattern": true,
+        "keyboard": true,
+        "png": true,
+        "contextLost": true,
+        "contextRecovered": true,
+        "idle": true,
+        "spinning": true,
+        "hidden": true,
+        "resumed": true,
+        "low": true,
+        "maxGeometries": 0,
+        "species": [],
+        "drawCalls": 58,
+        "triangles": 32810
+      },
+      "errors": []
+    },
+    {
+      "page": "skin.html",
+      "width": 320,
+      "scroll": 320,
+      "icons": 19,
+      "dock": true,
+      "hud": true,
+      "brokenImages": [],
+      "threeD": {
+        "ready": true,
+        "colors": true,
+        "growth": true,
+        "pattern": true,
+        "keyboard": true,
+        "png": true,
+        "contextLost": true,
+        "contextRecovered": true,
+        "idle": true,
+        "spinning": true,
+        "hidden": true,
+        "resumed": true,
+        "low": true,
+        "maxGeometries": 0,
+        "species": [],
+        "drawCalls": 58,
+        "triangles": 32810
+      },
+      "errors": []
+    }
+  ]
+}

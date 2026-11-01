@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hòm May Mắn — ST25 VIETNAM</title>
+  <meta name="description" content="Mở Hòm May Mắn bằng Lúa 🌾 nhận skin thần thoại, slot Gara và Lúa nổ hũ jackpot trên máy chủ ST25 The Isle: Evrima.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    .crate-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .crate-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(245, 158, 11, 0.2);
+    }
+    .crate-card.halloween-theme {
+      border-color: rgba(168, 85, 247, 0.7);
+      background: linear-gradient(180deg, rgba(147, 51, 234, 0.15), var(--bg-card));
+      box-shadow: 0 4px 25px rgba(139, 92, 246, 0.25);
+    }
+    .crate-card.halloween-theme:hover {
+      border-color: #c084fc;
+      box-shadow: 0 10px 35px rgba(168, 85, 247, 0.4);
+    }
+    .crate-card.gold-theme {
+      border-color: rgba(245, 158, 11, 0.6);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.08), var(--bg-card));
+    }
+    .crate-card.diamond-theme {
+      border-color: rgba(56, 189, 248, 0.6);
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), var(--bg-card));
+    }
+    .crate-icon-box {
+      font-size: 4rem;
+      margin: 15px auto;
+      filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.4));
+      animation: floatCrate 3s ease-in-out infinite alternate;
+    }
+    @keyframes floatCrate {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+    .crate-rewards-list {
+      text-align: left;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin: 15px 0;
+      font-size: 0.85rem;
+    }
+    .reward-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+    }
+    .reward-modal.active {
+      display: flex;
+    }
+    .reward-box {
+      background: var(--bg-card);
+      border: 2px solid #fbbf24;
+      box-shadow: 0 0 40px rgba(245, 158, 11, 0.5);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      text-align: center;
+      max-width: 450px;
+      width: 90%;
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Gacha Suspense Reel (IslePilot Style) */
+    .gacha-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+    .gacha-modal.active { display: flex; }
+    .gacha-box {
+      background: #090d16;
+      border: 1px solid rgba(139, 92, 246, 0.5);
+      box-shadow: 0 0 50px rgba(139, 92, 246, 0.3);
+      border-radius: 14px;
+      padding: 26px;
+      width: 92%;
+      max-width: 820px;
+      position: relative;
+    }
+    .gacha-reel-wrapper {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      background: #020617;
+      border: 2px solid #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 18px 0;
+      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8);
+    }
+    .gacha-center-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: #38bdf8;
+      box-shadow: 0 0 14px #38bdf8, 0 0 25px #0284c7;
+      transform: translateX(-50%);
+      z-index: 30;
+      pointer-events: none;
+    }
+    .gacha-center-line::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 9px solid #38bdf8;
+    }
+    .gacha-center-line::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 9px solid #38bdf8;
+    }
+    .gacha-reel-strip {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      will-change: transform;
+    }
+    .gacha-card {
+      width: 110px;
+      height: 126px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 6px;
+      flex-shrink: 0;
+      user-select: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .gacha-card-icon {
+      font-size: 2.2rem;
+    }
+    .gacha-card-name {
+      font-size: 0.72rem;
+      color: #fff;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.25;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .gacha-card-rarity {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 3px;
+      border-bottom: 2px solid;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Site Header -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 30px; padding-bottom: 60px;">
+    
+    <!-- Multi-user Account Switcher & Login Banner -->
+    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 18px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.3rem;">🎮</span>
+        <div>
+          <span style="color: #fff; font-weight: 700; font-size: 0.95rem;" id="crate-player-display">Tài khoản: Đang tải...</span>
+          <small style="color: #94a3b8; display: block; font-family: monospace;" id="crate-steamid-display">Steam ID: ---</small>
+        </div>
+      </div>
+
+      <div>
+        <a href="lien-ket-steam.html" class="btn btn-secondary btn-sm" style="font-size: 0.8rem;">
+          🎮 Đổi / Liên Kết Steam
+        </a>
+      </div>
+    </div>
+
+    <!-- Maintenance Banner: Feature Closed -->
+    <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(15, 23, 42, 0.95)); border: 2px solid #ef4444; border-radius: var(--radius-lg); padding: 35px 25px; margin-bottom: 35px; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.25); text-align: center; position: relative; overflow: hidden;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(239, 68, 68, 0.25); border: 1px solid #f87171; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; color: #fca5a5; margin-bottom: 15px;">
+        🔒 TÍNH NĂNG TẠM ĐÓNG
+      </div>
+      <h1 style="color: #fff; font-size: 2.2rem; margin: 0 0 12px 0; letter-spacing: 0.5px;">
+        TÍNH NĂNG MỞ HÒM MAY MẮN ĐÃ TẠM DỪNG HOẠT ĐỘNG 🎃
+      </h1>
+      <p style="color: #cbd5e1; font-size: 1.05rem; max-width: 820px; margin: 0 auto 24px auto; line-height: 1.6;">
+        Tính năng Mở Hòm May Mắn hiện tại đã được tắt theo quyết định của ban quản trị server ST25 VIETNAM. Bạn có thể sử dụng số dư Lúa của mình để tham gia các minigame hấp dẫn khác như <strong>Vòng Quay CS2</strong> hoặc <strong>Chợ Giao Dịch P2P</strong>!
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <a href="vong-quay.html" class="btn btn-primary" style="font-size: 1.15rem; font-weight: 800; padding: 14px 28px; background: linear-gradient(135deg, #10b981, #059669); border: 1px solid #6ee7b7; box-shadow: 0 0 30px rgba(16, 185, 129, 0.5); text-decoration: none; border-radius: 12px; display: inline-flex; align-items: center; gap: 10px;">
+          <span>🎰 Trải Nghiệm Vòng Quay Roulette CS2</span>
+        </a>
+        <a href="plinko.html" class="btn btn-secondary" style="font-size: 1.05rem; font-weight: 700; padding: 14px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+          <span>✦ Thả Bóng Plinko</span>
+        </a>
+        <a href="gara.html" class="btn btn-secondary" style="font-size: 1.05rem; font-weight: 700; padding: 14px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+          <span>🦖 Xem Garage Của Bạn</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Live Crates Showcase Title & Balance Banner -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+      <div>
+        <h2 style="color: #fff; font-size: 1.6rem; margin: 0 0 6px 0;">📦 DANH MỤC HÒM LIVE TỪ ISLEPILOT CLOUD</h2>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.92rem;">
+          Dữ liệu hòm và tỷ lệ rơi phần thưởng đồng bộ trực tiếp thời gian thực từ IslePilot Cloud.
+        </p>
+      </div>
+
+      <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35); padding: 12px 20px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 1.8rem;">🌾</span>
+        <div>
+          <small style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase;">Số Lúa trong tài khoản của bạn</small>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #fbbf24;" id="my-lua-balance">--- Lúa</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Crates Container (Populated by JS) -->
+    <div id="crates-container" style="margin-bottom: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px;">
+      <!-- Populated by JS -->
+    </div>
+
+    <!-- Crate Opening History -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px;">
+      <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 14px;">📜 Lịch Sử Trúng Thưởng Gần Đây Của Server ST25</h3>
+      <div style="display: flex; flex-direction: column; gap: 10px;" id="recent-wins">
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: rgba(15, 23, 42, 0.5); border-radius: 6px; font-size: 0.85rem;">
+          <span style="color: #cbd5e1;">🦖 Người chơi [7656...6540] vừa mở <strong>Hòm Kim Cương</strong> trúng <strong style="color: #fbbf24;">500 Lúa Jackpot 🌾</strong></span>
+          <span style="color: var(--text-muted);">2 phút trước</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: rgba(15, 23, 42, 0.5); border-radius: 6px; font-size: 0.85rem;">
+          <span style="color: #cbd5e1;">🐊 Người chơi [7656...8278] vừa mở <strong>Hòm Vàng</strong> trúng <strong style="color: #38bdf8;">Skin Kim Giáp Dạ Quang ✨</strong></span>
+          <span style="color: var(--text-muted);">5 phút trước</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 14px; background: rgba(15, 23, 42, 0.5); border-radius: 6px; font-size: 0.85rem;">
+          <span style="color: #cbd5e1;">🦅 Người chơi [7656...1234] vừa mở <strong>Hòm Tre Làng</strong> trúng <strong style="color: #10b981;">Thẻ Hồi Máu Khẩn Cấp 💖</strong></span>
+          <span style="color: var(--text-muted);">12 phút trước</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Gacha Suspense Spinning Modal (CS:GO style from IslePilot screenshot) -->
+  <div class="gacha-modal" id="gacha-modal">
+    <div class="gacha-box">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 2.2rem;">🎃</span>
+          <div>
+            <h3 style="color: #fff; margin: 0; font-size: 1.3rem;">VÒNG QUAY HÒM HALLOWEEN 🎃</h3>
+            <small style="color: #c084fc; font-weight: 600;">Hệ thống Gacha chính thức máy chủ ST25 & IslePilot</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reel Container with center selector line -->
+      <div class="gacha-reel-wrapper" id="gacha-reel-wrapper">
+        <div class="gacha-center-line"></div>
+        <div class="gacha-reel-strip" id="gacha-reel-strip">
+          <!-- Dynamically populated cards -->
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="color: var(--text-muted); font-size: 0.85rem;" id="gacha-status-text">
+          Đang quay thưởng hồi hộp... 🎰
+        </span>
+        <button id="gacha-skip-btn" onclick="skipGachaAnimation()" class="btn btn-secondary btn-sm" style="font-size: 0.75rem; padding: 4px 10px;">
+          Bỏ qua hiệu ứng ⏩
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reward Winning Modal -->
+  <div class="reward-modal" id="reward-modal">
+    <div class="reward-box">
+      <div style="font-size: 4.5rem; margin-bottom: 10px;" id="modal-reward-icon">🎉</div>
+      <span class="rule-badge badge-allow" style="color: #fbbf24; border-color: #fbbf24; margin-bottom: 12px; font-size: 0.85rem;">
+        CHÚC MỪNG BẠN ĐÃ TRÚNG THƯỞNG!
+      </span>
+      <h2 style="color: #fff; font-size: 1.6rem; margin: 10px 0;" id="modal-reward-name">Phần Thưởng</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;" id="modal-reward-desc">
+        Vật phẩm đã được tự động thêm vào Túi đồ của bạn trên server ST25.
+      </p>
+
+      <div style="display: flex; gap: 10px; margin-top: 15px;">
+        <button onclick="closeRewardModal()" class="btn btn-secondary" style="flex: 1; font-weight: 700;">
+          🌾 Tiếp Tục Mở
+        </button>
+        <a id="modal-garage-btn" href="gara.html" class="btn btn-primary" style="flex: 1; display: none; font-weight: 700; text-align: center; text-decoration: none; padding: 10px 14px; line-height: 1.5;">
+          🦖 Mở Gara Ra Đảo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/hom-qua.js"></script>
+</body>
+</html>

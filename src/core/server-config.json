@@ -1,0 +1,84 @@
+{
+  "server": {
+    "name": "ST25 VIETNAM",
+    "short_name": "ST25",
+    "server_id": "cmufraiwk7fnooa01vpdzdhm4",
+    "ip": "127.0.0.1",
+    "port": 7777,
+    "max_players": 100,
+    "map": "Gateway v0.21.7",
+    "discord_url": "https://discord.gg/3xCrA6VyY",
+    "hud_download_url": "https://drive.google.com/file/d/1RvIjjldsLZp58QifkEZQcMkBeXyWdhpI/view?usp=sharing",
+    "hud_direct_download_url": "https://drive.google.com/file/d/1RvIjjldsLZp58QifkEZQcMkBeXyWdhpI/view?usp=sharing"
+  },
+  "islepilot": {
+    "dashboard_url": "https://islepilot.eu/dashboard/servers/cmufraiwk7fnooa01vpdzdhm4/api",
+    "api_base_url": "https://islepilot.eu/api/v1",
+    "server_id": "cmufraiwk7fnooa01vpdzdhm4",
+    "api_token": "ipa_4c51bd355513813f26ea6e759d4e6fb0dd5d8bb7174799de",
+    "enabled": true
+  },
+  "steam": {
+    "api_key": "",
+    "realm": "http://localhost:3000",
+    "return_url": "http://localhost:3000/api/player/steam/callback"
+  },
+  "garage": {
+    "default_slots": 3,
+    "role_limits": {
+      "default": 3,
+      "vai_tro_moi": 3,
+      "may_chu_bot": 3,
+      "nguoi_moi": 3,
+      "dam_lay": 3,
+      "luat_su": 3,
+      "bau_troi": 3,
+      "vien_gach_dau_tien": 30,
+      "khung_long_an_co": 3,
+      "khung_long_an_thit": 3,
+      "long_ta_dien": 12,
+      "long_chu": 8,
+      "long_phu_nong": 18,
+      "long_dai_dia_chu": 20,
+      "hoa_hau": 3,
+      "streamer": 5,
+      "may_chu_bo_khuech_dai": 5,
+      "booster": 5,
+      "mod": 20,
+      "bot": 5,
+      ".": 20,
+      "dev": 10,
+      "long_khung_quang_cao": 10,
+      "admin": 20
+    },
+    "player_custom_slots": {
+      "76561198354289789": 20,
+      "76561199194553823": 20,
+      "76561198838095252": 20,
+      "76561198682056372": 20,
+      "76561199229687125": 20,
+      "76561198789527189": 12,
+      "76561199031275693": 20,
+      "76561198000000888": 8,
+      "76561198000000777": 8,
+      "76561198740116188": 5,
+      "76561199830877379": 5,
+      "76561198130578953": 20
+    },
+    "user_roles": {
+      "76561198354289789": "admin",
+      "76561198682056372": "admin",
+      "76561199229687125": "admin",
+      "76561199194553823": "mod",
+      "76561198838095252": ".",
+      "76561198789527189": "long_ta_dien",
+      "76561199031275693": "admin",
+      "76561198000000888": "default",
+      "76561198000000777": "long_chu",
+      "76561198740116188": "streamer",
+      "76561199830877379": "streamer",
+      "76561198130578953": "admin"
+    },
+    "upgrade_discord_url": "https://discord.gg/3xCrA6VyY"
+  }
+}

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Xếp Hạng Đỉnh Cao — ST25 VIETNAM</title>
+  <meta name="description" content="Vinh danh những huyền thoại sống sót lâu nhất, thợ săn khát máu nhất và đại gia nhiều Lúa nhất trên máy chủ ST25 The Isle: Evrima.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    /* Leaderboard Styling */
+    .bxh-hero {
+      text-align: center;
+      padding: 30px 20px 20px;
+    }
+    .bxh-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    .bxh-subtitle {
+      color: var(--text-secondary);
+      max-width: 680px;
+      margin: 0 auto 24px;
+      font-size: 0.95rem;
+    }
+
+    /* Tabs */
+    .bxh-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .bxh-tab-btn {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      color: #94a3b8;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+    }
+    .bxh-tab-btn:hover {
+      color: #fff;
+      border-color: rgba(251, 191, 36, 0.5);
+      background: rgba(30, 41, 59, 0.8);
+    }
+    .bxh-tab-btn.active {
+      color: #fbbf24;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(15, 23, 42, 0.9));
+      border-color: #fbbf24;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+    }
+
+    /* Podium (Top 3) */
+    .podium-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 18px;
+      align-items: flex-end;
+      margin-bottom: 35px;
+    }
+    @media (max-width: 768px) {
+      .podium-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .podium-card {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px 18px;
+      text-align: center;
+      position: relative;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+    .podium-card:hover {
+      transform: translateY(-6px);
+    }
+    .podium-card.first {
+      order: 2;
+      border-color: #fbbf24;
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.18), rgba(15, 23, 42, 0.95));
+      box-shadow: 0 10px 35px rgba(245, 158, 11, 0.25);
+      padding: 32px 20px;
+    }
+    .podium-card.second {
+      order: 1;
+      border-color: #94a3b8;
+      background: linear-gradient(180deg, rgba(148, 163, 184, 0.12), rgba(15, 23, 42, 0.95));
+      box-shadow: 0 6px 20px rgba(148, 163, 184, 0.15);
+    }
+    .podium-card.third {
+      order: 3;
+      border-color: #d97706;
+      background: linear-gradient(180deg, rgba(217, 119, 6, 0.12), rgba(15, 23, 42, 0.95));
+      box-shadow: 0 6px 20px rgba(217, 119, 6, 0.15);
+    }
+    @media (max-width: 768px) {
+      .podium-card.first { order: 1; }
+      .podium-card.second { order: 2; }
+      .podium-card.third { order: 3; }
+    }
+    .podium-rank-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .podium-card.first .podium-rank-badge {
+      background: #fbbf24;
+      color: #0f172a;
+      width: 52px;
+      height: 52px;
+      font-size: 1.7rem;
+    }
+    .podium-card.second .podium-rank-badge {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+    .podium-card.third .podium-rank-badge {
+      background: #b45309;
+      color: #fff;
+    }
+    .podium-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid #fbbf24;
+      margin: 0 auto 10px;
+      display: block;
+    }
+    .podium-name {
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .podium-sub {
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-family: monospace;
+      margin-bottom: 12px;
+    }
+    .podium-stat {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fbbf24;
+    }
+
+    /* Ranking Table */
+    .table-container {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+    }
+    .bxh-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .bxh-table th {
+      background: rgba(30, 41, 59, 0.9);
+      padding: 14px 18px;
+      color: #94a3b8;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .bxh-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #cbd5e1;
+      vertical-align: middle;
+      font-size: 0.92rem;
+    }
+    .bxh-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .rank-number {
+      font-weight: 800;
+      font-size: 1rem;
+      color: #64748b;
+      display: inline-block;
+      width: 28px;
+    }
+    .rank-number.top4 { color: #38bdf8; }
+    .rank-number.top5 { color: #10b981; }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Navigation Bar -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-bottom: 70px;">
+    
+    <div class="bxh-hero">
+      <h1 class="bxh-title">🏆 ST25 HALL OF FAME — BẢNG XẾP HẠNG ĐỈNH CAO</h1>
+      <p class="bxh-subtitle">
+        Nơi ghi danh những cá thể khủng long kiên cường nhất, những sát thủ săn mồi gieo rắc kinh hoàng và những đại gia tích lũy hạt Lúa 🌾 số một toàn cõi Evrima.
+      </p>
+
+      <!-- Category Tabs -->
+      <div class="bxh-tabs">
+        <button class="bxh-tab-btn active" id="tab-survivors" onclick="LeaderboardApp.switchTab('survivors')">
+          <span>🏆 Vua Sống Sót</span>
+        </button>
+        <button class="bxh-tab-btn" id="tab-hunters" onclick="LeaderboardApp.switchTab('hunters')">
+          <span>⚔️ Thợ Săn Đỉnh Cao</span>
+        </button>
+        <button class="bxh-tab-btn" id="tab-wealth" onclick="LeaderboardApp.switchTab('wealth')">
+          <span>🌾 Đại Gia ST25</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Podium Top 3 Section -->
+    <div class="podium-grid" id="podium-container">
+      <!-- Dynamically generated top 1, 2, 3 -->
+    </div>
+
+    <!-- Rest of Rankings Table (#4 - #10) -->
+    <div style="margin-top: 25px;">
+      <h3 style="color: #fff; font-size: 1.15rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+        <span id="ranking-table-title">📋 Bảng Xếp Hạng Chi Tiết (#4 – #10)</span>
+        <button onclick="LeaderboardApp.loadData()" class="btn btn-secondary btn-sm" style="font-size: 0.75rem;">🔄 Cập Nhật</button>
+      </h3>
+
+      <div class="table-container">
+        <table class="bxh-table">
+          <thead id="bxh-table-thead">
+            <!-- Table headers depend on category -->
+          </thead>
+          <tbody id="bxh-table-tbody">
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 40px; color: #64748b;">
+                Đang nạp dữ liệu Bảng Xếp Hạng...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/bxh.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+/* Native navigation keeps URLs, browser history and link behavior intact. */
+/* Use one entrance system instead of snapshotting and animating the whole page too. */
+@view-transition { navigation: none; }
+body > main.container { view-transition-name: st25-content; }
+body > header.site-header { view-transition-name: st25-header; }
+::view-transition { pointer-events: none; }
+::view-transition-group(*) { animation-duration: 220ms; }
+::view-transition-old(root) { animation: st25-fade-out 140ms ease both; }
+::view-transition-new(root) { animation: st25-fade-in 200ms ease both; }
+::view-transition-group(st25-header),
+::view-transition-new(st25-header) { animation: none; }
+::view-transition-old(st25-header) { display: none; }
+::view-transition-old(st25-content) { animation: st25-fade-out 120ms ease both; }
+::view-transition-new(st25-content) {
+  animation: st25-content-in 220ms cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes st25-fade-out { to { opacity: 0; } }
+@keyframes st25-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes st25-content-in {
+  from { opacity: .25; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Kodilion-inspired rolling text; the link hit area and width stay fixed. */
+.st25-roll {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+  line-height: inherit;
+  max-width: 100%;
+}
+.st25-roll > span { display: block; }
+.st25-roll::after {
+  content: attr(data-label) / "";
+  position: absolute;
+  inset: 0;
+  transform: translateY(115%);
+  pointer-events: none;
+}
+.st25-roll > span, .st25-roll::after {
+  transition: transform 420ms cubic-bezier(.16,1,.3,1);
+}
+@media (hover: hover) and (pointer: fine) {
+  a:is(:hover, :focus-visible) > .st25-roll > span { transform: translateY(-115%); }
+  a:is(:hover, :focus-visible) > .st25-roll::after { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .st25-roll > span, .st25-roll::after { transition: none; transform: none !important; }
+  .st25-roll::after { content: none; }
+  @view-transition { navigation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,921 @@
+{
+  "userWallets": {
+    "76561198636766540": 189,
+    "76561198354289789": 7389,
+    "76561198838095252": 586,
+    "76561199229687125": 22,
+    "76561198789527189": 302
+  },
+  "userInventory": {
+    "76561198636766540": [
+      {
+        "id": "inv-1",
+        "name": "Thẻ Hồi Sinh Bảo Hộ",
+        "icon": "🛡️",
+        "desc": "Bảo lưu 100% Growth nếu rớt vực",
+        "type": "item"
+      },
+      {
+        "id": "inv-2",
+        "name": "Skin Thần Thoại T-Rex Hắc Long",
+        "icon": "🦖",
+        "desc": "Mã phối màu dạ quang độc quyền",
+        "type": "skin"
+      }
+    ],
+    "76561198354289789": [
+      {
+        "id": "inv-1791277033305",
+        "name": "Skin Rừng Nhiệt Đới 🌿",
+        "icon": "🦖",
+        "desc": "Rút thăm may mắn từ Hòm Tre Làng ST25",
+        "type": "skin"
+      },
+      {
+        "id": "inv-1791277039021",
+        "name": "Skin Kim Giáp Dạ Quang Vàng 🌟",
+        "icon": "✨",
+        "desc": "Rút thăm may mắn từ Hòm Vàng ST25 Thần Tốc",
+        "type": "skin"
+      },
+      {
+        "id": "inv-1791277917263",
+        "name": "T-Rex Đực 100% Full Dinh Dưỡng S-S-D",
+        "icon": "🦖",
+        "desc": "Mua từ chợ với giá 120 Lúa 🌾",
+        "type": "dino_voucher"
+      },
+      {
+        "id": "skin-1791277998465",
+        "name": "Skin Triceratops Đã Áp Dụng",
+        "icon": "🎨",
+        "desc": "Mã Evrima: [Tyrannosaurus_Skin_v1:B=1e293b:P=fbbf24:U=f59e0b:E=ef4444]",
+        "type": "skin"
+      },
+      {
+        "id": "inv-1791278061200",
+        "name": "Skin Thần Long Hắc Ám T-Rex 🐉",
+        "icon": "🐉",
+        "desc": "Rút thăm may mắn từ Hòm Kim Cương Thần Thú",
+        "type": "skin"
+      },
+      {
+        "id": "inv-1791278215510",
+        "name": "Deinosuchus Cái 95% Prime Ready",
+        "icon": "🐊",
+        "desc": "Mua từ chợ với giá 90 Lúa 🌾",
+        "type": "dino_voucher"
+      },
+      {
+        "id": "inv-1791280269965",
+        "name": "Thẻ Hồi Sinh Bảo Hộ Vĩnh Cửu 🛡️",
+        "icon": "🛡️",
+        "desc": "Rút thăm may mắn từ Hòm Kim Cương Thần Thú",
+        "type": "item"
+      },
+      {
+        "id": "skin-1791285366838",
+        "name": "Skin Tyrannosaurus Đã Áp Dụng",
+        "icon": "🎨",
+        "desc": "Mã Evrima: [Tyrannosaurus_Skin_v1:B=090d16:P=1e293b:U=334155:E=06b6d4]",
+        "type": "skin"
+      },
+      {
+        "id": "voucher-1791333861335-147",
+        "name": "T-Rex Bạo Chúa 100% Full Dinh Dưỡng S-S-D",
+        "icon": "🦖",
+        "desc": "Khủng long Tyrannosaurus (Đực (Male), 100% Growth). Mua từ Chợ ST25.",
+        "type": "dino_voucher",
+        "species": "Tyrannosaurus",
+        "growth": 100,
+        "gender": "Đực (Male)",
+        "purchased_at": "07:44:21 7/10/2026"
+      },
+      {
+        "id": "dino-1791365498163-172",
+        "name": "Tyrannosaurus 80% (Cái (Female))",
+        "icon": "🦖",
+        "desc": "Phần thưởng từ: Giao Dịch ST25 (Nhận từ: Thích Thì Var)",
+        "type": "dino_voucher",
+        "species": "Tyrannosaurus",
+        "growth": 80,
+        "gender": "Cái (Female)",
+        "isPrimeElder": false,
+        "date": "2026-10-08T01:08:31.490Z"
+      },
+      {
+        "id": "dino-1791397419672-224",
+        "name": "Tyrannosaurus 40% (Đực (Male))",
+        "icon": "🦖",
+        "desc": "Phần thưởng từ: Gacha IslePilot Cloud (Hòm Halloween Huyền Bí 🎃)",
+        "type": "dino_voucher",
+        "species": "Tyrannosaurus",
+        "growth": 40,
+        "gender": "Đực (Male)",
+        "isPrimeElder": false,
+        "date": "2026-10-08T01:08:31.504Z"
+      }
+    ],
+    "76561198838095252": [
+      {
+        "id": "voucher-1791336181143-806",
+        "name": "T-Rex 100% Chiến Thần ST25",
+        "icon": "🦖",
+        "desc": "Khủng long Tyrannosaurus (Đực (Male), 100% Growth). Mua từ Chợ ST25.",
+        "type": "dino_voucher",
+        "species": "Tyrannosaurus",
+        "growth": 100,
+        "gender": "Đực (Male)",
+        "purchased_at": "08:23:01 7/10/2026"
+      }
+    ]
+  },
+  "marketListings": [
+    {
+      "id": "mkt-2",
+      "seller": "Sát Thủ Đầm Lầy",
+      "sellerSteamId": "76561198000000002",
+      "title": "Cá Sấu Deinosuchus Nữ Hoàng Prime 95%",
+      "species": "Deinosuchus",
+      "gender": "Cái (Female)",
+      "price": 90,
+      "growth": 95,
+      "diet": "S-S-D",
+      "icon": "🐊"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "TK-3070",
+      "senderSteamId": "76561198354289789",
+      "targetPlayer": "Player_Suspicious",
+      "timeReport": "15:30 06/10",
+      "locationReport": "Rừng Dừa",
+      "videoUrl": "https://youtu.be/example",
+      "violationRule": "Điều 6: CAMP Vùng Cam",
+      "details": "Con lớn trên 50% cố tình lùa giết con non ở Rừng Dừa",
+      "status": "Đang Tiếp Nhận (BQT đang xem log)",
+      "createdAt": "15:56:12 6/10/2026"
+    }
+  ],
+  "referrals": {},
+  "carcassOrders": [
+    {
+      "id": "drop-1791283612330",
+      "steamId": "76561198354289789",
+      "carcassName": "Thịt Triceratops Khổng Lồ (100% Full)",
+      "price": 45,
+      "orderedAt": "17:46:52 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791283499403",
+      "steamId": "76561198354289789",
+      "carcassName": "Thịt Triceratops Khổng Lồ (100% Full)",
+      "price": 45,
+      "orderedAt": "17:44:59 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791283487086",
+      "steamId": "76561198354289789",
+      "carcassName": "Thịt Tenontosaurus Đại Tiệc (100% Full)",
+      "price": 40,
+      "orderedAt": "17:44:47 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791283472086",
+      "steamId": "76561198354289789",
+      "carcassName": "Thịt Triceratops (50% Con Non)",
+      "price": 25,
+      "orderedAt": "17:44:32 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791282955189",
+      "steamId": "76561198636766540",
+      "carcassName": "Thịt Triceratops Khổng Lồ (100% Full)",
+      "price": 45,
+      "orderedAt": "17:35:55 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791281973552",
+      "steamId": "76561198354289789",
+      "carcassName": "Cá Khổng Lồ Đầm Lầy (Big Fish)",
+      "price": 25,
+      "orderedAt": "17:19:33 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791281961107",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Hươu Đốm (Deer)",
+      "price": 30,
+      "orderedAt": "17:19:21 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791281955842",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Tenonto Khổng Lồ",
+      "price": 50,
+      "orderedAt": "17:19:15 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791281940621",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Heo Rừng (Wild Boar)",
+      "price": 15,
+      "orderedAt": "17:19:00 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791281918725",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Hươu Đốm (Deer)",
+      "price": 30,
+      "orderedAt": "17:18:38 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791281655860",
+      "steamId": "76561198636766540",
+      "carcassName": "Xác Heo Rừng (Wild Boar)",
+      "price": 15,
+      "orderedAt": "17:14:15 6/10/2026",
+      "status": "Đã Rớt Xác Thành Công",
+      "note": "Đã thả xác vật lý rơi ngay vị trí của bạn trong game và hồi phục cơn đói khát!"
+    },
+    {
+      "id": "drop-1791280778839",
+      "steamId": "76561198354289789",
+      "carcassName": "Cá Khổng Lồ Đầm Lầy (Big Fish)",
+      "price": 25,
+      "orderedAt": "16:59:38 6/10/2026",
+      "status": "Đã Thả Thành Công (Đã Cứu Đói Trong Game)",
+      "note": "Đã kích hoạt hồi phục đói khát & dinh dưỡng thành công trực tiếp vào nhân vật trong game!"
+    },
+    {
+      "id": "drop-1791280751669",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Hươu Đốm (Deer)",
+      "price": 30,
+      "orderedAt": "16:59:11 6/10/2026",
+      "status": "Đã Thả Thành Công (Đã Cứu Đói Trong Game)",
+      "note": "Đã kích hoạt hồi phục đói khát & dinh dưỡng thành công trực tiếp vào nhân vật trong game!"
+    },
+    {
+      "id": "drop-1791280728217",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Tenonto Khổng Lồ",
+      "price": 50,
+      "orderedAt": "16:58:48 6/10/2026",
+      "status": "Đã Thả Thành Công (Đã Cứu Đói Trong Game)",
+      "note": "Đã kích hoạt hồi phục đói khát & dinh dưỡng thành công trực tiếp vào nhân vật trong game!"
+    },
+    {
+      "id": "drop-1791280567991",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Tenonto Khổng Lồ",
+      "price": 50,
+      "orderedAt": "16:56:07 6/10/2026",
+      "status": "Đã Thả Thành Công (Đã Cứu Đói Trong Game)",
+      "note": "Đã kích hoạt hồi phục đói khát & dinh dưỡng thành công trực tiếp vào nhân vật trong game!"
+    },
+    {
+      "id": "drop-1791280539138",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Heo Rừng (Wild Boar)",
+      "price": 15,
+      "orderedAt": "16:55:39 6/10/2026",
+      "status": "Đã Thả Thành Công (Đã Cứu Đói Trong Game)",
+      "note": "Đã kích hoạt hồi phục đói khát & dinh dưỡng thành công trực tiếp vào nhân vật trong game!"
+    },
+    {
+      "id": "drop-1791279877491",
+      "steamId": "76561198636766540",
+      "carcassName": "Xác Heo Rừng (Wild Boar)",
+      "price": 15,
+      "orderedAt": "16:44:37 6/10/2026",
+      "status": "Đã Thả Thành Công (Đã Cứu Đói Trong Game)",
+      "note": "Đã kích hoạt hồi phục đói khát & dinh dưỡng thành công trực tiếp vào nhân vật trong game!"
+    },
+    {
+      "id": "drop-1791276972502",
+      "steamId": "76561198354289789",
+      "carcassName": "Xác Heo Rừng (Wild Boar)",
+      "price": 15,
+      "orderedAt": "15:56:12 6/10/2026",
+      "status": "Đã Thả Thành Công",
+      "note": "Đã kích hoạt thả tại toạ độ vị trí hiện tại của bạn trên Gateway!"
+    }
+  ],
+  "userGarage": {
+    "76561198636766540": [
+      {
+        "id": "dino-1791280118789-557",
+        "species": "Triceratops",
+        "gender": "Đực (Male)",
+        "growth": 100,
+        "health": 100,
+        "hunger": 100,
+        "thirst": 100,
+        "diet": [
+          "100% Dinh Dưỡng"
+        ],
+        "mutations": [],
+        "stored_at": "16:48:38 6/10/2026",
+        "source": "Mua từ Chợ Giao Dịch (Bảo Kê Rừng Dừa)",
+        "isLocal": true
+      },
+      {
+        "id": "dino-1791283967260-994",
+        "species": "Tyrannosaurus",
+        "gender": "Đực (Male)",
+        "growth": 40,
+        "health": 100,
+        "hunger": 100,
+        "thirst": 100,
+        "diet": [
+          "S",
+          "S",
+          "D"
+        ],
+        "mutations": [],
+        "stored_at": "17:52:47 6/10/2026",
+        "source": "Trúng thưởng từ Hòm Halloween Huyền Bí 🎃",
+        "isLocal": true
+      },
+      {
+        "id": "dino-1791355973442-719",
+        "species": "Allosaurus",
+        "gender": "Đực (Male)",
+        "growth": 60,
+        "health": 100,
+        "hunger": 100,
+        "thirst": 100,
+        "diet": [
+          "S",
+          "S",
+          "D"
+        ],
+        "mutations": [],
+        "stored_at": "13:52:53 7/10/2026",
+        "source": "Gacha May Mắn (Hòm Halloween Huyền Bí 🎃)",
+        "isLocal": true
+      }
+    ],
+    "76561198354289789": [],
+    "76561198838095252": [
+      {
+        "id": "dino-1791334448673-768",
+        "species": "Deinosuchus",
+        "gender": "Đực (Male)",
+        "growth": 100,
+        "health": 100,
+        "hunger": 100,
+        "thirst": 100,
+        "diet": [
+          "S",
+          "S",
+          "D"
+        ],
+        "mutations": [
+          "Hemomania",
+          "Multichambered Lungs",
+          "Osteophagic",
+          "Gastronomic Regeneration"
+        ],
+        "stored_at": "07:54:08 7/10/2026",
+        "source": "Hòm May Mắn (Hòm Kim Cương Thần Thú 💎)",
+        "isLocal": true
+      }
+    ],
+    "76561199229687125": [
+      {
+        "id": "dino-1791355971609-316",
+        "species": "Tyrannosaurus",
+        "gender": "Đực (Male)",
+        "growth": 60,
+        "health": 100,
+        "hunger": 100,
+        "thirst": 100,
+        "diet": [
+          "S",
+          "S",
+          "D"
+        ],
+        "mutations": [],
+        "stored_at": "13:52:51 7/10/2026",
+        "source": "Gacha May Mắn (Hòm Halloween Huyền Bí 🎃)",
+        "isLocal": true
+      }
+    ]
+  },
+  "withdrawnDinos": {
+    "76561198354289789": []
+  },
+  "adminAssignments": {
+    "76561198789527189": {
+      "roleKey": "long_ta_dien",
+      "slots": 12,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "17:23:48 7/10/2026",
+      "updatedAtTimestamp": 1791368628130,
+      "notes": "Test cap Long Ta Dien 12 slots"
+    },
+    "76561199031275693": {
+      "roleKey": "admin",
+      "slots": 20,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "04:42:40 8/10/2026",
+      "updatedAtTimestamp": 1791409360000,
+      "notes": "76561199031275693"
+    },
+    "76561198000000888": {
+      "roleKey": "default",
+      "slots": 8,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "22:34:23 7/10/2026",
+      "updatedAtTimestamp": 1791387263331,
+      "notes": "Test 8 slots"
+    },
+    "76561198000000777": {
+      "roleKey": "long_chu",
+      "slots": 8,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "22:43:22 7/10/2026",
+      "updatedAtTimestamp": 1791387802322,
+      "notes": "Test cap 8 slot vinh vien"
+    },
+    "76561198740116188": {
+      "roleKey": "streamer",
+      "slots": 5,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "04:45:03 8/10/2026",
+      "updatedAtTimestamp": 1791409503000,
+      "notes": ""
+    },
+    "76561199830877379": {
+      "roleKey": "streamer",
+      "slots": 5,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "03:30:56 8/10/2026",
+      "updatedAtTimestamp": 1791405056000,
+      "notes": ""
+    },
+    "76561198130578953": {
+      "roleKey": "admin",
+      "slots": 20,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "01:11:21 8/10/2026",
+      "updatedAtTimestamp": 1791396681000,
+      "notes": ""
+    },
+    "76561199194553823": {
+      "roleKey": "mod",
+      "slots": 20,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "04:45:27 8/10/2026",
+      "updatedAtTimestamp": 1791409527000,
+      "notes": ""
+    },
+    "76561198354289789": {
+      "roleKey": "admin",
+      "slots": 20,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "04:45:27 8/10/2026",
+      "updatedAtTimestamp": 1791409527000,
+      "notes": "Super Admin vĩnh viễn"
+    },
+    "76561198682056372": {
+      "roleKey": "admin",
+      "slots": 20,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "04:45:27 8/10/2026",
+      "updatedAtTimestamp": 1791409527000,
+      "notes": "Super Admin vĩnh viễn"
+    },
+    "76561198838095252": {
+      "roleKey": ".",
+      "slots": 20,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "04:45:27 8/10/2026",
+      "updatedAtTimestamp": 1791409527000,
+      "notes": "Super Admin vĩnh viễn"
+    },
+    "76561199229687125": {
+      "roleKey": "admin",
+      "slots": 20,
+      "updatedBy": "76561198354289789",
+      "updatedAt": "04:45:27 8/10/2026",
+      "updatedAtTimestamp": 1791409527000,
+      "notes": "Super Admin vĩnh viễn"
+    }
+  },
+  "trades": [
+    {
+      "id": "trade-1791448934719-925",
+      "senderSteamId": "76561198636766540",
+      "senderName": "Thích Thì Var",
+      "receiverSteamId": "76561198000000002",
+      "receiverName": "Player_0002",
+      "senderDino": {
+        "id": "cmuwr9agl036noa01k7ua8w2h",
+        "name": null,
+        "species": "Tyrannosaurus",
+        "gender": "Đực (Male)",
+        "growth": 38,
+        "health": 1,
+        "hunger": 0.9283773291925467,
+        "thirst": 0.982778,
+        "stamina": 1,
+        "isPrimeElder": false,
+        "mutations": [
+          "Osteosclerosis",
+          "None",
+          "None",
+          "None"
+        ],
+        "parkedAt": "2026-10-06T14:09:40.918Z",
+        "isLocal": false
+      },
+      "senderLua": 0,
+      "requestedLua": 10,
+      "note": "Test auto expiry 30s",
+      "status": "expired",
+      "createdAt": "15:42:14 8/10/2026",
+      "createdAtTimestamp": 1791448934719,
+      "expiresAtTimestamp": 1791448964719,
+      "timeoutSeconds": 30,
+      "updatedAt": "15:42:51 8/10/2026",
+      "updatedAtTimestamp": 1791448971089,
+      "expireReason": "Hết thời gian chờ (30 giây) - Tự động hoàn trả về Gara"
+    },
+    {
+      "id": "trade-1791448882751-159",
+      "senderSteamId": "76561198636766540",
+      "senderName": "Thích Thì Var",
+      "receiverSteamId": "76561198000000002",
+      "receiverName": "Player_0002",
+      "senderDino": {
+        "id": "cmuwonovr01mkoz01dkk6p5wm",
+        "name": null,
+        "species": "Deinosuchus",
+        "gender": "Đực (Male)",
+        "growth": 58,
+        "health": 1,
+        "hunger": 0.5677867124650373,
+        "thirst": 1,
+        "stamina": 0.9710514724434479,
+        "isPrimeElder": false,
+        "mutations": [
+          "Hemomania",
+          "Osteosclerosis",
+          "None",
+          "None"
+        ],
+        "parkedAt": "2026-10-06T12:56:53.943Z",
+        "isLocal": false
+      },
+      "senderLua": 0,
+      "requestedLua": 50,
+      "note": "Test anti exploit 30s",
+      "status": "expired",
+      "createdAt": "15:41:22 8/10/2026",
+      "createdAtTimestamp": 1791448882751,
+      "expiresAtTimestamp": 1791448912751,
+      "timeoutSeconds": 30,
+      "updatedAt": "15:41:55 8/10/2026",
+      "updatedAtTimestamp": 1791448915710,
+      "expireReason": "Hết thời gian chờ (30 giây) - Tự động hoàn trả về Gara"
+    },
+    {
+      "id": "trade-1791448861758-696",
+      "senderSteamId": "76561198636766540",
+      "senderName": "Thích Thì Var",
+      "receiverSteamId": "76561198000000002",
+      "receiverName": "Player_0002",
+      "senderDino": {
+        "id": "cmuwr9agl036noa01k7ua8w2h",
+        "name": null,
+        "species": "Tyrannosaurus",
+        "gender": "Đực (Male)",
+        "growth": 38,
+        "health": 1,
+        "hunger": 0.9283773291925467,
+        "thirst": 0.982778,
+        "stamina": 1,
+        "isPrimeElder": false,
+        "mutations": [
+          "Osteosclerosis",
+          "None",
+          "None",
+          "None"
+        ],
+        "parkedAt": "2026-10-06T14:09:40.918Z",
+        "isLocal": false
+      },
+      "senderLua": 0,
+      "requestedLua": 50,
+      "note": "Test anti exploit 30s",
+      "status": "expired",
+      "createdAt": "15:41:01 8/10/2026",
+      "createdAtTimestamp": 1791448861889,
+      "expiresAtTimestamp": 1791448891889,
+      "timeoutSeconds": 30,
+      "updatedAt": "15:41:35 8/10/2026",
+      "updatedAtTimestamp": 1791448895679,
+      "expireReason": "Hết thời gian chờ (30 giây) - Tự động hoàn trả về Gara"
+    },
+    {
+      "id": "trade-1791365521902-147",
+      "senderSteamId": "76561198354289789",
+      "senderName": "Maico Dol",
+      "receiverSteamId": "76561198636766540",
+      "receiverName": "Thích Thì Var",
+      "senderDino": {
+        "id": "cmuwmfr0a02lrk301b0zu7cgo",
+        "name": null,
+        "species": "Tyrannosaurus",
+        "gender": "Đực (Male)",
+        "growth": 100,
+        "health": 1,
+        "hunger": 0.315462647869065,
+        "thirst": 0.991319,
+        "stamina": 1,
+        "isPrimeElder": false,
+        "mutations": [
+          "None",
+          "None",
+          "None",
+          "None"
+        ],
+        "parkedAt": "2026-10-06T11:54:44.218Z",
+        "isLocal": false
+      },
+      "senderLua": 5,
+      "requestedLua": 0,
+      "note": "Test offer to cancel",
+      "status": "declined",
+      "createdAt": "16:32:01 7/10/2026",
+      "updatedAt": "16:32:01 7/10/2026"
+    },
+    {
+      "id": "trade-1791365520424-992",
+      "senderSteamId": "76561198354289789",
+      "senderName": "Maico Dol",
+      "receiverSteamId": "76561198636766540",
+      "receiverName": "Thích Thì Var",
+      "senderDino": {
+        "id": "cmuwmfr0a02lrk301b0zu7cgo",
+        "name": null,
+        "species": "Tyrannosaurus",
+        "gender": "Đực (Male)",
+        "growth": 100,
+        "health": 1,
+        "hunger": 0.315462647869065,
+        "thirst": 0.991319,
+        "stamina": 1,
+        "isPrimeElder": false,
+        "mutations": [
+          "None",
+          "None",
+          "None",
+          "None"
+        ],
+        "parkedAt": "2026-10-06T11:54:44.218Z",
+        "isLocal": false
+      },
+      "senderLua": 5,
+      "requestedLua": 0,
+      "note": "Test offer to cancel",
+      "status": "cancelled",
+      "createdAt": "16:32:00 7/10/2026",
+      "updatedAt": "16:32:00 7/10/2026"
+    },
+    {
+      "id": "trade-1791365496969-966",
+      "senderSteamId": "76561198636766540",
+      "senderName": "Thích Thì Var",
+      "receiverSteamId": "76561198354289789",
+      "receiverName": "Maico Dol",
+      "senderDino": {
+        "id": "cmuwrkdhj0537l401h8ec978q",
+        "name": null,
+        "species": "Tyrannosaurus",
+        "gender": "Cái (Female)",
+        "growth": 80,
+        "health": 1,
+        "hunger": 0.9636355584269429,
+        "thirst": 0.9528150000000001,
+        "stamina": 0.673442284325638,
+        "isPrimeElder": true,
+        "mutations": [
+          "None",
+          "None",
+          "None",
+          "None"
+        ],
+        "parkedAt": "2026-10-06T14:18:18.055Z",
+        "isLocal": false
+      },
+      "senderLua": 0,
+      "requestedLua": 10,
+      "note": "Giao dich Rex lay 10 Lua ST25",
+      "status": "accepted",
+      "createdAt": "16:31:36 7/10/2026",
+      "updatedAt": "16:31:38 7/10/2026"
+    }
+  ],
+  "soldDinos": {
+    "76561198636766540": [
+      "cmuwrkdhj0537l401h8ec978q"
+    ]
+  },
+  "combatLogs": [
+    {
+      "id": "hit-100",
+      "timestamp": "00:21:01 8/10/2026",
+      "timestampMs": 1791393661672,
+      "attacker": {
+        "steamId": "76561199319705270",
+        "name": "peopeo",
+        "species": "Tyrannosaurus",
+        "growth": 61
+      },
+      "victim": {
+        "steamId": "76561199383105969",
+        "name": "tonthanhphong1995",
+        "species": "Tyrannosaurus",
+        "growth": 60,
+        "hpBefore": 5009,
+        "hpAfter": 2759
+      },
+      "damage": 2250,
+      "hitBox": "Đầu",
+      "distance": 2.4,
+      "speed": 42,
+      "resolved": false,
+      "flags": [
+        {
+          "type": "ONE_SHOT",
+          "level": "danger",
+          "title": "🚨 DAME ẢO / ONE-SHOT",
+          "message": "Gây 2,250 sát thương bằng 1 cú cắn! (Vượt 900% giới hạn tối đa loài Tyrannosaurus)"
+        }
+      ]
+    },
+    {
+      "id": "hit-101",
+      "timestamp": "00:19:46 8/10/2026",
+      "timestampMs": 1791393586672,
+      "attacker": {
+        "steamId": "76561199383105969",
+        "name": "tonthanhphong1995",
+        "species": "Tyrannosaurus",
+        "growth": 60
+      },
+      "victim": {
+        "steamId": "76561198740116188",
+        "name": "an",
+        "species": "Tyrannosaurus",
+        "growth": 50,
+        "hpBefore": 2824,
+        "hpAfter": 2299
+      },
+      "damage": 525,
+      "hitBox": "Thân",
+      "distance": 11.5,
+      "speed": 42,
+      "resolved": false,
+      "flags": [
+        {
+          "type": "REACH_HACK",
+          "level": "danger",
+          "title": "🚨 TẦM ĐÁNH QUÁ XA (REACH/HITBOX HACK)",
+          "message": "Cắn trúng đối thủ ở khoảng cách 11.5 mét! (Tầm cắn tối đa của Tyrannosaurus chỉ 4.5m)"
+        }
+      ]
+    },
+    {
+      "id": "hit-102",
+      "timestamp": "00:18:31 8/10/2026",
+      "timestampMs": 1791393511672,
+      "attacker": {
+        "steamId": "76561198740116188",
+        "name": "an",
+        "species": "Tyrannosaurus",
+        "growth": 50
+      },
+      "victim": {
+        "steamId": "76561199553482722",
+        "name": "trieuvi2632000",
+        "species": "Triceratops",
+        "growth": 59,
+        "hpBefore": 5707,
+        "hpAfter": 5186
+      },
+      "damage": 521,
+      "hitBox": "Cổ",
+      "distance": 2.2,
+      "speed": 42,
+      "resolved": false,
+      "flags": []
+    },
+    {
+      "id": "hit-103",
+      "timestamp": "00:17:16 8/10/2026",
+      "timestampMs": 1791393436672,
+      "attacker": {
+        "steamId": "76561199553482722",
+        "name": "trieuvi2632000",
+        "species": "Triceratops",
+        "growth": 59
+      },
+      "victim": {
+        "steamId": "76561198870866539",
+        "name": "GreY",
+        "species": "Pteranodon",
+        "growth": 76,
+        "hpBefore": 93,
+        "hpAfter": 0
+      },
+      "damage": 544,
+      "hitBox": "Chân sau",
+      "distance": 4.4,
+      "speed": 42,
+      "resolved": false,
+      "flags": []
+    },
+    {
+      "id": "hit-104",
+      "timestamp": "00:16:01 8/10/2026",
+      "timestampMs": 1791393361672,
+      "attacker": {
+        "steamId": "76561198870866539",
+        "name": "GreY",
+        "species": "Pteranodon",
+        "growth": 76
+      },
+      "victim": {
+        "steamId": "76561198694488278",
+        "name": "nhatpham2084",
+        "species": "Pteranodon",
+        "growth": 51,
+        "hpBefore": 38,
+        "hpAfter": 0
+      },
+      "damage": 559,
+      "hitBox": "Đuôi",
+      "distance": 3.6,
+      "speed": 42,
+      "resolved": false,
+      "flags": []
+    }
+  ],
+  "claimedCodeHistory": [],
+  "claimedCodesPerUser": {},
+  "claimedQuests": {
+    "76561198789527189": {
+      "cmuvilrra0b7npo01yc012pp1": {
+        "claimedAt": "2026-10-07T17:43:49.526Z",
+        "amount": 12,
+        "questName": "Bậc Thầy Sinh Tồn (Survive 120 Mins)"
+      },
+      "cmuvilqyd00sut301xvqmajc8": {
+        "claimedAt": "2026-10-07T17:43:58.388Z",
+        "amount": 6,
+        "questName": "Sống Sót Kiên Cường (Survive 60 Mins)"
+      },
+      "cmuvilv7b0b8cpo01qrkcl58t": {
+        "claimedAt": "2026-10-07T17:43:58.388Z",
+        "amount": 8,
+        "questName": "Tuần Tra Lãnh Thổ (Patrol Zones)"
+      },
+      "cmuvg7q1o0pnmo40186z1eeh3": {
+        "claimedAt": "2026-10-07T17:43:58.388Z",
+        "amount": 50,
+        "questName": "Di CHUYỂN"
+      }
+    }
+  },
+  "lockedInviteCodes": [],
+  "userCustomInviteCodes": {},
+  "adminDeleted": {
+    "76561198968616319": 1791439072792
+  }
+}

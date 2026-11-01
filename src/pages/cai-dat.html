@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Quản Trị Cấp Role & Slot Gara — ST25 VIETNAM</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <style>
+    .admin-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85));
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+    @media (max-width: 992px) {
+      .admin-grid { grid-template-columns: 1fr; }
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+    .quick-slot-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .btn-quick-slot {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #cbd5e1;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-quick-slot:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    .btn-quick-slot.active {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.45), rgba(217, 119, 6, 0.35)) !important;
+      border-color: #f59e0b !important;
+      color: #fbbf24 !important;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+      font-weight: 700;
+    }
+    .btn-preset {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-preset:hover, .btn-preset.active {
+      background: rgba(245, 158, 11, 0.35) !important;
+      border-color: #f59e0b !important;
+      color: #fbbf24 !important;
+      font-weight: 700;
+    }
+    .player-preview-card {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-top: 14px;
+    }
+    .player-preview-card img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid #38bdf8;
+    }
+    .table-container {
+      overflow-x: auto;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .admin-table th {
+      background: rgba(30, 41, 59, 0.9);
+      padding: 14px 18px;
+      color: #94a3b8;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .admin-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #e2e8f0;
+      vertical-align: middle;
+    }
+    .admin-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .badge-admin {
+      background: rgba(234, 179, 8, 0.15);
+      border: 1px solid #eab308;
+      color: #facc15;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .badge-slot {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    .btn-action-sm {
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .btn-action-edit {
+      background: #0284c7;
+      color: #fff;
+      margin-right: 6px;
+    }
+    .btn-action-edit:hover { background: #0369a1; }
+    .btn-action-del {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+    }
+    .btn-action-del:hover { background: #ef4444; color: #fff; }
+
+    /* Admin Nav Tabs */
+    .admin-nav-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 4px;
+    }
+    .admin-tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 12px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 8px 8px 0 0;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .admin-tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .admin-tab-btn.active {
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.12);
+    }
+    .admin-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #fbbf24;
+      border-radius: 3px 3px 0 0;
+      box-shadow: 0 0 10px #fbbf24;
+    }
+    .admin-tab-btn.tab-danger.active {
+      color: #f87171;
+      background: rgba(239, 68, 68, 0.15);
+    }
+    .admin-tab-btn.tab-danger.active::after {
+      background: #ef4444;
+      box-shadow: 0 0 10px #ef4444;
+    }
+
+    /* Combat Inspector Badges & Cards */
+    .flag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .flag-badge.danger {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+    }
+    .flag-badge.warning {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid #f59e0b;
+      color: #fcd34d;
+    }
+    .flag-badge.clean {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10b981;
+      color: #6ee7b7;
+    }
+    .combat-stat-pill {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    /* Quản lý Thời hạn Gói Gara & Bộ Lọc Thời Gian */
+    .expiry-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .expiry-stat-chip {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      user-select: none;
+    }
+    .expiry-stat-chip:hover {
+      background: rgba(30, 41, 59, 0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .expiry-stat-chip.active {
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    }
+    .filter-toolbar-box {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-status-active {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10b981;
+      color: #6ee7b7;
+    }
+    .badge-status-expiring {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid #f59e0b;
+      color: #fcd34d;
+      animation: pulse-warn 2s infinite ease-in-out;
+    }
+    .badge-status-expired {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+    }
+    .badge-status-perm {
+      background: rgba(168, 85, 247, 0.18);
+      border: 1px solid #a855f7;
+      color: #d8b4fe;
+    }
+    @keyframes pulse-warn {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Navigation Bar -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 25px; padding-bottom: 60px;">
+
+    <!-- Access Denied Panel (Hiển thị khi chưa đăng nhập hoặc không phải Admin) -->
+    <div id="access-denied-panel" style="display: none; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)); border: 1px solid #ef4444; border-radius: var(--radius-lg); padding: 50px 30px; text-align: center; margin: 40px auto; max-width: 650px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+      <span style="font-size: 3.5rem; display: block; margin-bottom: 14px;">⛔</span>
+      <h2 style="color: #ef4444; font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">TRUY CẬP BỊ TỪ CHỐI</h2>
+      <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+        Khu vực Quản Trị chỉ dành riêng cho <strong>Quản Trị Viên (Admin) ST25</strong> đã đăng nhập tài khoản Steam chính chủ. Tài khoản thành viên (member) hoặc khách chưa đăng nhập không có quyền truy cập vào đây.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <a href="index.html" class="btn btn-secondary" style="font-weight: 700;">
+          Quay Về Trang Chủ
+        </a>
+        <a href="{{api:playerSteamLogin}}?redirect=/cai-dat.html" class="btn btn-primary" style="font-weight: 700; background: linear-gradient(135deg, #10b981, #059669); border: none;">
+          🎮 Đăng Nhập Steam Chính Chủ
+        </a>
+      </div>
+    </div>
+
+    <!-- Admin Authorized Content (Chỉ hiển thị khi đã đăng nhập Admin) -->
+    <div id="admin-authorized-content" style="display: none;">
+
+    <!-- Page Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 12px;">
+          <span>👑 BẢNG QUẢN TRỊ CẤP ROLE & SLOT GARA</span>
+        </h1>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">
+          Dành riêng cho Quản Trị Viên (Admin) ST25: Phân quyền, cấp vai trò Discord / Web và điều chỉnh số lượng Slot Gara trực tiếp theo Steam ID. Cập nhật tức thì 100%!
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button onclick="AdminPanel.init()" class="btn btn-secondary btn-sm">
+          🔄 Tải lại dữ liệu
+        </button>
+        <a href="gara.html" class="btn btn-primary btn-sm">
+          🦖 Vào Gara Của Bạn
+        </a>
+      </div>
+    </div>
+
+    <!-- Admin Status Banner -->
+    <div class="admin-card" id="admin-banner-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img id="admin-avatar" src="assets/imges/st25-favicon.png" alt="Admin" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid #fbbf24;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="color: #fff; font-weight: 800; font-size: 1.15rem;" id="admin-name">Đang kiểm tra quyền Admin...</span>
+              <span class="badge-admin" id="admin-tag">👑 QUẢN TRỊ VIÊN TỐI CAO</span>
+            </div>
+            <small style="color: #94a3b8; font-family: monospace;" id="admin-steamid">Steam ID: Đang tải...</small>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 0.85rem; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 6px 12px; border-radius: 6px; border: 1px solid #10b981;">
+            🟢 Trạng thái hệ thống: Đã kích hoạt quyền Cấp Slot
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs (Role Management vs Combat Inspector) -->
+    <div class="admin-nav-tabs">
+      <button type="button" class="admin-tab-btn active" id="tab-btn-roles" onclick="AdminPanel.switchTab('roles')">
+        <span>👑 Cấp Role & Slot Gara</span>
+      </button>
+      <button type="button" class="admin-tab-btn tab-danger" id="tab-btn-combat" onclick="AdminPanel.switchTab('combat')">
+        <span>🛡️ Soi Sát Thương & Chống Hack (Admin Only)</span>
+        <span class="flag-badge danger" id="tab-combat-alert-badge" style="display: none;">0 Nghi Vấn</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: CẤP ROLE & SLOT GARA -->
+    <div id="tab-content-roles">
+
+    <!-- Main Form Grid -->
+    <div class="admin-grid">
+
+      <!-- Form Cấp Quyền -->
+      <div class="admin-card">
+        <h3 style="color: #fff; font-size: 1.25rem; margin: 0 0 16px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+          ✍️ Cấp Role & Chỉnh Sửa Slot Gara Thủ Công
+        </h3>
+
+        <form id="assign-role-form" onsubmit="AdminPanel.submitAssign(event)">
+          
+          <!-- Steam ID Input -->
+          <div class="form-group">
+            <label class="form-label" for="target-steamid">Steam ID Người Chơi (17 số):</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="target-steamid" class="form-input" placeholder="Ví dụ: 76561198354289789" required autocomplete="off" oninput="AdminPanel.onSteamIdInput()">
+              <button type="button" onclick="AdminPanel.inspectPlayer()" class="btn btn-secondary btn-sm" style="white-space: nowrap;">
+                🔍 Tra Cứu
+              </button>
+            </div>
+            <small style="color: #64748b; margin-top: 4px; display: block;">
+              Nhập Steam ID 64 của người chơi cần nâng cấp hoặc điều chỉnh.
+            </small>
+          </div>
+
+          <!-- Quick Select from Online / Recent Players -->
+          <div class="form-group">
+            <label class="form-label">Hoặc chọn nhanh từ danh sách người chơi gần đây:</label>
+            <select id="recent-players-select" class="form-select" onchange="AdminPanel.onSelectRecentPlayer(this.value)">
+              <option value="">-- Chọn thành viên từ máy chủ --</option>
+            </select>
+          </div>
+
+          <!-- Player Preview Card (Hidden until checked) -->
+          <div id="player-preview" class="player-preview-card" style="display: none;">
+            <img id="preview-avatar" src="assets/imges/st25-logo-web.png" alt="Avatar">
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h4 style="color: #fff; margin: 0; font-size: 1.05rem;" id="preview-name">Player Name</h4>
+                <span class="badge-slot" id="preview-current-slots">3 Slots</span>
+              </div>
+              <div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">
+                Vai trò hiện tại: <strong style="color: #fbbf24;" id="preview-current-role">Thành Viên ST25</strong>
+              </div>
+              <div style="font-size: 0.8rem; color: #64748b; margin-top: 2px;" id="preview-status-extra">
+                Đang cất trong Gara: 0 con
+              </div>
+            </div>
+          </div>
+
+          <!-- Role Selection -->
+          <div class="form-group" style="margin-top: 18px;">
+            <label class="form-label" for="select-role">Chọn Vai Trò (Role):</label>
+            <select id="select-role" class="form-select" onchange="AdminPanel.onRoleChange(this.value)">
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+
+          <!-- Garage Slots -->
+          <div class="form-group">
+            <label class="form-label" for="custom-slots">Số Lượng Slot Gara Muốn Cấp:</label>
+            <input type="number" id="custom-slots" class="form-input" min="1" max="100" value="3" required oninput="AdminPanel.updateQuickSlotButtons(this.value)">
+            
+            <div class="quick-slot-btns">
+              <span style="font-size: 0.8rem; color: #94a3b8; align-self: center; margin-right: 4px;">Chọn nhanh:</span>
+              <button type="button" class="btn-quick-slot" data-slot-val="3" onclick="AdminPanel.setSlots(3)">3 Slots (Mặc định)</button>
+              <button type="button" class="btn-quick-slot" data-slot-val="5" onclick="AdminPanel.setSlots(5)">5 Slots</button>
+              <button type="button" class="btn-quick-slot" data-slot-val="8" onclick="AdminPanel.setSlots(8)">8 Slots (Long Chủ)</button>
+              <button type="button" class="btn-quick-slot" data-slot-val="12" onclick="AdminPanel.setSlots(12)">12 Slots (Long Tá Điền)</button>
+              <button type="button" class="btn-quick-slot" data-slot-val="18" onclick="AdminPanel.setSlots(18)">18 Slots (Long Phú Nông)</button>
+              <button type="button" class="btn-quick-slot" data-slot-val="20" onclick="AdminPanel.setSlots(20)">20 Slots (Admin/Đại Địa Chủ)</button>
+              <button type="button" class="btn-quick-slot" data-slot-val="30" onclick="AdminPanel.setSlots(30)">30 Slots (Viên Gạch)</button>
+            </div>
+          </div>
+
+          <!-- Notes / Reason -->
+          <div class="form-group">
+            <label class="form-label" for="assign-notes">Ghi Chú / Lý Do (Tùy chọn):</label>
+            <input type="text" id="assign-notes" class="form-input" placeholder="Ví dụ: Cấp theo gói ủng hộ server, thưởng event...">
+          </div>
+
+          <!-- Submit Button -->
+          <div style="margin-top: 24px;">
+            <button type="submit" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 1.05rem; padding: 14px; background: linear-gradient(135deg, #f59e0b, #d97706); border: none;">
+              💾 LƯU & CẤP QUYỀN NGAY LẬP TỨC
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Hướng Dẫn & Thông Tin Quy Định Slots -->
+      <div>
+        <div class="admin-card" style="margin-bottom: 20px;">
+          <h3 style="color: #fff; font-size: 1.2rem; margin: 0 0 12px;">
+            📜 Bảng Định Mức Slot Gara Theo Vai Trò
+          </h3>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 14px;">
+            Hệ thống ST25 tự động áp dụng số slot mặc định theo từng vai trò khi bạn phân quyền, hoặc bạn có thể tự tay gõ bất kỳ số slot nào (từ 1 đến 100):
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem;">
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>👑 Quản Trị Viên (Admin) / BQT Cấp Cao</span>
+              <strong style="color: #fbbf24;">20 Slots</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>🏰 LONG ĐẠI ĐỊA CHỦ</span>
+              <strong style="color: #38bdf8;">20 Slots</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>🌾 LONG PHÚ NÔNG</span>
+              <strong style="color: #10b981;">18 Slots</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>🌾 LONG TÁ ĐIỀN</span>
+              <strong style="color: #a855f7;">12 Slots</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>🐲 LONG CHỦ</span>
+              <strong style="color: #f43f5e;">8 Slots</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>🧱 Viên Gạch Đầu Tiên</span>
+              <strong style="color: #ec4899;">30 Slots</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>🚀 Booster Máy Chủ / Streamer</span>
+              <strong style="color: #06b6d4;">5 Slots</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+              <span>🦖 Thành Viên Thường ST25</span>
+              <strong style="color: #94a3b8;">3 Slots</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h4 style="color: #38bdf8; margin: 0 0 8px; font-size: 1rem;">
+            💡 Cơ Chế Lưu Trữ Độc Lập & Bền Vững:
+          </h4>
+          <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; color: #94a3b8; line-height: 1.7;">
+            <li>Dữ liệu phân quyền được lưu đồng thời vào cả <code>server-config.json</code> và <code>portal-data.json</code>.</li>
+            <li>Khi bấm <strong>Lưu</strong>, bộ nhớ cache người chơi sẽ được xóa ngay tức thì.</li>
+            <li>Người chơi chỉ cần mở trang Gara là số slot mới sẽ hiển thị đúng 100% ngay mà không cần khởi động lại server.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Danh Sách Các Thành Viên Đã Phân Quyền -->
+    <section>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h3 style="color: #fff; font-size: 1.3rem; margin: 0 0 4px; display: flex; align-items: center; gap: 8px;">
+            <span>📋 Danh Sách Thành Viên & Quản Lý Hạn Gara (1 Tháng)</span>
+          </h3>
+          <p style="color: var(--text-secondary); margin: 0; font-size: 0.85rem;">
+            Theo dõi thời gian cấp, ngày hết hạn (30 ngày), lọc người chơi theo ngày sửa đổi và gia hạn nhanh slot Gara.
+          </p>
+        </div>
+      </div>
+
+      <!-- 5 Thẻ Thống Kê Nhanh Trạng Thái Hạn 1 Tháng -->
+      <div class="expiry-stats-bar">
+        <div class="expiry-stat-chip active" id="stat-chip-all" onclick="AdminPanel.setFilterStatus('all')">
+          <span style="color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Tất Cả</span>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #fff;" id="count-all">0</div>
+          <small style="color: #64748b; font-size: 0.7rem;">Tổng thành viên</small>
+        </div>
+        <div class="expiry-stat-chip" id="stat-chip-active" onclick="AdminPanel.setFilterStatus('active')" style="border-color: rgba(16, 185, 129, 0.3);">
+          <span style="color: #6ee7b7; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">🟢 Còn Hạn</span>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #10b981;" id="count-active">0</div>
+          <small style="color: #34d399; font-size: 0.7rem;">Thời hạn > 7 ngày</small>
+        </div>
+        <div class="expiry-stat-chip" id="stat-chip-expiring" onclick="AdminPanel.setFilterStatus('expiring')" style="border-color: rgba(245, 158, 11, 0.3);">
+          <span style="color: #fcd34d; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">🟡 Sắp Hết Hạn</span>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #f59e0b;" id="count-expiring">0</div>
+          <small style="color: #fbbf24; font-size: 0.7rem;">Còn lại ≤ 7 ngày</small>
+        </div>
+        <div class="expiry-stat-chip" id="stat-chip-expired" onclick="AdminPanel.setFilterStatus('expired')" style="border-color: rgba(239, 68, 68, 0.3);">
+          <span style="color: #fca5a5; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">🔴 Đã Quá Hạn</span>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #ef4444;" id="count-expired">0</div>
+          <small style="color: #f87171; font-size: 0.7rem;">Hết hạn 30 ngày</small>
+        </div>
+        <div class="expiry-stat-chip" id="stat-chip-perm" onclick="AdminPanel.setFilterStatus('permanent')" style="border-color: rgba(168, 85, 247, 0.3);">
+          <span style="color: #d8b4fe; font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">♾️ Vĩnh Viễn</span>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #c084fc;" id="count-perm">0</div>
+          <small style="color: #e9d5ff; font-size: 0.7rem;">Không thời hạn</small>
+        </div>
+      </div>
+
+      <!-- Thanh Công Cụ Tìm Kiếm & Lọc Thời Gian -->
+      <div class="filter-toolbar-box">
+        <div class="filter-group" style="flex: 1 1 240px;">
+          <input type="text" id="filter-keyword" placeholder="🔍 Tìm Steam ID, ghi chú, vai trò..." class="form-input" style="padding: 8px 12px; font-size: 0.85rem; width: 100%;" oninput="AdminPanel.onFilterInput()">
+        </div>
+
+        <!-- Lọc Theo Ngày Sửa Đổi / Cấp -->
+        <div class="filter-group">
+          <label for="filter-date" style="color: #94a3b8; font-size: 0.8rem; font-weight: 600; white-space: nowrap;">
+            📅 Ngày cấp:
+          </label>
+          <input type="date" id="filter-date" class="form-input" style="padding: 6px 10px; font-size: 0.85rem; color: #fff; background: rgba(0,0,0,0.4);" onchange="AdminPanel.onDateChange()">
+          <button type="button" id="btn-clear-date" onclick="AdminPanel.clearDateFilter()" class="btn-action-sm" style="display: none; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5;" title="Xóa lọc ngày">
+            ✕
+          </button>
+        </div>
+
+        <!-- Lọc Theo Trạng Thái Hạn Dùng -->
+        <div class="filter-group">
+          <select id="filter-status" class="form-input" style="padding: 7px 12px; font-size: 0.85rem; width: auto;" onchange="AdminPanel.onStatusChange(this.value)">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="active">🟢 Còn hạn (> 7 ngày)</option>
+            <option value="expiring">🟡 Sắp hết hạn (≤ 7 ngày)</option>
+            <option value="expired">🔴 Đã quá hạn</option>
+            <option value="permanent">♾️ Vĩnh viễn</option>
+          </select>
+        </div>
+
+        <!-- Sắp Xếp Danh Sách -->
+        <div class="filter-group">
+          <select id="filter-sort" class="form-input" style="padding: 7px 12px; font-size: 0.85rem; width: auto;" onchange="AdminPanel.onSortChange(this.value)">
+            <option value="newest">⏱️ Mới sửa đổi nhất</option>
+            <option value="oldest">⏳ Cũ nhất</option>
+            <option value="expiring">⚠️ Sắp hết hạn nhất</option>
+            <option value="slots">🦖 Slots nhiều nhất</option>
+          </select>
+          <button type="button" onclick="AdminPanel.resetFilters()" class="btn-action-sm" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #cbd5e1;" title="Đặt lại toàn bộ bộ lọc">
+            🔄 Đặt lại
+          </button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 45px;">#</th>
+              <th>Steam ID</th>
+              <th>Vai Trò (Role)</th>
+              <th style="width: 110px;">Sức Chứa</th>
+              <th>Thời Hạn & Ghi Chú (Gói 1 Tháng)</th>
+              <th style="text-align: right; width: 230px;">Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody id="assigned-users-tbody">
+            <tr>
+              <td colspan="6" style="text-align: center; padding: 30px; color: #64748b;">
+                Đang nạp danh sách thành viên...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    </div> <!-- End of #tab-content-roles -->
+
+    <!-- TAB 2: SOI SÁT THƯƠNG & CHỐNG HACK (ADMIN ONLY) -->
+    <div id="tab-content-combat" style="display: none;">
+      <!-- Combat Header & Stat Overview -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px;">
+        <div class="combat-stat-pill">
+          <span style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Tổng đòn đánh ghi nhận</span>
+          <div style="font-size: 1.8rem; font-weight: 800; color: #fff;" id="stat-total-hits">0</div>
+          <small style="color: #64748b; font-size: 0.75rem;">Cập nhật theo thời gian thực</small>
+        </div>
+        <div class="combat-stat-pill" style="border-color: rgba(239, 68, 68, 0.4); background: rgba(239, 68, 68, 0.08);">
+          <span style="color: #fca5a5; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">🚨 Nghi Vấn Hack</span>
+          <div style="font-size: 1.8rem; font-weight: 800; color: #ef4444;" id="stat-flagged-hits">0</div>
+          <small style="color: #f87171; font-size: 0.75rem;">Reach / One-shot / God / Speed</small>
+        </div>
+        <div class="combat-stat-pill" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.08);">
+          <span style="color: #fcd34d; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">⚠️ Tầm Đánh Bất Thường</span>
+          <div style="font-size: 1.8rem; font-weight: 800; color: #f59e0b;" id="stat-reach-hits">0</div>
+          <small style="color: #fbbf24; font-size: 0.75rem;">Hitbox Reach > 8 - 10m</small>
+        </div>
+        <div class="combat-stat-pill" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.08);">
+          <span style="color: #6ee7b7; font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">🟢 Đòn Đánh Hợp Lệ</span>
+          <div style="font-size: 1.8rem; font-weight: 800; color: #10b981;" id="stat-clean-hits">0</div>
+          <small style="color: #34d399; font-size: 0.75rem;">Sát thương chuẩn theo loài</small>
+        </div>
+      </div>
+
+      <!-- Combat Filter Bar -->
+      <div class="admin-card" style="margin-bottom: 20px; padding: 14px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 700;">Bộ Lọc:</span>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-filter-all" onclick="CombatInspector.setFilter('all')" style="font-weight: 700;">Tất Cả</button>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-filter-flagged" onclick="CombatInspector.setFilter('flagged')" style="background: #ef4444; border: none; font-weight: 700;">🚨 Chỉ Nghi Vấn Hack</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-filter-clean" onclick="CombatInspector.setFilter('clean')">🟢 Hợp Lệ</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-filter-oneshot" onclick="CombatInspector.setFilter('ONE_SHOT')">💥 Dame Ảo</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-filter-reach" onclick="CombatInspector.setFilter('REACH_HACK')">📏 Hitbox Hack</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-filter-speed" onclick="CombatInspector.setFilter('SPEED_HACK')">⚡ Speed Hack</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-filter-god" onclick="CombatInspector.setFilter('GOD_MODE')">🛡️ Bất Tử</button>
+          </div>
+
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <!-- Real-time Live Mode Toggle -->
+            <button type="button" id="btn-toggle-live-combat" onclick="CombatInspector.toggleLive()" class="btn btn-sm" style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #6ee7b7; font-weight: 800; display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 8px;">
+              <span id="live-combat-dot" style="display: inline-block; width: 9px; height: 9px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></span>
+              <span id="live-combat-status-text">🟢 REAL-TIME LIVE (3s)</span>
+            </button>
+            <span id="live-combat-time-text" style="font-size: 0.8rem; color: #94a3b8; font-family: monospace;">Cập nhật: --:--:--</span>
+            
+            <input type="text" id="combat-search-input" placeholder="Tìm Steam ID / Tên / Loài..." class="form-input" style="padding: 6px 12px; font-size: 0.85rem; width: 210px;" oninput="CombatInspector.search(this.value)">
+            <button type="button" onclick="CombatInspector.loadLogs(false)" class="btn btn-secondary btn-sm" title="Tải lại ngay">🔄 Nạp Lại</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combat Logs Table -->
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>Thời Gian</th>
+              <th>Kẻ Tấn Công (Attacker)</th>
+              <th>Nạn Nhân (Victim)</th>
+              <th>Sát Thương (Dame)</th>
+              <th>Bộ Phận</th>
+              <th>Khoảng Cách</th>
+              <th>Tốc Độ</th>
+              <th>Cảnh Báo (Anti-Cheat)</th>
+              <th style="text-align: right;">Xử Lý Admin</th>
+            </tr>
+          </thead>
+          <tbody id="combat-logs-tbody">
+            <tr>
+              <td colspan="10" style="text-align: center; padding: 40px; color: #64748b;">
+                Đang tải nhật ký chiến đấu...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> <!-- End of #tab-content-combat -->
+
+    </div> <!-- End of #admin-authorized-content -->
+
+    <!-- Modal Popup Chỉnh Sửa Phân Quyền & Slots -->
+    <div id="admin-edit-modal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0, 0, 0, 0.78); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 20px;">
+      <div style="background: #0f172a; border: 2px solid #f59e0b; border-radius: 16px; max-width: 540px; width: 100%; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9); overflow: hidden; animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);">
+        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(15, 23, 42, 0.98)); padding: 20px 24px; border-bottom: 1px solid rgba(245, 158, 11, 0.35); display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; color: #fff; font-size: 1.25rem; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.4rem;">✏️</span>
+            <span>Chỉnh Sửa Phân Quyền & Slots Gara</span>
+          </h3>
+          <button type="button" onclick="AdminPanel.closeEditModal()" style="background: rgba(255,255,255,0.1); border: none; color: #cbd5e1; width: 34px; height: 34px; border-radius: 50%; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;">&times;</button>
+        </div>
+
+        <form id="admin-edit-modal-form" onsubmit="AdminPanel.saveEditModal(event)" style="padding: 24px;">
+          <div class="form-group" style="margin-bottom: 18px; background: rgba(0, 0, 0, 0.35); padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
+            <div style="font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Tài khoản Steam ID</div>
+            <div id="modal-edit-steamid-display" style="color: #fbbf24; font-family: monospace; font-weight: 800; font-size: 1.1rem; margin-top: 4px;"></div>
+            <input type="hidden" id="modal-edit-steamid">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label class="form-label" for="modal-edit-role" style="font-weight: 700;">👑 Chọn Vai Trò (Role):</label>
+            <select id="modal-edit-role" class="form-input" required onchange="AdminPanel.onModalRoleChange()" style="font-size: 0.95rem;">
+              <!-- dynamically loaded -->
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label class="form-label" for="modal-edit-slots" style="font-weight: 700;">🦖 Sức Chứa Gara (Số Slots):</label>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <input type="number" id="modal-edit-slots" class="form-input" min="1" max="100" required style="font-size: 1.1rem; font-weight: 700; width: 110px; text-align: center;" oninput="AdminPanel.updateModalSlotButtons(this.value)">
+              <div class="modal-slot-btns" style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <button type="button" class="btn-preset" data-modal-slot="3" onclick="AdminPanel.setModalSlots(3)">3 slot</button>
+                <button type="button" class="btn-preset" data-modal-slot="5" onclick="AdminPanel.setModalSlots(5)">5 slot</button>
+                <button type="button" class="btn-preset" data-modal-slot="8" onclick="AdminPanel.setModalSlots(8)">8 slot</button>
+                <button type="button" class="btn-preset" data-modal-slot="12" onclick="AdminPanel.setModalSlots(12)">12 slot</button>
+                <button type="button" class="btn-preset" data-modal-slot="18" onclick="AdminPanel.setModalSlots(18)">18 slot</button>
+                <button type="button" class="btn-preset" data-modal-slot="20" onclick="AdminPanel.setModalSlots(20)">20 slot</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label class="form-label" for="modal-edit-notes">📝 Ghi Chú Cập Nhật (Tùy chọn):</label>
+            <input type="text" id="modal-edit-notes" class="form-input" placeholder="Ví dụ: Nâng cấp VIP 20 slot, Hỗ trợ sự kiện...">
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 18px;">
+            <button type="button" onclick="AdminPanel.closeEditModal()" class="btn btn-secondary" style="padding: 10px 20px;">
+              Hủy Bỏ
+            </button>
+            <button type="submit" id="btn-save-edit-modal" class="btn btn-primary" style="padding: 10px 24px; font-weight: 800; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">
+              💾 Lưu Cập Nhật Ngay
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/cai-dat.js"></script>
+</body>
+</html>

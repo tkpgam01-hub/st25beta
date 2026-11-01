@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trung Tâm Hỗ Trợ & Cứu Kẹt — ST25 VIETNAM</title>
+  <meta name="description" content="Gửi yêu cầu cứu kẹt GPS tự động, mở Ticket khiếu nại báo cáo vi phạm Điều 4 server ST25 The Isle: Evrima.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <style>
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 860px) {
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .ticket-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Site Header -->
+  <!-- include:header -->
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 30px; padding-bottom: 60px;">
+    
+    <div style="margin-bottom: 25px;">
+      <span class="rule-badge badge-allow">🆘 Dịch Vụ Hỗ Trợ Người Chơi</span>
+      <h1 style="color: #fff; font-size: 2rem; margin: 8px 0 4px;">TRUNG TÂM HỖ TRỢ & BÁO CÁO VI PHẠM 🌾</h1>
+      <p style="color: var(--text-secondary); margin: 0; font-size: 0.95rem;">
+        Cứu kẹt toạ độ tự động khi khủng long mắc kẹt địa hình và tiếp nhận Ticket tố cáo vi phạm Điều 4 nội quy ST25.
+      </p>
+    </div>
+
+    <!-- Quick Unstuck Banner -->
+    <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(15, 23, 42, 0.95)); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: var(--radius-md); padding: 22px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span style="font-size: 1.5rem;">🆘</span>
+          <h3 style="color: #fff; font-size: 1.25rem; margin: 0;">Cứu Kẹt Tọa Độ Khẩn Cấp (Unstuck)</h3>
+        </div>
+        <p style="color: var(--text-secondary); margin: 0; font-size: 0.88rem; max-width: 600px;">
+          Khủng long của bạn bị kẹt vách đá, lọt hố hoặc kẹt thân cây không thể di chuyển? Bấm nút cứu kẹt để tự động đưa khủng long về vị trí an toàn gần nhất.
+        </p>
+      </div>
+
+      <button onclick="handleUnstuck()" class="btn btn-primary" style="background: linear-gradient(135deg, #ef4444, #dc2626); border-color: #ef4444; font-weight: 700;">
+        🚨 KÍCH HOẠT CỨU KẸT NGAY
+      </button>
+    </div>
+
+    <div class="support-grid">
+      
+      <!-- Left Column: Form Gửi Ticket Tố Cáo Theo Điều 4 -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+        <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>📜 Mở Ticket Báo Cáo Vi Phạm (Điều 4)</span>
+        </h3>
+        
+        <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #fbbf24; padding: 10px 14px; border-radius: 4px; font-size: 0.8rem; color: #cbd5e1; margin-bottom: 18px;">
+          ⚠️ <strong>Lưu ý Điều 4:</strong> Báo cáo phải gửi trong vòng 24 giờ. Cần kèm video record rõ ràng tình huống trước, trong và sau vi phạm để Ban Quản Trị đối chiếu log server.
+        </div>
+
+        <form id="ticket-form" onsubmit="handleSendTicket(event)">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="target-player">Tên hoặc SteamID người bị báo cáo:</label>
+            <input type="text" id="target-player" class="form-input" placeholder="Ví dụ: PlayerName hoặc SteamID 64..." required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+            <div class="form-group">
+              <label class="form-label" for="time-report">Thời gian xảy ra sự việc:</label>
+              <input type="text" id="time-report" class="form-input" placeholder="Ví dụ: 14:30 ngày 06/10" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="location-report">Địa điểm / Khu vực:</label>
+              <input type="text" id="location-report" class="form-input" placeholder="Ví dụ: Rừng Dừa, Đầm Lầy..." required>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="violation-rule">Điều luật vi phạm:</label>
+            <select id="violation-rule" class="form-input" required>
+              <option value="Điều 1 & 2: Mixpack / Vượt Pack Limit">Điều 1 & 2: Mixpack / Vượt Pack Limit</option>
+              <option value="Điều 3: Lợi dụng giao lưu quá 5 phút">Điều 3: Lợi dụng giao lưu quá 5 phút</option>
+              <option value="Điều 5: Xúc phạm, toxic công kích cá nhân ngoài đời">Điều 5: Toxic / Xúc phạm đời tư ngoài đời</option>
+              <option value="Điều 6: CAMP hoặc săn con non tại Vùng Cam (Rừng Dừa)">Điều 6: CAMP / Săn con non Vùng Cam (Rừng Dừa)</option>
+              <option value="Điều 12: Đổi Dino Gara tham chiến né 5 phút hồi">Điều 12: Đổi Dino Gara né hồi 5 phút</option>
+              <option value="Khác: Gian lận / Hack / Bug Game">Khác: Gian lận / Nghi vấn Hack / Bug Game</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label" for="video-url">Link Video Record bằng chứng (Google Drive / YouTube):</label>
+            <input type="url" id="video-url" class="form-input" placeholder="https://drive.google.com/... hoặc link YouTube unlisted" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label class="form-label" for="ticket-details">Mô tả chi tiết diễn biến sự việc:</label>
+            <textarea id="ticket-details" class="form-input" style="height: 90px; resize: none;" placeholder="Mô tả ngắn gọn diễn biến trước, trong và sau tình huống vi phạm..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            📤 Gửi Ticket Khiếu Nại BQT ST25
+          </button>
+        </form>
+      </div>
+
+      <!-- Right Column: Danh Sách Ticket Đã Gửi Của Bạn -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="color: #fff; font-size: 1.2rem; margin: 0;">📋 Ticket Của Bạn Đang Xử Lý</h3>
+          <span class="rule-badge badge-allow" id="ticket-count-badge">0 Ticket</span>
+        </div>
+
+        <div id="tickets-list-container" style="max-height: 480px; overflow-y: auto;">
+          <div style="color: var(--text-muted); text-align: center; padding: 40px 10px;">
+            Bạn chưa gửi ticket nào.
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-secondary);">
+          💬 Bạn cũng có thể liên hệ trực tiếp BQT tại kênh Discord: <a href="https://discord.gg/3xCrA6VyY" target="_blank" style="color: #fbbf24; font-weight: 700;">discord.gg/3xCrA6VyY ST25</a>.
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/ho-tro.js"></script>
+</body>
+</html>

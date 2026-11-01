@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/api/endpoints.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên Kết Steam & Quản Lý Đàn — ST25</title>
+  <meta name="description" content="Liên kết tài khoản Steam với server ST25 The Isle Evrima. Đồng bộ dữ liệu khủng long, toạ độ GPS và danh sách thành viên trong đàn theo thời gian thực từ IslePilot.">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261009-stable1">
+  <link rel="icon" type="image/png" href="assets/imges/st25-favicon.png?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/buttons.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/fonts.css?v=20261009-audit">
+  <link rel="stylesheet" href="assets/css/motion.css?v=20261009-stable1">
+  <script src="assets/js/motion.js?v=20261009-stable1" defer></script>
+  <link rel="stylesheet" href="assets/css/portal-layout.css?v=20261009-spacing1">
+  <link rel="stylesheet" href="assets/css/logo.css?v=20261009-stable1">
+  <link rel="stylesheet" href="assets/css/redesign.css?v=20261009-ui1">
+  <script src="assets/js/ui.js?v=20261009-ui1" defer></script>
+</head>
+<body class="st25-portal">
+
+  <!-- Header -->
+  <!-- include:header -->
+
+  <!-- Content -->
+  <main class="container" style="padding: 40px 20px; max-width: 1100px;">
+    
+    <div style="margin-bottom: 30px;">
+      <span class="rule-badge badge-allow">🌾 Tài Khoản & Đội Nhóm ST25</span>
+      <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin: 10px 0 6px;">
+        🌾 LIÊN KẾT STEAM & QUẢN LÝ ĐÀN 🦖
+      </h1>
+      <p style="color: var(--text-secondary); line-height: 1.6;">
+        Hệ thống tự động đồng bộ thời gian thực với máy chủ server ST25. Xác thực tài khoản chính chủ qua Steam OpenID để xem thông tin khủng long cá nhân, vị trí GPS và số dư <strong>Lúa 🌾</strong> của bạn.
+      </p>
+    </div>
+
+    <!-- Quick Online Dino Population (Strictly No Player Names) -->
+    <div style="background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.28); border-radius: var(--radius-md); padding: 20px; margin-bottom: 25px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+        <strong style="color: #fbbf24; font-size: 1rem;">🌾 Số Lượng Khủng Long Đang Sinh Tồn (Trực Tuyến):</strong>
+        <span class="rule-badge badge-allow" id="online-count-badge">Đang tải...</span>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 14px;">
+        Thống kê thời gian thực các cá thể khủng long đang sinh tồn trên đảo. Danh tính người chơi được ẩn hoàn toàn để bảo vệ quyền riêng tư và đảm bảo công bằng (chống soi tên hunting meta):
+      </p>
+      <div id="online-players-chips" style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <!-- Injected by JS -->
+        <span style="color: var(--text-muted); font-size: 0.85rem;">Đang quét dữ liệu server...</span>
+      </div>
+    </div>
+
+    <!-- Steam Linking Box -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);">
+      <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 32px; align-items: flex-start;">
+        
+        <!-- Left: Official Steam Login Only -->
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <span class="rule-badge badge-allow">Xác Thực Steam OpenID</span>
+            <span class="rule-badge badge-warn">Bảo Mật 100%</span>
+          </div>
+          <h3 style="color: #fff; font-size: 1.35rem; margin-bottom: 10px;">Đăng Nhập Liên Kết Tài Khoản Steam</h3>
+          <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 22px; line-height: 1.6;">
+            Hệ thống chỉ chấp nhận xác thực trực tiếp qua cổng <strong>Steam OpenID chính chủ của Valve</strong>. Chức năng nhập SteamID thủ công đã bị đóng hoàn toàn để bảo vệ quyền sở hữu tài khoản và chống mạo danh.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px;">
+            <a href="{{api:playerSteamLogin}}?redirect=/lien-ket-steam.html" class="btn-steam-big" id="btn-steam-login">
+              <svg viewBox="0 0 24 24" style="width: 24px; height: 24px; fill: currentColor;">
+                <path d="M12 2a10 10 0 0 0-10 10c0 4.7 3.25 8.64 7.64 9.69l3.12-4.52a3.02 3.02 0 0 1-.76-.17l-3.3 2.27A7.99 7.99 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8c0 3.96-2.88 7.24-6.67 7.89l-2.22-3.21c.2-.29.35-.61.44-.96l3.66.72a4 4 0 0 0 .16-.89 4 4 0 0 0-4-4c-1.66 0-3.08 1.01-3.67 2.45l-4.14-.82A7.96 7.96 0 0 1 12 4c4.41 0 8 3.59 8 8 0 4.41-3.59 8-8 8-1.07 0-2.09-.21-3.03-.6l3.32-4.81c.22.04.45.06.68.06a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-2.94 2.37l-3.5-.69A5.002 5.002 0 0 1 12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5z"/>
+              </svg>
+              <span>🌾 ĐĂNG NHẬP BẰNG STEAM 🦖</span>
+            </a>
+
+            <button type="button" id="btn-unlink" class="btn btn-danger btn-sm" style="display: none; width: fit-content;">
+              Huỷ Liên Kết / Đăng Xuất
+            </button>
+          </div>
+
+          <div style="padding: 14px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: var(--radius-sm); font-size: 0.8rem; color: #bae6fd; line-height: 1.5;">
+            🔒 <strong>Bảo mật:</strong> Đăng nhập hoàn toàn trên máy chủ của Steam Community. ST25 không lưu mật khẩu của bạn, chỉ nhận SteamID64 định danh để đồng bộ khủng long, nhiệm vụ và toạ độ trên IslePilot.
+          </div>
+        </div>
+
+        <!-- Right: Current Linked Account Card -->
+        <div id="profile-card-container" style="background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-sm); padding: 22px;">
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+            <img id="steam-profile-avatar" src="https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" alt="Avatar" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent-emerald-light);">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <h4 id="steam-profile-name" style="color: #fff; font-size: 1.1rem;">Chưa liên kết</h4>
+                <span class="rule-badge badge-warn" id="steam-link-badge">Chờ liên kết</span>
+              </div>
+              <div id="steam-profile-id" style="font-family: monospace; font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                SteamID: Chưa có
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 14px;">
+            <div>
+              <span style="color: var(--text-muted);">Khủng long hiện tại:</span>
+              <strong id="card-dino-species" style="color: var(--accent-emerald-light); display: block;">Chưa xác định</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted);">Mức độ lớn:</span>
+              <strong id="card-dino-growth" style="color: #fff; display: block;">0%</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted);">Thời gian chơi:</span>
+              <strong id="card-playtime" style="color: #38bdf8; display: block;">0 giờ</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted);">Toạ độ in-game:</span>
+              <strong id="card-coords" style="color: var(--accent-amber); display: block;">Chưa có GPS</strong>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: 18px;">
+            <a href="bando.html" id="btn-goto-map" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;">Xem Trên Bản Đồ</a>
+            <a href="nhiem-vu.html" id="btn-goto-quests" class="btn btn-secondary btn-sm" style="flex: 1; text-align: center;">Xem Nhiệm Vụ</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Team / Pack Roster Section -->
+    <section style="margin-top: 40px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <h2 style="color: #fff; font-size: 1.35rem;">DANH SÁCH THÀNH VIÊN TRONG ĐÀN (TEAM ROSTER)</h2>
+          <p style="font-size: 0.875rem; color: var(--text-secondary);">
+            Dữ liệu thời gian thực của các thành viên cùng loài trên server ST25. Tự động đối chiếu Pack Limit theo Điều 2 Nội Quy.
+          </p>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 0.875rem; color: var(--text-muted);" id="pack-species-title">Loài:</span>
+          <span class="rule-badge badge-allow" id="pack-limit-badge" style="font-size: 0.85rem;">Đang tải...</span>
+        </div>
+      </div>
+
+      <!-- Team Members Grid -->
+      <div id="team-members-container" class="team-grid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Rule 2 reminder -->
+      <div style="margin-top: 24px; padding: 16px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid var(--accent-emerald); border-radius: var(--radius-sm); font-size: 0.85rem; color: #cbd5e1;">
+        <strong>Quy định Điều 2 Nội Quy ST25:</strong> Một đàn chỉ được bao gồm các thành viên cùng loài và không được vượt quá số lượng tối đa. Nghiêm cấm Mixpack / liên minh khác loài để bảo kê hoặc săn chung.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <!-- include:footer -->
+
+  <script src="assets/js/app.js?v=20261010-roll1"></script>
+  <script src="assets/js/features/lien-ket-steam.js"></script>
+</body>
+</html>

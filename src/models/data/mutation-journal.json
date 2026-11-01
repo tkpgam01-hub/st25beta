@@ -1,0 +1,62 @@
+[
+  {
+    "id": "e981ff68-803d-4405-8df5-57865a96cd69",
+    "path": "/diagnostics/plinko-wallet",
+    "keys": [
+      "76561198682056372"
+    ],
+    "input": {
+      "testId": "a5fceda4-fd14-41fc-8cc6-8b62d4e11ab8",
+      "steamId": "76561198682056372",
+      "amount": 10,
+      "intent": "confirmed debit then equal refund"
+    },
+    "details": {
+      "testId": "a5fceda4-fd14-41fc-8cc6-8b62d4e11ab8",
+      "steamId": "76561198682056372",
+      "amount": 10,
+      "startedAt": "2026-10-12T18:44:55.935Z",
+      "scope": "live currency API debit/refund only; not a production Plinko round",
+      "status": "started",
+      "before": 9622,
+      "intent": "wallet API diagnostic; refund only a confirmed debit"
+    },
+    "status": "completed",
+    "createdAt": 1791830696348,
+    "steps": [
+      {
+        "endpoint": "/players/76561198682056372/currency",
+        "method": "POST",
+        "body": {
+          "amount": -10,
+          "reason": "st25_plinko_wallet_test_debit_a5fceda4-fd14-41fc-8cc6-8b62d4e11ab8"
+        },
+        "status": "confirmed",
+        "startedAt": 1791830696348,
+        "result": {
+          "ok": true,
+          "balance": 9612,
+          "applied": -10
+        },
+        "finishedAt": 1791830696623
+      },
+      {
+        "endpoint": "/players/76561198682056372/currency",
+        "method": "POST",
+        "body": {
+          "amount": 10,
+          "reason": "st25_plinko_wallet_test_refund_a5fceda4-fd14-41fc-8cc6-8b62d4e11ab8"
+        },
+        "status": "confirmed",
+        "startedAt": 1791830696643,
+        "result": {
+          "ok": true,
+          "balance": 9622,
+          "applied": 10
+        },
+        "finishedAt": 1791830696904
+      }
+    ],
+    "updatedAt": 1791830697171
+  }
+]

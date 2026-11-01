@@ -1,0 +1,85 @@
+{
+  "collectedDate": "2026-10-12",
+  "timezone": "Asia/Bangkok",
+  "status": "partial-public-documentation-and-verifier-panels",
+  "sources": [
+    {
+      "url": "https://clash.gg/plinko",
+      "purpose": "UI controls, advertised risks, maximum multiplier and maximum win",
+      "access": "extracted page text"
+    },
+    {
+      "url": "https://clash.gg/questions",
+      "purpose": "published house edge",
+      "access": "official-domain search-index extraction; direct extraction incomplete"
+    },
+    {
+      "url": "https://clash.gg/fairness",
+      "purpose": "general server/client seed commitment description",
+      "access": "extracted page text"
+    },
+    {
+      "url": "https://clash.gg/fairness?tab=plinko",
+      "purpose": "Plinko-specific verification algorithm",
+      "access": "failed"
+    },
+    {
+      "url": "https://clash.gg/de/fairness?tab=plinko",
+      "purpose": "alternate-language Plinko verification page",
+      "access": "failed"
+    },
+    {
+      "url": "https://codepen.io/mjchal/pen/vYpaxOK",
+      "purpose": "Public Plinko verifier HTML/CSS/JS",
+      "access": "web extraction; local transcriptions; production equivalence unverified"
+    },
+    {
+      "url": "https://github.com/davidbau/seedrandom",
+      "purpose": "Primary upstream dependency repository",
+      "access": "repository page; library not downloaded"
+    },
+    {
+      "url": "https://blog.codepen.io/documentation/licensing/",
+      "purpose": "Public Pen MIT licensing",
+      "access": "official documentation"
+    }
+  ],
+  "rawArtifacts": [],
+  "confirmedApiEndpoints": [],
+  "confirmedJavaScriptAssets": [],
+  "publishedHouseEdge": 0.086,
+  "derivedRtp": 0.914,
+  "perSlotProbabilities": null,
+  "perRiskPayoutTables": null,
+  "rngAlgorithm": null,
+  "limitations": [
+    "Direct HTTPS proxy connection failed",
+    "Interactive browser unavailable",
+    "Private backend is not public"
+  ],
+  "verifierAlgorithm": {
+    "source": "https://codepen.io/mjchal/pen/vYpaxOK",
+    "rng": "seedrandom@3.0.5",
+    "input": "serverSeed:clientSeed:row",
+    "directionThreshold": 0.5,
+    "tileIndexBase": 1,
+    "productionEquivalent": "unverified"
+  },
+  "localTranscriptions": [
+    {
+      "file": "codepen-plinko-verifier.mjs",
+      "sha256": "932e1698e0020f9385f8e9fbd754e6e6318c1320f197b4bb3690ca417a03f222",
+      "hashScope": "local normalized transcription, not upstream bytes"
+    },
+    {
+      "file": "codepen-plinko-verifier.html",
+      "sha256": "b6de49b7fe4a44e76995e4124455226d5ab20a911895c7802e869ae05099476b",
+      "hashScope": "local normalized transcription, not upstream bytes"
+    },
+    {
+      "file": "codepen-plinko-verifier.css",
+      "sha256": "ac0122dda4a4fbfa568d6c57906577103f303b2e54cf9291a3a144e0ca8906e5",
+      "hashScope": "local normalized transcription, not upstream bytes"
+    }
+  ]
+}
