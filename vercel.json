@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "regions": ["sin1"],
+  "buildCommand": "node tools/build-vercel.cjs",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{src,assets}/**",
+      "excludeFiles": "assets/vendor/islepilot-skin/cdn/**"
+    }
+  },
+  "routes": [
+    {
+      "src": "/cdn/skinviewer/(.*)",
+      "headers": {
+        "Cache-Control": "public, max-age=604800, stale-while-revalidate=86400"
+      },
+      "dest": "/assets/vendor/islepilot-skin/cdn/skinviewer/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.js"
+    }
+  ],
+  "framework": null
+}

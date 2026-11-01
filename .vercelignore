@@ -1,0 +1,16 @@
+node_modules/
+.git/
+.build-cache/
+.env
+.env.*
+tests/
+deliverables/
+PLINKO_HANDOFF.md
+PLINKO_SETUP.md
+PLINKO_STATUS_2026-10-14.md
+research/
+reference/
+.merge-backup/
+aaa-local-before-merge-fix.zip
+debug.log
+src/models/data/mutation-journal.json
